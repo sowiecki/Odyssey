@@ -7,17 +7,25 @@ header, footer {
 	text-align: center;
 	background-color: #F4F4F4;
 }
-
 footer {
 	position: absolute;
 	bottom: 0;
+	height: 1em;
 }
-
 footer > a {
 	color: #3DB6E4;
 }
 
-#divvy-header-text {
+div#wrapper {
+	position: relative;
+	min-height: 100%;
+}
+div#content {
+	padding: 0 0 1em 0; /* Leave room for the footer */
+	background-color: black;
+}
+
+h1#divvy-header-text {
 	margin: 0;
 	text-transform: uppercase;
 	font-family: 'Monda', sans-serif;
@@ -29,8 +37,7 @@ footer > a {
     -ms-transform:scale(1.75,1); /* IE 9 */
     -o-transform:scale(1.75,1); /* Opera */
 }
-
-#odyssey-header-text {
+h1#odyssey-header-text {
 	margin: 0;
 	font-family: 'Parisienne', cursive;
 	font-size: 3em;
@@ -38,7 +45,6 @@ footer > a {
 	color: #FF5E3C;
 	text-shadow: #d8d8d8 .02em .02em .02em;
 }
-
-#vv {
+span#vv {
 	color: #3DB7E4;
 }
