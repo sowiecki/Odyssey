@@ -11,14 +11,21 @@ header {
 	margin: 0;
 	text-transform: uppercase;
 	font-family: 'Monda', sans-serif;
-	font-size: 2em;
+	font-size: 1.5em;
+	font-weight: bold;
+	transform:scale(1.75,1); /* W3C */
+    -webkit-transform:scale(1.75,1); /* Safari and Chrome */
+    -moz-transform:scale(1.75,1); /* Firefox */
+    -ms-transform:scale(1.75,1); /* IE 9 */
+    -o-transform:scale(1.75,1); /* Opera */
 }
 
 #odyssey-header-text {
 	margin: 0;
 	font-family: 'Parisienne', cursive;
-	font-size: 2.25em;
+	font-size: 3em;
 	font-weight: normal;
+	color: #3f3f3f;
 }
 
 #vv {
