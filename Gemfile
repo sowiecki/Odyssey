@@ -39,3 +39,8 @@ gem 'web-console', '~> 2.0', group: [:development, :test]
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring', group: [:development, :test]
 
+# Test suites
+gem 'rspec-rails', '~> 3.0.0', group: [:development, :test]
+gem 'rails_12factor', group: [:production]
+gem 'shoulda-matchers', group: [:test]
+gem 'jasmine', group: [:test]
