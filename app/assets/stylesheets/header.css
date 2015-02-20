@@ -1,0 +1,26 @@
+@import url(http://fonts.googleapis.com/css?family=Monda);
+@import url(http://fonts.googleapis.com/css?family=Parisienne);
+
+header {
+	padding: .5em;
+	text-align: center;
+	background-color: #F4F4F4
+}
+
+#divvy-header-text {
+	margin: 0;
+	text-transform: uppercase;
+	font-family: 'Monda', sans-serif;
+	font-size: 2em;
+}
+
+#odyssey-header-text {
+	margin: 0;
+	font-family: 'Parisienne', cursive;
+	font-size: 2.25em;
+	font-weight: normal;
+}
+
+#vv {
+	color: #3DB7E4;
+}
