@@ -22,7 +22,6 @@ div#wrapper {
 }
 div#content {
 	padding: 0 0 1em 0; /* Leave room for the footer */
-	background-color: black;
 }
 
 h1#divvy-header-text {
