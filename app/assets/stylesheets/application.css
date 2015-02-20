@@ -10,6 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ * Color scheme blue!33DB6E4 red!FF5E3C yellow!FFC73C
+ *
  *= require_tree .
  *= require_self
  */
