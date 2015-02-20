@@ -1,10 +1,20 @@
 @import url(http://fonts.googleapis.com/css?family=Monda);
 @import url(http://fonts.googleapis.com/css?family=Parisienne);
 
-header {
+header, footer {
 	padding: .5em;
+	width: 100%;
 	text-align: center;
-	background-color: #F4F4F4
+	background-color: #F4F4F4;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+}
+
+footer > a {
+	color: #3DB6E4;
 }
 
 #divvy-header-text {
@@ -25,7 +35,8 @@ header {
 	font-family: 'Parisienne', cursive;
 	font-size: 3em;
 	font-weight: normal;
-	color: #3f3f3f;
+	color: #FF5E3C;
+	text-shadow: #d8d8d8 .02em .02em .02em;
 }
 
 #vv {

@@ -16,4 +16,12 @@
 
 body {
 	margin: 0;
+	font-family: helvetica;
+}
+
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
 }
