@@ -4,10 +4,10 @@ class Trip
 	has_one :in, :origin
 	has_one :out, :destination
 
-	property :trip_id, type: Integer
+	property :trip_id, type: Integer, constraint: :unique
 	property :start_time, type: DateTime
 	property :stop_time, type: DateTime
-	property :bike_id, type: Integer
+	property :bike_id, type: Integer, index: :exact
 	property :trip_duration, type: Integer
 	property :origin_station_id, type: Integer
 	property :destination_station_id, type: Integer
