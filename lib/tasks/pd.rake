@@ -1,7 +1,7 @@
 require 'csv'
 require 'date'
 
-# Neo4j::Session.open(:server_db, 'http://localhost:7474', {basic_auth: {username: 'foo', password: 'bar'}})
+# CSV loaders expect divvy_data to be located in /lib/tasks
 
 namespace :pd do
 	desc "Parse Divvy 2014 stations data into database"
