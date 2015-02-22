@@ -16,3 +16,9 @@
 //= require gmaps/google
 //= require_tree .
 //= stub map
+
+_.templateSettings = {
+  interpolate : /\{\{=(.+?)\}\}/g,
+  escape : /\{\{-(.+?)\}\}/g,
+  evaluate: /\{\{(.+?)\}\}/g,
+};

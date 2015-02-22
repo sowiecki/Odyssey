@@ -14,6 +14,10 @@ $(function() {
     var directionsService = new google.maps.DirectionsService();
     var map;
 
+    var routesPanel = _.template(
+      $('#routes-template').html()
+    );
+
     function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer();
       var chicago = new google.maps.LatLng(41.850033, -87.6500523);
@@ -26,7 +30,6 @@ $(function() {
     }
 
     function calcRoute(trips) {
-      console.log(trips[0])
       var start = new google.maps.LatLng(trips[0].lat, trips[0].lng);
       var end = new google.maps.LatLng(trips[7].lat, trips[7].lng);
       var waypts = [];
@@ -47,10 +50,13 @@ $(function() {
         if (status == google.maps.DirectionsStatus.OK) {
           directionsDisplay = new google.maps.DirectionsRenderer();
           directionsDisplay.setDirections(response);
-          var route = response.routes[0];
-          // var summaryPanel = document.getElementById('directions_panel');
+          var routesData = {
+            routes: response.routes[0],
+          }
+          console.log(response.routes[0])
+          $('#routes-anchor').after(routesPanel(routesData))
           // summaryPanel.innerHTML = '';
-          // // For each route, display summary information.
+          // For each route, display summary information.
           // for (var i = 0; i < route.legs.length; i++) {
           //   var routeSegment = i + 1;
           //   summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';

@@ -1,0 +1,8 @@
+<script type="template" id='routes-template'>
+  {{ for (var i = 0; i < routes.legs.length; i++) { }}
+	  <p>Trip #{{= i + 1 }}:
+  	{{= routes.legs[i].start_address }} to 
+  	{{= routes.legs[i].end_address }}
+  	{{= routes.legs[i].distance.text  }}</p>
+  {{ } }}
+</script>
