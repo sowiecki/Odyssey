@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'map#index'
+  get 'markers/:bike_id' => 'map#markers'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
