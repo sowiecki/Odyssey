@@ -1,8 +1,7 @@
 class Trip
 	include Neo4j::ActiveNode
 
-	has_one :in, :origin
-	has_one :out, :destination
+	has_one :out, :next_trip, model_class: Trip
 
 	property :trip_id, type: Integer
 	property :start_time, type: DateTime
