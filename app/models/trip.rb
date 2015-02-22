@@ -1,10 +1,6 @@
 class Trip
 	include Neo4j::ActiveNode
 
-	# after_create :set_next_trip
-
-	# has_one :in, :origin_station_id, model_class: Station
-	# has_one :out, :destination_station_id, model_class: Station
 	has_one :out, :next_trip, model_class: Trip
 
 	property :trip_id, type: Integer, constraint: :unique
@@ -33,12 +29,4 @@ class Trip
 						:origin_station_id,
 						:destination_station_id,
 						numericality: { only_integer: true }
-
-	# def set_next_trip
-	# 	self.next_trip << Trip.where do |property|
-	# 		(property[:origin_station_id] == self.destination_station_id) &
-	# 		(property[:start_time] >= self.stop_time) &
-	# 		(property[:bike_id] == self.bike_id)
-	# 	end
-	# end
 end
