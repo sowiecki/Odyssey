@@ -1,0 +1,21 @@
+#map {
+	margin: 0 auto auto;
+	width: 100%;
+	min-height: 500px;
+	max-height: 900px;
+}
+
+/* Smartphone (lanscape) */
+@media only screen 
+and (min-width : 321px) {
+ #map {
+ 	
+ }
+}
+/* Smartphone (portrait) */
+@media only screen 
+and (max-width : 320px) {
+	#map {
+
+	}
+}
