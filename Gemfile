@@ -46,3 +46,5 @@ gem 'rspec-rails', '~> 3.0.0', group: [:development, :test]
 gem 'rails_12factor', group: [:production]
 gem 'shoulda-matchers', group: [:test]
 gem 'jasmine', group: [:test]
+
+gem 'gmaps4rails'
