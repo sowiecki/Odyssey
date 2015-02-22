@@ -59,6 +59,7 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
     hike (1.2.3)
     httparty (0.13.3)
       json (~> 1.8)
@@ -206,6 +207,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  gmaps4rails
   jasmine
   jbuilder (~> 2.0)
   jquery-rails
