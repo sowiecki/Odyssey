@@ -8,4 +8,10 @@ class Station
 	property :dpcapacity, type: String
 	property :landmark, type: Integer
 	property :online_date, type: DateTime
+
+	validates :station_id,
+						:name,
+						:latitude,
+						:longitude,
+						presence: true
 end
