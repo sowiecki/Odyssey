@@ -1,4 +1,4 @@
-$(function() {
+$(function() {  
   var mapStyle = [
     {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
   ];
@@ -31,15 +31,21 @@ $(function() {
 
     function calcRoute(trips) {
       console.log(trips[1])
-      var start = new google.maps.LatLng(trips[0].lat, trips[0].lng);
-      var end = new google.maps.LatLng(trips[4].lat, trips[4].lng);
+      trips.sort(function(a, b) {
+        return a.start_time - b.start_time;
+      });
+      // var start = new google.maps.LatLng(trips[0].lat, trips[0].lng);
+      // var end = new google.maps.LatLng(trips[trips.length - 1].lat, trips[trips.length - 1].lng);
       var waypts = [];
-      for (var i = 0; i < 3; i++) {
+      for (var i = 0; i < trips.length; i++) {
         waypts.push({
             location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
             stopover: true
           });
       }
+      console.log(waypts)
+      var start = waypts[0].location
+      var end = waypts[waypts.length -1].location
       var request = {
           origin: start,
           destination: end,
@@ -56,15 +62,6 @@ $(function() {
           }
           console.log(response.routes[0])
           $('#routes-anchor').after(routesPanel(routesData))
-          // summaryPanel.innerHTML = '';
-          // For each route, display summary information.
-          // for (var i = 0; i < route.legs.length; i++) {
-          //   var routeSegment = i + 1;
-          //   summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
-          //   summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-          //   summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-          //   summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-          // }
         }
         var chicago = new google.maps.LatLng(41.850033, -87.6500523);
       var mapOptions = {
@@ -80,49 +77,5 @@ $(function() {
     calcRoute(trips);
 
     google.maps.event.addDomListener(window, 'load', initialize);
-
-    // handler = Gmaps.build('Google');
-    // handler.buildMap({
-    //   provider: {
-    //     styles: mapStyle,
-    //     icon: iconBase + 'schools_maps.png'
-    //   }, internal: {id: 'map'}}, function(){
-
-    //     markers = handler.addMarkers(trips);
-    //     handler.bounds.extendWith(markers);
-    //     handler.fitMapToBounds();
-    //   });
-
-    // console.log(trips[1])
-
-    // var directionsDisplay = new google.maps.DirectionsRenderer();
-    // var directionsService = new google.maps.DirectionsService();
-
-    // function calcRoute() {
-    //   var origin      = new google.maps.LatLng(trips[0].lat, trips[0].lng);
-    //   var destination = new google.maps.LatLng(trips[1].lat, trips[1].lng);
-    //   var request = {
-    //       origin:      origin,
-    //       destination: destination,
-    //       travelMode:  google.maps.TravelMode.BICYCLING
-    //   };
-    //   directionsService.route(request, function(response, status) {
-    //     if (status == google.maps.DirectionsStatus.OK) {
-    //       directionsDisplay.setDirections(response);
-    //     }
-    //   });
-    // }
-
-    // calcRoute();
-
-    // var handler = Gmaps.build('Google');
-    // handler.buildMap({
-    //   provider: {
-    //     styles: mapStyle,
-    //     icon: iconBase + 'schools_maps.png'
-    //   },
-    //   internal: {id: 'map'}}, function(){
-    //   directionsDisplay.setMap(handler.getMap());
-    // });
   })
 })
