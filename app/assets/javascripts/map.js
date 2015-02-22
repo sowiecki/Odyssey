@@ -44,8 +44,9 @@ $(function() {
           });
       }
       console.log(waypts)
-      var start = waypts[0].location
-      var end = waypts[waypts.length -1].location
+      var start = waypts.shift().location
+      var second = waypts.shift().location
+      var end = waypts.pop().location
       var request = {
           origin: start,
           destination: end,
