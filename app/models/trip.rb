@@ -4,8 +4,8 @@ class Trip
 	has_one :out, :next_trip, model_class: Trip
 
 	property :trip_id, type: Integer
-	property :start_time, type: DateTime
-	property :stop_time, type: DateTime
+	property :start_time, type: String
+	property :stop_time, type: String
 	property :bike_id, type: Integer
 	property :trip_duration, type: Integer
 	property :origin_station_id, type: Integer

@@ -4,7 +4,7 @@ class MapController < ApplicationController
 	end
 
 	def markers
-		trips = Trip.where(bike_id: params[:bike_id].to_i).order(start_time: :desc)
+		trips = Trip.where(bike_id: params[:bike_id].to_i).limit(50).order(start_time: :desc)
 		hash = Gmaps4rails.build_markers(trips) do |trip, marker|
 			station = Station.find_by(station_id: trip.origin_station_id)
 		  marker.lat(station.latitude)

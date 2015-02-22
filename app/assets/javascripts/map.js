@@ -4,7 +4,7 @@ $(function() {
   ];
   // var iconBase = 'http://maps.google.com/mapfiles/kml/shapes/';
   var getTrips = $.ajax({
-    url: "markers/361",
+    url: "markers/10",
     method: "get",
     dataType: "json",
   })
@@ -30,20 +30,19 @@ $(function() {
     }
 
     function calcRoute(trips) {
-      console.log(trips[1])
       trips.sort(function(a, b) {
         return a.start_time - b.start_time;
       });
       // var start = new google.maps.LatLng(trips[0].lat, trips[0].lng);
       // var end = new google.maps.LatLng(trips[trips.length - 1].lat, trips[trips.length - 1].lng);
       var waypts = [];
-      for (var i = 0; i < trips.length; i++) {
+      for (var i = 5; i < 16; i++) {
         waypts.push({
             location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
             stopover: true
           });
       }
-      console.log(waypts)
+      console.log(trips.length)
       var start = waypts.shift().location
       var second = waypts.shift().location
       var end = waypts.pop().location
