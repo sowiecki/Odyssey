@@ -2,7 +2,7 @@ $(function() {
   var mapStyle = [
     {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
   ];
-  var iconBase = 'http://maps.google.com/mapfiles/kml/shapes/';
+  // var iconBase = 'http://maps.google.com/mapfiles/kml/shapes/';
   var getTrips = $.ajax({
     url: "markers/361",
     method: "get",
@@ -29,15 +29,11 @@ $(function() {
       var start = new google.maps.LatLng(trips[1].lat, trips[1].lng);
       var end = new google.maps.LatLng(trips[4].lat, trips[4].lng);
       var waypts = [];
-      function pushWaypoints() {
+      for (var i = 0; i < trips.length; i++) {
         waypts.push({
-          location: new google.maps.LatLng(trips[2].lat, trips[2].lng),
-          stopover: true
-        })
-        waypts.push({
-          location: new google.maps.LatLng(trips[3].lat, trips[3].lng),
-          stopover: true
-        })
+            location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
+            stopover: true
+          });
       }
 
       var request = {
