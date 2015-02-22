@@ -30,10 +30,11 @@ $(function() {
     }
 
     function calcRoute(trips) {
+      console.log(trips[1])
       var start = new google.maps.LatLng(trips[0].lat, trips[0].lng);
-      var end = new google.maps.LatLng(trips[7].lat, trips[7].lng);
+      var end = new google.maps.LatLng(trips[4].lat, trips[4].lng);
       var waypts = [];
-      for (var i = 0; i < 8; i++) {
+      for (var i = 0; i < 3; i++) {
         waypts.push({
             location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
             stopover: true
