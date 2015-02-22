@@ -27,15 +27,22 @@ $(function() {
 
     function calcRoute(trips) {
       var start = new google.maps.LatLng(trips[1].lat, trips[1].lng);
-      var end = new google.maps.LatLng(trips[4].lat, trips[4].lng);
-      var waypts = [];
-      for (var i = 0; i < trips.length; i++) {
-        waypts.push({
-            location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
-            stopover: true
-          });
-      }
-
+      var end = new google.maps.LatLng(trips[trips.length - 1].lat, trips[trips.length - 1].lng);
+      var waypts = trips.reduce(function(a, waypoint) {
+        var lastpoint = trips[trips.length - 1];
+        if( !lastpoint || !waypoint.equals(lastpoint.location) ) {
+            trips.push({ location:waypoint, stopover:true });
+        }
+        return trips;
+      }, []);
+      // var waypts = [];
+      // for (var i = 0; i < trips.length; i++) {
+      //   waypts.push({
+      //       location: new google.maps.LatLng(trips[2].lat, trips[2].lng),
+      //       stopover: true
+      //     });
+      // }
+      // console.log(start.toString().replace(/\s+/g, ''))
       var request = {
           origin: start,
           destination: end,
