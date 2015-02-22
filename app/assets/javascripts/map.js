@@ -26,23 +26,16 @@ $(function() {
     }
 
     function calcRoute(trips) {
-      var start = new google.maps.LatLng(trips[1].lat, trips[1].lng);
-      var end = new google.maps.LatLng(trips[trips.length - 1].lat, trips[trips.length - 1].lng);
-      var waypts = trips.reduce(function(a, waypoint) {
-        var lastpoint = trips[trips.length - 1];
-        if( !lastpoint || !waypoint.equals(lastpoint.location) ) {
-            trips.push({ location:waypoint, stopover:true });
-        }
-        return trips;
-      }, []);
-      // var waypts = [];
-      // for (var i = 0; i < trips.length; i++) {
-      //   waypts.push({
-      //       location: new google.maps.LatLng(trips[2].lat, trips[2].lng),
-      //       stopover: true
-      //     });
-      // }
-      // console.log(start.toString().replace(/\s+/g, ''))
+      console.log(trips[0])
+      var start = new google.maps.LatLng(trips[0].lat, trips[0].lng);
+      var end = new google.maps.LatLng(trips[7].lat, trips[7].lng);
+      var waypts = [];
+      for (var i = 0; i < 8; i++) {
+        waypts.push({
+            location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
+            stopover: true
+          });
+      }
       var request = {
           origin: start,
           destination: end,
@@ -52,9 +45,9 @@ $(function() {
       };
       directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-          console.log(response)
+          directionsDisplay = new google.maps.DirectionsRenderer();
           directionsDisplay.setDirections(response);
-          // var route = response.routes[0];
+          var route = response.routes[0];
           // var summaryPanel = document.getElementById('directions_panel');
           // summaryPanel.innerHTML = '';
           // // For each route, display summary information.
@@ -66,6 +59,14 @@ $(function() {
           //   summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
           // }
         }
+        var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+      var mapOptions = {
+        zoom: 6,
+        styles: mapStyle,
+        center: chicago
+      }
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      directionsDisplay.setMap(map);
       });
     }
 
