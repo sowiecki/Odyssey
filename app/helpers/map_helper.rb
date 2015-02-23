@@ -1,6 +1,6 @@
 module MapHelper
 	def trip_history_segment
-		params[:trip_history_segment].to_i * 20
+		params[:trip_history_segment].to_i * 10
 	end
 
 	def trips
