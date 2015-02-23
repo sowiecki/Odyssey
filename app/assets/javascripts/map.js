@@ -4,7 +4,7 @@ $(function() {
   ];
   // var iconBase = 'http://maps.google.com/mapfiles/kml/shapes/';
   var getTrips = $.ajax({
-    url: "markers/10",
+    url: "markers/361",
     method: "get",
     dataType: "json",
   })
