@@ -1,15 +1,27 @@
 $(function() {  
   var mapStyle = [
-    {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
+    {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":55}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
   ];
-  // var iconBase = 'http://maps.google.com/mapfiles/kml/shapes/';
+
+  var bikeId = 361;
+  var tripHistorySegment = 1;
   var getTrips = $.ajax({
-    url: "markers/361",
+    url: "markers/" + bikeId + "/" + tripHistorySegment,
     method: "get",
     dataType: "json",
-  })
+  });
 
   getTrips.done(function(trips) {
+    var markerOptions = {
+      icon: "images/marker.png"
+    }
+
+    var rendererOptions = {
+      map: map,
+      markerOptions: markerOptions,
+      suppressBicyclingLayer: true
+    }
+
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
     var map;
@@ -18,31 +30,15 @@ $(function() {
       $('#routes-template').html()
     );
 
-    function initialize() {
-      directionsDisplay = new google.maps.DirectionsRenderer();
-      var chicago = new google.maps.LatLng(41.850033, -87.6500523);
-      var mapOptions = {
-        zoom: 6,
-        center: chicago
-      }
-      map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      directionsDisplay.setMap(map);
-    }
-
     function calcRoute(trips) {
-      trips.sort(function(a, b) {
-        return a.start_time - b.start_time;
-      });
-      // var start = new google.maps.LatLng(trips[0].lat, trips[0].lng);
-      // var end = new google.maps.LatLng(trips[trips.length - 1].lat, trips[trips.length - 1].lng);
       var waypts = [];
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 11; i++) {
         waypts.push({
             location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
             stopover: true
           });
       }
-      console.log(trips.length)
+
       var start = waypts.shift().location
       var second = waypts.shift().location
       var end = waypts.pop().location
@@ -53,29 +49,43 @@ $(function() {
           optimizeWaypoints: true,
           travelMode: google.maps.TravelMode.BICYCLING
       };
+
       directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay = new google.maps.DirectionsRenderer();
+          directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
           directionsDisplay.setDirections(response);
           var routesData = {
             routes: response.routes[0],
           }
-          console.log(response.routes[0])
           $('#routes-anchor').after(routesPanel(routesData))
         }
+
         var chicago = new google.maps.LatLng(41.850033, -87.6500523);
-      var mapOptions = {
-        zoom: 6,
-        styles: mapStyle,
-        center: chicago
-      }
-      map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      directionsDisplay.setMap(map);
+
+        var mapOptions = {
+          zoom: 6,
+          styles: mapStyle,
+          center: chicago
+        }
+
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        var marker = new google.maps.Marker({
+          position: chicago,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 10
+          },
+          draggable: true,
+          map: map
+        });
+
+        directionsDisplay.setMap(map);
       });
     }
 
     calcRoute(trips);
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    // google.maps.event.addDomListener(window, 'load', initialize);
   })
 })
