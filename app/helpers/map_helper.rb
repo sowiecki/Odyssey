@@ -4,12 +4,9 @@ module MapHelper
 	end
 
 	def trips
-		puts trip_history_segment
-		offset = trip_history_segment
-		Trip.where(bike_id: params[:bike_id]
-										.to_i)
-										.limit(20)
-										.offset(offset)
-										.order(start_time: :desc)
+		Trip.where(bike_id: params[:bike_id].to_i)
+				.offset(trip_history_segment)
+				.limit(20)
+				.order(start_time: :desc)
 	end
 end

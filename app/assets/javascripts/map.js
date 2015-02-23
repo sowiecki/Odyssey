@@ -3,7 +3,7 @@ $(function() {
     {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":55}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
   ];
 
-  var bikeId = 361;
+  var bikeId = 363;
   var tripHistorySegment = 1;
   var getTrips = $.ajax({
     url: "markers/" + bikeId + "/" + tripHistorySegment,
@@ -13,7 +13,7 @@ $(function() {
 
   getTrips.done(function(trips) {
     var markerOptions = {
-      icon: "images/marker.png"
+      // icon: "images/marker.png"
     }
 
     var rendererOptions = {
@@ -32,21 +32,19 @@ $(function() {
 
     function calcRoute(trips) {
       var waypts = [];
-      for (var i = 0; i < 11; i++) {
+      for (var i = 0; i < 10; i++) {
         waypts.push({
-            location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
-            stopover: true
-          });
+          location: trips[i].join(),
+          // stopover: true
+        });
       }
 
       var start = waypts.shift().location
-      var second = waypts.shift().location
       var end = waypts.pop().location
       var request = {
           origin: start,
           destination: end,
           waypoints: waypts,
-          optimizeWaypoints: true,
           travelMode: google.maps.TravelMode.BICYCLING
       };
 
