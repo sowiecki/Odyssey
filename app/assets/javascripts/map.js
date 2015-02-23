@@ -3,7 +3,7 @@ $(function() {
     {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":55}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
   ];
 
-  var bikeId = 363;
+  var bikeId = 361;
   var tripHistorySegment = 1;
   var getTrips = $.ajax({
     url: "markers/" + bikeId + "/" + tripHistorySegment,
@@ -35,7 +35,6 @@ $(function() {
       for (var i = 0; i < 10; i++) {
         waypts.push({
           location: trips[i].join(),
-          // stopover: true
         });
       }
 
