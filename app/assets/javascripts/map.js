@@ -36,7 +36,7 @@ $(function() {
       // var start = new google.maps.LatLng(trips[0].lat, trips[0].lng);
       // var end = new google.maps.LatLng(trips[trips.length - 1].lat, trips[trips.length - 1].lng);
       var waypts = [];
-      for (var i = 0; i < 6; i++) {
+      for (var i = 0; i < 4; i++) {
         waypts.push({
             location: new google.maps.LatLng(trips[i].lat, trips[i].lng),
             stopover: true
