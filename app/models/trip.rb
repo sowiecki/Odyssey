@@ -29,4 +29,16 @@ class Trip
 						:origin_station_id,
 						:destination_station_id,
 						numericality: { only_integer: true }
+
+	def start_time_fixed
+		DateTime.strptime(self.start_time, '%m/%d/%Y %H:%M')
+	end
+
+	# def stop_time
+	# 	format_time(super)
+	# end
+
+	# def format(time)
+	# 	DateTime.strptime(time, '%m/%d/%Y %H:%M')
+	# end
 end
