@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 # Use Neo4j for database
 gem 'neo4j'
+# Use Neography for faster cypher queries
+# gem 'neography'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -34,6 +36,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 gem 'byebug', group: [:development, :test]
+gem 'better_errors', group: [:development, :test]
 
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0', group: [:development, :test]

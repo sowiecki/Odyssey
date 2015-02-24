@@ -6,7 +6,7 @@ class Trip
 	property :trip_id, type: Integer
 	property :start_time, type: String
 	property :stop_time, type: String
-	property :bike_id, type: Integer
+	property :bike_id, type: Integer, index: :exact
 	property :trip_duration, type: Integer
 	property :origin_station_id, type: Integer
 	property :destination_station_id, type: Integer
