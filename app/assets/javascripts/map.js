@@ -27,7 +27,7 @@ $(function() {
     this.offset = 0;
     this.calcRoute = function (trips) {
       this.waypts = [];
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < trips.length; i++) {
         routesSegment.waypts.push({
           location: trips[i].lat + ", " + trips[i].lng,
         });
@@ -43,8 +43,6 @@ $(function() {
           travelMode: google.maps.TravelMode.BICYCLING
       };
 
-      console.log(request)
-
       directionsService.route(request, function(response, status) {
         console.log(response.routes[0])
         console.log(status)
@@ -56,8 +54,6 @@ $(function() {
           }
           $('#routes-anchor').after(routesPanel(routesData))
         }
-
-        // map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
         directionsDisplay.setMap(map);
       });
@@ -74,11 +70,12 @@ $(function() {
       method: "get",
       dataType: "json",
       success: function(data) {
+        if (data.length < 10) { endOfTheLine(); }
         routesSegment.calcRoute(data);
       }
     })
   }
-  // getTrips(361, routesSegment.offset);
+  getTrips(361, routesSegment.offset);
 
   $('#next-segment').on('click', function(e) {
     e.preventDefault();
@@ -86,4 +83,8 @@ $(function() {
     console.log(routesSegment.offset)
     getTrips(361, routesSegment.offset);
   });
+
+  function endOfTheLine() {
+    $('#next-segment').fadeOut();
+  }
 })
