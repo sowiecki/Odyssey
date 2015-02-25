@@ -15,7 +15,7 @@ class MapController < ApplicationController
 		  	duration: trip.trip_duration
 		  })
 		end
-		hash.shift
+		# hash.shift
 		render json: hash
 	end
 end

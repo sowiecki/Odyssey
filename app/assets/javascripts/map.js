@@ -81,10 +81,34 @@ $(function() {
     e.preventDefault();
     routesSegment.offset += 1
     console.log(routesSegment.offset)
-    getTrips(361, routesSegment.offset);
+    getTrips(1, routesSegment.offset);
   });
+
+  $('#pause-traverse').on('click', function(e) {
+    e.preventDefault();
+    pauseReverse();
+  })
+
+  $('#start-traverse').on('click', function(e) {
+    e.preventDefault();
+    autoTraverseRoutes();
+  })
+
+  function traverseRoutes() {
+    routesSegment.offset += 1
+    console.log(routesSegment.offset)
+    getTrips(1, routesSegment.offset);
+  }
 
   function endOfTheLine() {
     $('#next-segment').fadeOut();
+  }
+
+  function autoTraverseRoutes() {
+    nIntervId = setInterval(traverseRoutes, 1500);
+  }
+
+  function pauseReverse() {
+    clearInterval(nIntervId);
   }
 })
