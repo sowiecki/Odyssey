@@ -24,22 +24,43 @@ $(function() {
   var routesPanel = _.template($('#routes-template').html());
 
   function RoutesSegment() {
+    this.bikeId = 10;
     this.offset = 0;
-    this.calcRoute = function (trips) {
-      this.waypts = [];
+    this.waypts = [];
+    this.safeWaypts = [];
+    this.makeSafeWaypts = function() {
+      this.safeWaypts = [];
+      for (var i = 1; i < 7; i++) {
+        this.safeWaypts.push(
+          this.waypts[i]
+        );
+      }
+    }
+    this.buildInitialRoute = function (trips) {
       for (var i = 0; i < trips.length; i++) {
-        routesSegment.waypts.push({
+        this.waypts.push({
           location: trips[i].lat + ", " + trips[i].lng,
         });
       }
+      this.calcRoute();
+    }
+    this.advanceRoute = function(trip) {
+      console.log(this.destination)
+      console.log(this.safeWaypts)
 
-      var origin = routesSegment.waypts.shift().location;
-      var destination = routesSegment.waypts.pop().location;
+      this.waypts.shift();
+      this.waypts.push({
+        location: trip.lat + ", " + trip.lng
+      });
 
+      this.calcRoute();
+    }
+    this.calcRoute = function () {
+      this.makeSafeWaypts();
       var request = {
-          origin: origin,
-          destination: destination,
-          waypoints: routesSegment.waypts,
+          origin: this.waypts[0].location,
+          destination: this.waypts[this.waypts.length - 1].location,
+          waypoints: this.safeWaypts,
           travelMode: google.maps.TravelMode.BICYCLING
       };
 
@@ -47,12 +68,11 @@ $(function() {
         console.log(response.routes[0])
         console.log(status)
         if (status == google.maps.DirectionsStatus.OK) {
-          
           directionsDisplay.setDirections(response);
           var routesData = {
             routes: response.routes[0],
           }
-          $('#routes-anchor').after(routesPanel(routesData))
+          $('#routes-anchor').html(routesPanel(routesData))
         }
 
         directionsDisplay.setMap(map);
@@ -60,55 +80,63 @@ $(function() {
     }
   }
 
-  var routesSegment = new RoutesSegment
-
-  // var tripHistorySegment = 1;
-  function getTrips(bikeId, offset) {
-    console.log(bikeId + ", " + offset)
+  function getInitialTrips(bikeId, offset) {
     $.ajax({
-      url: "markers/" + bikeId + "/" + offset,
+      url: "trips_for/" + bikeId + "/offset_by/" + offset,
       method: "get",
       dataType: "json",
       success: function(data) {
-        if (data.length < 10) { endOfTheLine(); }
-        routesSegment.calcRoute(data);
+        // if (data.length < 10) { endOfTheLine(); }
+        routesSegment.buildInitialRoute(data);
       }
     })
   }
-  getTrips(361, routesSegment.offset);
 
-  $('#next-segment').on('click', function(e) {
-    e.preventDefault();
-    routesSegment.offset += 1
-    console.log(routesSegment.offset)
-    getTrips(1, routesSegment.offset);
-  });
+  function getNextTrip(bikeId, offset) {
+    $.ajax({
+      url: "next_trip_for/" + bikeId + "/after/" + offset,
+      method: "get",
+      dataType: "json",
+      success: function(data) {
+        routesSegment.advanceRoute(data[0])
+      }
+    })
+  }
 
-  $('#pause-traverse').on('click', function(e) {
-    e.preventDefault();
-    pauseReverse();
-  })
-
-  $('#start-traverse').on('click', function(e) {
-    e.preventDefault();
-    autoTraverseRoutes();
-  })
+  var routesSegment = new RoutesSegment
+  getInitialTrips(routesSegment.bikeId, routesSegment.offset);
 
   function traverseRoutes() {
     routesSegment.offset += 1
     console.log(routesSegment.offset)
-    getTrips(1, routesSegment.offset);
+    getNextTrip(routesSegment.bikeId, routesSegment.offset);
+  }
+
+  function autoTraverseRoutes() {
+    nIntervId = setInterval(traverseRoutes, 500);
+  }
+
+  function pauseTraverse() {
+    clearInterval(nIntervId);
   }
 
   function endOfTheLine() {
     $('#next-segment').fadeOut();
   }
 
-  function autoTraverseRoutes() {
-    nIntervId = setInterval(traverseRoutes, 1500);
-  }
+  $('#next-segment').on('click', function(e) {
+    e.preventDefault();
+    routesSegment.offset += 1
+    traverseRoutes();
+  });
 
-  function pauseReverse() {
-    clearInterval(nIntervId);
-  }
+  $('#pause-traverse').on('click', function(e) {
+    e.preventDefault();
+    pauseTraverse();
+  })
+
+  $('#start-traverse').on('click', function(e) {
+    e.preventDefault();
+    autoTraverseRoutes();
+  })
 })
