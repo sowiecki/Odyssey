@@ -4,13 +4,17 @@ require 'date'
 # CSV loaders expect divvy_data to be located in /lib/tasks
 
 namespace :pd do
-	desc "Remove invalid dates"
+	desc "Fix invalid dates"
 	task fixdates: :environment do
-		file = File.expand_path("../divvy_data/Divvy_Trips_2014-Q1Q2a.csv", __FILE__)
-		CSV.foreach(file, headers: true) do |row|
-			if trip = Trip.where(trip_id: row["trip_id"].to_i).to_a[1]
-				puts "Destroying #{trip.start_time}"
-				trip.destroy
+		bike_ids = Set.new(1..3000)
+		bike_ids.each do |bike_id|
+			bike_trips = Trip.where(bike_id: bike_id).to_a
+			bike_trips.each do |trip|
+				p trip.start_time
+				trip.start_time = DateTime.strptime(trip.start_time, "%m/%d/%Y %H:%M")
+				trip.stop_time = DateTime.strptime(trip.stop_time, "%m/%d/%Y %H:%M")
+				p trip.start_time
+				trip.save
 			end
 		end
 	end
