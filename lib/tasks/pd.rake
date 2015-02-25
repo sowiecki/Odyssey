@@ -4,10 +4,16 @@ require 'date'
 # CSV loaders expect divvy_data to be located in /lib/tasks
 
 namespace :pd do
-	# desc "Remove invalid dates"
-	# task fixdates: :environment do
-	# 	trips = Trip.all(conditions: ["start_time MATCH ?", /\d{4}-\d{2}-\d{2}/])
-	# end
+	desc "Remove invalid dates"
+	task fixdates: :environment do
+		file = File.expand_path("../divvy_data/Divvy_Trips_2014-Q1Q2a.csv", __FILE__)
+		CSV.foreach(file, headers: true) do |row|
+			if trip = Trip.where(trip_id: row["trip_id"].to_i).to_a[1]
+				puts "Destroying #{trip.start_time}"
+				trip.destroy
+			end
+		end
+	end
 
 	desc "Parse Divvy 2014 stations data into database"
 	task stations: :environment do
@@ -50,17 +56,17 @@ namespace :pd do
 	end
 	desc "Build relations between trips"
 	task connect: :environment do
-		bike_ids = Set.new(65..3000)
+		bike_ids = Set.new(82..3000)
 		# Trip.all.each { |trip| bike_ids << trip.bike_id }
 		# Invalid bike ids 14, 15, 16, 17
-		p Trip.where(bike_id: 66).to_a.sort_by! { |bike_trip| p bike_trip; puts "flag!" unless Date.strptime(bike_trip.start_time,"%m/%d/%Y %H:%M") rescue false; bike_trip.start_time_fixed }
-		# bike_ids.each do |bike_id|
-		# 	bike_trips = Trip.where(bike_id: bike_id).to_a.sort_by { |bike_trip| bike_trip.start_time_fixed }
-		# 	bike_trips.each_with_index do |trip, index|
-		# 		trip.next_trip = bike_trips[index + 1] if trip.next_trip
-		# 		p trip.next_trip
-		# 	end
-		# 	bike_trips.last.next_trip = nil if bike_trips.last # Prevent last trip from being connected to first
-		# end
+		# p Trip.where(bike_id: 83).to_a.sort_by! { |bike_trip| p bike_trip; puts "flag!" unless Date.strptime(bike_trip.start_time,"%m/%d/%Y %H:%M") rescue false; bike_trip.start_time_fixed }
+		bike_ids.each do |bike_id|
+			bike_trips = Trip.where(bike_id: bike_id).to_a.sort_by { |bike_trip| bike_trip.start_time_fixed }
+			bike_trips.each_with_index do |trip, index|
+				trip.next_trip = bike_trips[index + 1] if trip.next_trip
+				p trip.next_trip
+			end
+			bike_trips.last.next_trip = nil if bike_trips.last # Prevent last trip from being connected to first
+		end
 	end
 end
