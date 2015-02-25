@@ -5,6 +5,9 @@ $(function() {
   ];
   var mapOptions = {
           zoom: 11,
+          // disableDefaultUI: true,
+          panControl: false,
+          mapTypeControl: false,
           styles: mapStyle,
           center: new google.maps.LatLng(41.870033, -87.6500523)
         }
