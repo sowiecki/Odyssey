@@ -9,7 +9,9 @@ $(function() {
           center: new google.maps.LatLng(41.870033, -87.6500523)
         }
   var markerOptions = {
-    // icon: "images/marker.png"
+    icon: "images/marker.png",
+    optimized: true
+    // visible: false
   }
   var rendererOptions = {
     map: map,
@@ -113,7 +115,7 @@ $(function() {
   }
 
   function autoTraverseRoutes() {
-    nIntervId = setInterval(traverseRoutes, 500);
+    nIntervId = setInterval(traverseRoutes, 1000);
   }
 
   function pauseTraverse() {
