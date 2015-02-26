@@ -21,7 +21,7 @@ namespace :pd do
 
 	desc "Parse Divvy 2014 stations data into database"
 	task stations: :environment do
-		file = File.expand_path("divvy_data/Divvy_Stations_2014-Q1Q2.csv", __FILE__)
+		file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Stations_2014-Q1Q2.csv", __FILE__)
 		CSV.foreach(file, headers: true) do |row|
 			Station.create(
 				station_id: row["id"].to_i,
@@ -36,15 +36,15 @@ namespace :pd do
 
 	desc "Parse Divvy 2014 trips data into database"
 	task trips: :environment do
-		file = File.expand_path("divvy_data/Divvy_Trips_2014-Q1Q2a.csv", __FILE__)
-		# file = File.expand_path("divvy_data/Divvy_Trips_2014-Q1Q2b.csv", __FILE__)
-		# file = File.expand_path("divvy_data/Divvy_Trips_2014-Q1Q2c.csv", __FILE__)
-		# file = File.expand_path("divvy_data/Divvy_Trips_2014-Q1Q2d.csv", __FILE__)
-		# file = File.expand_path("divvy_data/Divvy_Trips_2014-Q3a.csv", __FILE__)
-		# file = File.expand_path("divvy_data/Divvy_Trips_2014-Q3b.csv", __FILE__)
-		# file = File.expand_path("divvy_data/Divvy_Trips_2014-Q3c.csv", __FILE__)
-		# file = File.expand_path("divvy_data/Divvy_Trips_2014-Q4a.csv", __FILE__)
-		# file = File.expand_path("divvy_data/Divvy_Trips_2014-Q4b.csv", __FILE__)
+		file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q1Q2a.csv", __FILE__)
+		# file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q1Q2b.csv", __FILE__)
+		# file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q1Q2c.csv", __FILE__)
+		# file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q1Q2d.csv", __FILE__)
+		# file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q3a.csv", __FILE__)
+		# file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q3b.csv", __FILE__)
+		# file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q3c.csv", __FILE__)
+		# file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q4a.csv", __FILE__)
+		# file = File.expand_path("http://divvy-odyssey.herokuapp.com/divvy_data/Divvy_Trips_2014-Q4b.csv", __FILE__)
 		CSV.foreach(file, headers: true) do |row|
 			Trip.create(
 				trip_id: row["trip_id"].to_i,
