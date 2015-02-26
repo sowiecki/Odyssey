@@ -51,3 +51,4 @@ gem 'shoulda-matchers', group: [:test]
 gem 'jasmine', group: [:test]
 
 gem 'gmaps4rails'
+gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'

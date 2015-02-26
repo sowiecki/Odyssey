@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore-min
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
 //= stub map
 //= stub gmaps

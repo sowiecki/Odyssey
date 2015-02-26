@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/reactjs/react-rails.git
+  revision: ac4320eb183b948ec328a695cd54d27c769073af
+  specs:
+    react-rails (1.0.0.pre)
+      coffee-script-source (~> 1.9)
+      connection_pool
+      execjs
+      rails (>= 3.1)
+      react-source (~> 0.12)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -59,6 +70,7 @@ GEM
       execjs
     coffee-script-source (1.9.1)
     columnize (0.9.0)
+    connection_pool (2.1.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
@@ -159,6 +171,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    react-source (0.12.2)
     rspec-core (3.0.4)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.4)
@@ -227,6 +240,7 @@ DEPENDENCIES
   neo4j
   rails (= 4.2.0)
   rails_12factor
+  react-rails (~> 1.0.0.pre)!
   rspec-rails (~> 3.0.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
