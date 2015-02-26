@@ -29,73 +29,26 @@ $(function() {
   var routesPanel = _.template($('#routes-template').html());
   directionsDisplay.setMap(map);
 
-  function RoutesSegment() {
-    this.bikeId = null;
-    this.offset = null;
-    this.waypts = [];
-    this.wayptsInfo = [];
-
-    // Prevent MAX_WAYPOINTS_EXEEDED
-    this.safeWaypts = [];
-    this.makeSafeWaypts = function() {
-      this.safeWaypts = [];
-      for (var i = 1; i < this.waypts.length - 1; i++) {
-        this.safeWaypts.push(
-          this.waypts[i]
-        );
-      }
-    }
-
-    this.buildInitialRoute = function (trips) {
-      this.waypts.length = 0
-      for (var i = 0; i < trips.length; i++) {
-        this.waypts.push({
-          location: trips[i].lat + ", " + trips[i].lng
-        });
-        this.wayptsInfo.push({
-          tripId: trips[i].trip_id,
-          startTime: trips[i].start_time,
-          stopTime: trips[i].stop_time
-        })
-      }
-      this.drawRoute();
-    }
-    this.advanceRoute = function(trip) {
-      this.waypts.shift();
-      this.waypts.push({
-        location: trip.lat + ", " + trip.lng
-      });
-
-      this.wayptsInfo.shift();
-      this.wayptsInfo.push({
-        tripId: trip.trip_id,
-        startTime: trip.start_time,
-        stopTime: trip.stop_time
-      })
-
-      this.drawRoute();
-    }
-    this.drawRoute = function () {
-      this.makeSafeWaypts();
-      var request = {
-          origin: this.waypts[0].location,
-          destination: this.waypts[this.waypts.length - 1].location,
-          waypoints: this.safeWaypts,
-          travelMode: google.maps.TravelMode.BICYCLING
-      };
-      directionsService.route(request, function(response, status) {
-        console.log(status)
-        if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(response);
-          var routesData = {
-            routes: response.routes[0],
-            routesInfo: routesSegment.wayptsInfo
-          }
-          document.getElementById('routes-anchor').html(routesPanel(routesData))
+  RoutesSegment.prototype.drawRoute = function () {
+    this.makeSafeWaypts();
+    var request = {
+        origin: this.waypts[0].location,
+        destination: this.waypts[this.waypts.length - 1].location,
+        waypoints: this.safeWaypts,
+        travelMode: google.maps.TravelMode.BICYCLING
+    };
+    directionsService.route(request, function(response, status) {
+      console.log(status)
+      if (status == google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+        var routesData = {
+          routes: response.routes[0],
+          routesInfo: routesSegment.wayptsInfo
         }
-        
-      });
-    }
+        document.getElementById('routes-anchor').html(routesPanel(routesData))
+      }
+      
+    });
   }
 
   function getInitialTrips(bikeId, offset) {
@@ -142,7 +95,27 @@ $(function() {
   var routesSegment = new RoutesSegment
   var intervalId = null
 
-  MapControl.Module.init();
+  var RoutingInterface = React.createClass({
+    onClick: function(e) {
+      e.preventDefault();
+      // pauseTraverse();
+      routesSegment.offset = 0
+      routesSegment.bikeId = document.getElementById('bike-id-input').value;
+      getInitialTrips(routesSegment.bikeId, routesSegment.offset);
+    },
+    render: function() {
+      return (
+        <div className="map-control-first-row">
+          <div className="map-control-first-row">
+            <input id="bike-id-input" type="text" autofocus="true" placeholder="Select a bike ID to focus on" />
+          </div>
+          <div className="map-control-second-row">
+            <input id="show-initial-routes" onClick={this.onClick} type="submit" value="Follow the bike!" />
+          </div>
+        </div>
+      )
+    }
+  })
 
   React.render(<RoutingInterface />, document.getElementById('map-control-interface'))
 })
