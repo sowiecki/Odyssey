@@ -3,7 +3,7 @@ class Trip
 
 	has_one :out, :next_trip, model_class: Trip
 
-	property :trip_id, type: Integer
+	property :trip_id, type: Integer, type: Integer, constraint: :unique
 	property :start_time, type: String
 	property :stop_time, type: String
 	property :bike_id, type: Integer, index: :exact
