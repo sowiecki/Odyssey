@@ -48,8 +48,8 @@ namespace :pd do
 		CSV.foreach(file, headers: true) do |row|
 			Trip.create(
 				trip_id: row["trip_id"].to_i,
-				start_time: Date.strptime(row["starttime"], "%m/%d/%Y %H:%M"),
-				stop_time: Date.strptime(row["stoptime"], "%m/%d/%Y %H:%M"),
+				start_time: DateTime.strptime(row["starttime"], "%m/%d/%Y %H:%M"),
+				stop_time: DateTime.strptime(row["stoptime"], "%m/%d/%Y %H:%M"),
 				bike_id: row["bikeid"].to_i,
 				trip_duration: row["tripduration"].to_i,
 				origin_station_id: row["from_station_id"].to_i,
