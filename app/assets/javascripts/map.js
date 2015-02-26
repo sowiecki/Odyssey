@@ -39,7 +39,7 @@ $(function() {
     this.safeWaypts = [];
     this.makeSafeWaypts = function() {
       this.safeWaypts = [];
-      for (var i = 1; i < 9; i++) {
+      for (var i = 1; i < this.waypts.length - 1; i++) {
         this.safeWaypts.push(
           this.waypts[i]
         );
