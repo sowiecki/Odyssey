@@ -36,15 +36,15 @@ namespace :pd do
 
 	desc "Parse Divvy 2014 trips data into database"
 	task trips: :environment do
-		file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2a.csv", __FILE__)
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2b.csv", __FILE__)
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2c.csv", __FILE__)
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2d.csv", __FILE__)
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3a.csv", __FILE__)
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3b.csv", __FILE__)
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3c.csv", __FILE__)
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q4a.csv", __FILE__)
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q4b.csv", __FILE__)
+		file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2a.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2b.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2c.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2d.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3a.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3b.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3c.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q4a.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q4b.csv")
 		CSV.foreach(file, headers: true) do |row|
 			Trip.create(
 				trip_id: row["trip_id"].to_i,
