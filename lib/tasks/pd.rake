@@ -36,8 +36,8 @@ namespace :pd do
 
 	desc "Parse Divvy 2014 trips data into database"
 	task trips: :environment do
-		file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2a.csv")
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2b.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2a.csv")
+		file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2b.csv")
 		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2c.csv")
 		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q1Q2d.csv")
 		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3a.csv")
