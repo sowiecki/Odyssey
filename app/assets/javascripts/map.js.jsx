@@ -91,7 +91,7 @@ $(function() {
             routes: response.routes[0],
             routesInfo: routesSegment.wayptsInfo
           }
-          $('#routes-anchor').html(routesPanel(routesData))
+          document.getElementById('routes-anchor').html(routesPanel(routesData))
         }
         
       });
@@ -124,47 +124,25 @@ $(function() {
   }
 
   function noTripsFound() {
-    $('#error-box').html("No trips found!")
+    document.getElementById('error-box').toggle();
+    document.getElementById('error-box').html("No trips found!");
   }
-
   function traverseRoutes() {
     routesSegment.offset += 1
     getNextTrip(routesSegment.bikeId, routesSegment.offset);
   }
-
   function autoTraverseRoutes() {
-    nIntervId = setInterval(traverseRoutes, 1000);
+    intervalId = setInterval(traverseRoutes, 1000);
   }
-
   function pauseTraverse() {
-    clearInterval(nIntervId);
+    clearInterval(intervalId);
   }
 
   // Initial control dependencies
   var routesSegment = new RoutesSegment
-  var nIntervId = null
+  var intervalId = null
 
-  $('#show-initial-routes').on('click', function(e) {
-    e.preventDefault();
-    pauseTraverse();
-    routesSegment.offset = 0
-    routesSegment.bikeId = $('#bike-id-input').val()
-    getInitialTrips(routesSegment.bikeId, routesSegment.offset);
-  })
+  MapControl.Module.init();
 
-  $('#next-segment').on('click', function(e) {
-    e.preventDefault();
-    routesSegment.offset += 1
-    traverseRoutes();
-  });
-
-  $('#pause-traverse').on('click', function(e) {
-    e.preventDefault();
-    pauseTraverse();
-  })
-
-  $('#start-traverse').on('click', function(e) {
-    e.preventDefault();
-    autoTraverseRoutes();
-  })
+  React.render(<RoutingInterface />, document.getElementById('map-control-interface'))
 })

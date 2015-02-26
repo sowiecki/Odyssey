@@ -1,5 +1,5 @@
 <%= javascript_include_tag 'map' %>
-
+<%= javascript_include_tag 'components/map_navigation' %>
 <div id='map'></div>
 
 <div id="error-box">
@@ -8,19 +8,19 @@ test
 
 <div id="map-control-container">
 	<div id="map-control-interface">
-		<form id="map-control-inputs">
+<!-- 		<form id="map-control-inputs">
 			<div class="map-control-first-row">
-				<input id="bike-id-input" type="text" autofocus="true" placeholder="Select a bike ID to focus on" />
+				<input id="bike-id-input" type="text" target="remote" autofocus="true" placeholder="Select a bike ID to focus on" />
 			</div>
 			<div class="map-control-second-row">
-				<input id="show-initial-routes" type="submit" value="Follow the bike!" />
+				<input id="show-initial-routes" type="submit" target="remote" value="Follow the bike!" />
 			</div>
 			<div class="map-control-third-row">
-				<input id="pause-traverse" type="submit" value="&#9646;&#9646;" />
-				<input id="start-traverse" type="submit" value="&#9654;" />
-				<input id="next-segment" type="submit" value="&#9654;&#9654;" />
+				<input id="pause-traverse" type="submit" target="remote" value="&#9646;&#9646;" />
+				<input id="start-traverse" type="submit" target="remote" value="&#9654;" />
+				<input id="next-segment" type="submit" target="remote" value="&#9654;&#9654;" />
 			</div>
-		</form>
+		</form> -->
 	</div>
 
 	<div id="routes-anchor">Enter a bike ID and click "Follow the bike!" to begin</div>
