@@ -2,15 +2,15 @@
 @import url(http://fonts.googleapis.com/css?family=Parisienne);
 
 header, footer {
-	padding: .5em;
+	padding: 10px;
 	width: 100%;
 	text-align: center;
 	background-color: #F4F4F4;
 }
 footer {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
-	height: 1em;
+	height: 10px;
 }
 footer > a {
 	color: #3DB6E4;
@@ -18,17 +18,21 @@ footer > a {
 
 div#wrapper {
 	position: relative;
+	margin: 0 auto 40px;
+	padding: 0 20px 0 20px;
 	min-height: 100%;
+	max-width: 960px;
 }
 div#content {
-	padding: 0 0 1em 0; /* Leave room for the footer */
+	padding: 0 0 10px 0; /* Leave room for the footer */
 }
 
 h1#divvy-header-text {
+	display: inline;
 	margin: 0;
 	text-transform: uppercase;
 	font-family: 'Monda', sans-serif;
-	font-size: 1.5em;
+	font-size: 20px;
 	font-weight: bold;
 	transform:scale(1.75,1); /* W3C */
     -webkit-transform:scale(1.75,1); /* Safari and Chrome */
@@ -37,9 +41,10 @@ h1#divvy-header-text {
     -o-transform:scale(1.75,1); /* Opera */
 }
 h1#odyssey-header-text {
+	display: inline;
 	margin: 0;
 	font-family: 'Parisienne', cursive;
-	font-size: 3em;
+	font-size: 30px;
 	font-weight: normal;
 	color: #FF5E3C;
 	text-shadow: #d8d8d8 .02em .02em .02em;

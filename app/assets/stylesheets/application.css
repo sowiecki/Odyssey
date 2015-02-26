@@ -15,12 +15,13 @@
  *= require_tree .
  *= require_self
  */
-
+html {
+	overflow-y: scroll;
+}
 body {
 	margin: 0;
 	font-family: helvetica;
 }
-
 a {
 	text-decoration: none;
 }

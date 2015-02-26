@@ -20,26 +20,74 @@ and (max-width : 320px) {
 	}
 }
 
-section#map-control, section#focus-bike {
-	margin: .5em;
+div#error-box {
+	display: none;
 	text-align: center;
-}
-input#bike-id-input {
-	display: block;
-	margin: 0 auto auto;
-	width: 20em;
-}
-section#map-control > form > input, input#show-initial-routes {
-	margin: .25em;
-	height: 2em;
-	width: 4em;
-	font-size: 2em;
-}
-input#show-initial-routes {
-	width: 8.5em;
 }
 
-div#error-box {
-	/*display: none;*/
-	text-align: center;
+#map-control-container {
+  display: flex;
+  background-color: #FF5E3C;
+  border: 2px solid #ff927f;
+}
+#map-control-interface > form {
+	float: left;
+	padding: 0 6px 0 6px;
+}
+.map-control-first-row > input, .map-control-second-row > input, .map-control-third-row > input {
+	margin: 6px 0 6px 0;
+	height: 40px;
+	outline: none;
+	background-color: #F8F8FF;
+	border: 2px solid #595959;
+	/*box-shadow: 1px 1px 2px #bfbfbf;*/
+}
+.map-control-first-row > input:focus, .map-control-second-row > input:focus, .map-control-third-row > input:focus {
+	box-shadow: inset 0px 0px 10px #bfbfbf;
+}
+.map-control-first-row > input:hover, .map-control-second-row > input:hover, .map-control-third-row > input:hover {
+	border: 2px solid #007fbf;
+}
+.map-control-first-row > input:active, .map-control-second-row > input:active, .map-control-third-row > input:active {
+	
+}
+.map-control-first-row > input {
+	padding: 0 8px 0 8px;
+	width: 180px;
+}
+.map-control-second-row > input {
+	width: 200px;
+}
+.map-control-third-row > input {
+	width: 60px;
+}
+.map-control-third-row > input:nth-child(2) {
+	margin: 6px;
+}
+
+div#map-control-interface {
+  /*width: 30%;*/
+  max-height: 160px;
+}
+div#routes-anchor {
+  flex-grow: 1;
+  flex-direction: column;
+  margin: 8px;
+  padding: 0 10px;
+  max-width: 70%;
+}
+
+div.trip-box {
+	display: inline-block;
+	vertical-align: top;
+	margin: 8px 6px 8px 6px;
+	padding: 4px;
+	min-height: 160px;
+	width: 190px;
+	font-size: 12px;
+	line-height: 18px;
+	background-color: #ff7f66;
+}
+div.trip-box > p {
+	margin: 0;
 }

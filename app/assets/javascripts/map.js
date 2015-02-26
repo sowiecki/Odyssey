@@ -53,7 +53,9 @@ $(function() {
           location: trips[i].lat + ", " + trips[i].lng
         });
         this.wayptsInfo.push({
-          startTime: trips[i].start_time
+          tripId: trips[i].trip_id,
+          startTime: trips[i].start_time,
+          stopTime: trips[i].stop_time
         })
       }
       this.drawRoute();
@@ -66,7 +68,9 @@ $(function() {
 
       this.wayptsInfo.shift();
       this.wayptsInfo.push({
-        startTime: trip.start_time
+        tripId: trips[i].trip_id,
+        startTime: trips[i].start_time,
+        stopTime: trips[i].stop_time
       })
 
       this.drawRoute();
