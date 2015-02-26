@@ -68,9 +68,9 @@ $(function() {
 
       this.wayptsInfo.shift();
       this.wayptsInfo.push({
-        tripId: trips[i].trip_id,
-        startTime: trips[i].start_time,
-        stopTime: trips[i].stop_time
+        tripId: trip.trip_id,
+        startTime: trip.start_time,
+        stopTime: trip.stop_time
       })
 
       this.drawRoute();
