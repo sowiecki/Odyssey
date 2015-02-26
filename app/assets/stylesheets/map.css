@@ -20,6 +20,26 @@ and (max-width : 320px) {
 	}
 }
 
-#map-control, #focus-bike {
+section#map-control, section#focus-bike {
+	margin: .5em;
+	text-align: center;
+}
+input#bike-id-input {
+	display: block;
+	margin: 0 auto auto;
+	width: 20em;
+}
+section#map-control > form > input, input#show-initial-routes {
+	margin: .25em;
+	height: 2em;
+	width: 4em;
+	font-size: 2em;
+}
+input#show-initial-routes {
+	width: 8.5em;
+}
+
+div#error-box {
+	/*display: none;*/
 	text-align: center;
 }

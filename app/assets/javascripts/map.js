@@ -30,8 +30,8 @@ $(function() {
   directionsDisplay.setMap(map);
 
   function RoutesSegment() {
-    this.bikeId = 0;
-    this.offset = 0;
+    this.bikeId = null;
+    this.offset = null;
     this.waypts = [];
     this.wayptsInfo = [];
 
@@ -47,6 +47,7 @@ $(function() {
     }
 
     this.buildInitialRoute = function (trips) {
+      this.waypts.length = 0
       for (var i = 0; i < trips.length; i++) {
         this.waypts.push({
           location: trips[i].lat + ", " + trips[i].lng
@@ -70,7 +71,6 @@ $(function() {
 
       this.drawRoute();
     }
-
     this.drawRoute = function () {
       this.makeSafeWaypts();
       var request = {
@@ -80,7 +80,7 @@ $(function() {
           travelMode: google.maps.TravelMode.BICYCLING
       };
       directionsService.route(request, function(response, status) {
-        // console.log(status)
+        console.log(status)
         if (status == google.maps.DirectionsStatus.OK) {
           directionsDisplay.setDirections(response);
           var routesData = {
@@ -100,11 +100,14 @@ $(function() {
       method: "get",
       dataType: "json",
       success: function(data) {
-        routesSegment.buildInitialRoute(data);
+        if (data.length) {
+          routesSegment.buildInitialRoute(data);
+        } else {
+          noTripsFound();
+        }
       }
     })
   }
-
   function getNextTrip(bikeId, offset) {
     $.ajax({
       url: "next_trip_for/" + bikeId + "/after/" + offset,
@@ -116,8 +119,9 @@ $(function() {
     })
   }
 
-  var routesSegment = new RoutesSegment
-  getInitialTrips(routesSegment.bikeId, routesSegment.offset);
+  function noTripsFound() {
+    $('#error-box').html("No trips found!")
+  }
 
   function traverseRoutes() {
     routesSegment.offset += 1
@@ -132,9 +136,17 @@ $(function() {
     clearInterval(nIntervId);
   }
 
-  function endOfTheLine() {
-    $('#next-segment').fadeOut();
-  }
+  // Initial control dependencies
+  var routesSegment = new RoutesSegment
+  var nIntervId = null
+
+  $('#show-initial-routes').on('click', function(e) {
+    e.preventDefault();
+    pauseTraverse();
+    routesSegment.offset = 0
+    routesSegment.bikeId = $('#bike-id-input').val()
+    getInitialTrips(routesSegment.bikeId, routesSegment.offset);
+  })
 
   $('#next-segment').on('click', function(e) {
     e.preventDefault();

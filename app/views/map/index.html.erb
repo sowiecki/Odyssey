@@ -2,18 +2,22 @@
 
 <div id='map'></div>
 
+<div id="error-box">
+test
+</div>
+
 <section id="focus-bike">
 	<form>
-		<input id="bike-id" type="text" placeholder="Bike ID" />
-		<input id="start-traverse" type="submit" value="Focus" />
+		<input id="bike-id-input" type="text" autofocus="true" placeholder="Select a bike ID to focus on" />
+		<input id="show-initial-routes" type="submit" value="Focus" />
 	</form>
 </section>
 
 <section id="map-control">
 	<form>
-		<input id="start-traverse" type="submit" value="Start" />
-		<input id="pause-traverse" type="submit" value="Pause" />
-		<input id="next-segment" type="submit" value="Next" />
+		<input id="pause-traverse"type="submit" value="&#9646;&#9646;" />
+		<input id="start-traverse" type="submit" value="&#9654;" />
+		<input id="next-segment" type="submit" value="&#9654;&#9654;" />
 	</form>
 </section>
 
