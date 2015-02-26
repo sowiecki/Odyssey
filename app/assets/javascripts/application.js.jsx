@@ -17,8 +17,6 @@
 //= require react_ujs
 //= require components
 //= require_tree .
-//= stub map
-//= stub gmaps
 
 _.templateSettings = {
   interpolate : /\{\{=(.+?)\}\}/g,

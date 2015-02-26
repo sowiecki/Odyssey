@@ -56,6 +56,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    browserify-rails (0.7.4)
+      sprockets (~> 2.0)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -231,6 +233,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  browserify-rails (~> 0.7)
   byebug
   coffee-rails (~> 4.1.0)
   gmaps4rails
