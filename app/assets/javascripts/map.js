@@ -9,10 +9,10 @@ $(function() {
           panControl: false,
           mapTypeControl: false,
           styles: mapStyle,
-          center: new google.maps.LatLng(41.870033, -87.6500523)
+          center: new google.maps.LatLng(41.890033, -87.6500523)
         }
   var markerOptions = {
-    icon: "images/marker.png",
+    // icon: "images/marker.png",
     optimized: true
     // visible: false
   }
@@ -27,40 +27,51 @@ $(function() {
   var directionsService = new google.maps.DirectionsService();
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);;
   var routesPanel = _.template($('#routes-template').html());
+  directionsDisplay.setMap(map);
 
   function RoutesSegment() {
-    this.bikeId = 10;
+    this.bikeId = 0;
     this.offset = 0;
     this.waypts = [];
+    this.wayptsInfo = [];
+
+    // Prevent MAX_WAYPOINTS_EXEEDED
     this.safeWaypts = [];
     this.makeSafeWaypts = function() {
       this.safeWaypts = [];
-      for (var i = 1; i < 7; i++) {
+      for (var i = 1; i < 9; i++) {
         this.safeWaypts.push(
           this.waypts[i]
         );
       }
     }
+
     this.buildInitialRoute = function (trips) {
       for (var i = 0; i < trips.length; i++) {
         this.waypts.push({
-          location: trips[i].lat + ", " + trips[i].lng,
+          location: trips[i].lat + ", " + trips[i].lng
         });
+        this.wayptsInfo.push({
+          startTime: trips[i].start_time
+        })
       }
-      this.calcRoute();
+      this.drawRoute();
     }
     this.advanceRoute = function(trip) {
-      console.log(this.destination)
-      console.log(this.safeWaypts)
-
       this.waypts.shift();
       this.waypts.push({
         location: trip.lat + ", " + trip.lng
       });
 
-      this.calcRoute();
+      this.wayptsInfo.shift();
+      this.wayptsInfo.push({
+        startTime: trip.start_time
+      })
+
+      this.drawRoute();
     }
-    this.calcRoute = function () {
+
+    this.drawRoute = function () {
       this.makeSafeWaypts();
       var request = {
           origin: this.waypts[0].location,
@@ -68,19 +79,17 @@ $(function() {
           waypoints: this.safeWaypts,
           travelMode: google.maps.TravelMode.BICYCLING
       };
-
       directionsService.route(request, function(response, status) {
-        console.log(response.routes[0])
-        console.log(status)
+        // console.log(status)
         if (status == google.maps.DirectionsStatus.OK) {
           directionsDisplay.setDirections(response);
           var routesData = {
             routes: response.routes[0],
+            routesInfo: routesSegment.wayptsInfo
           }
           $('#routes-anchor').html(routesPanel(routesData))
         }
-
-        directionsDisplay.setMap(map);
+        
       });
     }
   }
@@ -91,7 +100,6 @@ $(function() {
       method: "get",
       dataType: "json",
       success: function(data) {
-        // if (data.length < 10) { endOfTheLine(); }
         routesSegment.buildInitialRoute(data);
       }
     })
@@ -113,7 +121,6 @@ $(function() {
 
   function traverseRoutes() {
     routesSegment.offset += 1
-    console.log(routesSegment.offset)
     getNextTrip(routesSegment.bikeId, routesSegment.offset);
   }
 

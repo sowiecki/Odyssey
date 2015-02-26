@@ -1,11 +1,21 @@
 <%= javascript_include_tag 'map' %>
 
 <div id='map'></div>
-<form>
-	<input type="text" />
-	<input id="start-traverse" type="submit" value="Start" />
-	<input id="pause-traverse" type="submit" value="Pause" />
-	<input id="next-segment" type="submit" value="Next" />
-</form>
+
+<section id="focus-bike">
+	<form>
+		<input id="bike-id" type="text" placeholder="Bike ID" />
+		<input id="start-traverse" type="submit" value="Focus" />
+	</form>
+</section>
+
+<section id="map-control">
+	<form>
+		<input id="start-traverse" type="submit" value="Start" />
+		<input id="pause-traverse" type="submit" value="Pause" />
+		<input id="next-segment" type="submit" value="Next" />
+	</form>
+</section>
+
 <div id="routes-anchor"></div>
 <%= render 'map/routes_template' %>

@@ -19,3 +19,7 @@ and (max-width : 320px) {
 
 	}
 }
+
+#map-control, #focus-bike {
+	text-align: center;
+}
