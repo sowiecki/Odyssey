@@ -48,6 +48,7 @@ $(function() {
           routesInfo: wayptsInfo
         }
         $('#routes-anchor').html(routesPanel(routesData))
+        React.render(<RoutesInfoBox />, document.getElementById('routes-anchor'))
       }
     });
   }
@@ -132,11 +133,11 @@ $(function() {
   })
   
   var RoutesInfoBox = React.createClass({
-    propTypes: {
-      requiredArray: React.PropTypes.array.isRequired
-    },
+    // propTypes: {
+    //   requiredArray: React.PropTypes.array.isRequired
+    // },
     getInitialState: function() {
-
+      return null;
     },
     onClick: function() {
 
