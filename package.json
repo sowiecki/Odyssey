@@ -1,0 +1,12 @@
+{
+  "name": "Odyssey",
+  "repository": "https://github.com/Nase00/Odyssey",
+  "devDependencies" : {
+    "browserify": "~> 6.3",
+    "browserify-incremental": "^1.4.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10"
+  }
+}

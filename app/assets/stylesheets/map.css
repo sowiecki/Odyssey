@@ -1,4 +1,6 @@
 #map {
+	z-index: 0;
+/*	position: absolute;*/
 	margin: 0 auto auto;
 	width: 100%;
 	min-height: 600px;
@@ -25,14 +27,11 @@ div#error-box {
 	text-align: center;
 }
 
-#map-control-container {
-  display: flex;
-  background-color: #FF5E3C;
-  border: 2px solid #ff927f;
-}
-#map-control-interface > form {
-	float: left;
-	padding: 0 6px 0 6px;
+div#bike-control-container {
+	z-index: 200;
+	position: absolute;
+	top: 2%;
+	right: 4%;
 }
 .map-control-first-row > input, .map-control-second-row > input, .map-control-third-row > input {
 	margin: 6px 0 6px 0;
@@ -40,7 +39,7 @@ div#error-box {
 	outline: none;
 	background-color: #F8F8FF;
 	border: 2px solid #595959;
-	/*box-shadow: 1px 1px 2px #bfbfbf;*/
+	box-shadow: 1px 1px 2px #bfbfbf;
 }
 .map-control-first-row > input:focus, .map-control-second-row > input:focus, .map-control-third-row > input:focus {
 	box-shadow: inset 0px 0px 10px #bfbfbf;
@@ -57,21 +56,17 @@ div#error-box {
 }
 .map-control-second-row > input {
 	width: 200px;
+	font-size: 20px;
 }
 .map-control-third-row > input {
 	width: 60px;
 }
 .map-control-third-row > input:nth-child(2) {
-	margin: 6px;
+	margin: 6px 10px 6px 10px;
 }
 
-div#map-control-interface {
-  /*width: 30%;*/
-  max-height: 160px;
-}
 div#routes-anchor {
-  flex-grow: 1;
-  flex-direction: column;
+  display: absolute;
   margin: 8px;
   padding: 0 10px;
   max-width: 70%;
