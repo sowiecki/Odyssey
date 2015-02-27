@@ -4,7 +4,7 @@
 header, footer {
 	margin: 0 auto auto;
 	padding: 10px 0 10px 0;
-	width: 960px;
+	max-width: 960px;
 	text-align: center;
 	background-color: #F4F4F4;
 }
@@ -22,7 +22,6 @@ footer > a {
 div#wrapper {
 	position: relative;
 	margin: 0 auto 40px;
-	padding: 0 20px 0 20px;
 	min-height: 100%;
 	max-width: 960px;
 }

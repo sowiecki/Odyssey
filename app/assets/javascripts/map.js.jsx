@@ -130,8 +130,11 @@ $(function() {
       )
     }
   })
-
+  
   var RoutesInfoBox = React.createClass({
+    propTypes: {
+      requiredArray: React.PropTypes.array.isRequired
+    },
     getInitialState: function() {
 
     },
@@ -141,7 +144,7 @@ $(function() {
     render: function() {
       return (
         <div className="trip-box"  onClick={this.onClick}>
-
+          Test
         </div>
       )
     }

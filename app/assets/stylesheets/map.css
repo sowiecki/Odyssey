@@ -1,6 +1,5 @@
 #map {
 	z-index: 0;
-/*	position: absolute;*/
 	margin: 0 auto auto;
 	width: 100%;
 	min-height: 600px;
@@ -39,7 +38,7 @@ div#bike-control-container {
 	outline: none;
 	background-color: #F8F8FF;
 	border: 2px solid #595959;
-	box-shadow: 1px 1px 2px #bfbfbf;
+	/*box-shadow: 1px 1px 2px #bfbfbf;*/
 }
 .map-control-first-row > input:focus, .map-control-second-row > input:focus, .map-control-third-row > input:focus {
 	box-shadow: inset 0px 0px 10px #bfbfbf;
