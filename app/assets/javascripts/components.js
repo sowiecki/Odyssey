@@ -1,3 +1,7 @@
+module.exports = {
+  model: RoutesSegment
+};
+
 function RoutesSegment() {
   this.bikeId = null;
   this.offset = null;
@@ -44,4 +48,4 @@ function RoutesSegment() {
 
     this.drawRoute();
   }
-}
+};
