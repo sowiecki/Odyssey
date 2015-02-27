@@ -32,6 +32,7 @@ $(function() {
 
   RoutesSegment.prototype.drawRoute = function () {
     this.makeSafeWaypts();
+    var wayptsInfo = this.wayptsInfo;
     var request = {
         origin: this.waypts[0].location,
         destination: this.waypts[this.waypts.length - 1].location,
@@ -44,7 +45,7 @@ $(function() {
         directionsDisplay.setDirections(response);
         var routesData = {
           routes: response.routes[0],
-          routesInfo: routesSegment.wayptsInfo
+          routesInfo: wayptsInfo
         }
         $('#routes-anchor').html(routesPanel(routesData))
       }
@@ -92,13 +93,12 @@ $(function() {
     }
   }
 
-  var RouteControl = new RouteControl();
-
   // Initialize control dependencies
+  var RouteControl = new RouteControl
   var routesSegment = new RoutesSegment
   var intervalId = null
 
-  var RoutingInterface = React.createClass({
+  var BikeControl = React.createClass({
     startRouting: function(e) {
       e.preventDefault();
       RouteControl.getInitialTrips();
@@ -131,5 +131,18 @@ $(function() {
     }
   })
 
-  React.render(<RoutingInterface />, document.getElementById('map-control-container'))
+  var RoutesInfoBox = React.createClass({
+    onClick: function() {
+
+    },
+    render: function() {
+      return (
+        <div className="trip-box"  onClick={this.onClick}>
+
+        </div>
+      )
+    }
+  })
+
+  React.render(<BikeControl />, document.getElementById('bike-control-container'))
 })
