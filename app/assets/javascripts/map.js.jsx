@@ -114,7 +114,7 @@ $(function() {
     },
     render: function() {
       return (
-        <div className="map-control-interface">
+        <div id="map-control-interface">
           <div className="map-control-first-row">
             <input id="bike-id-input" type="text" autofocus="true" placeholder="Select a bike ID to focus on" />
           </div>
@@ -132,6 +132,9 @@ $(function() {
   })
 
   var RoutesInfoBox = React.createClass({
+    getInitialState: function() {
+
+    },
     onClick: function() {
 
     },
