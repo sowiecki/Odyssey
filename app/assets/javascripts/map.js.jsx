@@ -132,24 +132,24 @@ $(function() {
     }
   })
   
-  // var RoutesInfoBox = React.createClass({
-  //   // propTypes: {
-  //   //   requiredArray: React.PropTypes.array.isRequired
-  //   // },
-  //   getInitialState: function() {
-  //     return null;
-  //   },
-  //   onClick: function() {
+  var RoutesInfoBox = React.createClass({
+    // propTypes: {
+    //   requiredArray: React.PropTypes.array.isRequired
+    // },
+    // getInitialState: function() {
 
-  //   },
-  //   render: function() {
-  //     return (
-  //       <div className="trip-box"  onClick={this.onClick}>
-  //         Test
-  //       </div>
-  //     )
-  //   }
-  // })
+    // },
+    onClick: function() {
+
+    },
+    render: function() {
+      return (
+        <div className="trip-box"  onClick={this.onClick}>
+          Test
+        </div>
+      )
+    }
+  })
 
   React.render(<BikeControl />, document.getElementById('bike-control-container'))
 })
