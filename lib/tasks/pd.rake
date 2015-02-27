@@ -43,8 +43,8 @@ namespace :pd do
 		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3a.csv")
 		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3b.csv")
 		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q3c.csv")
-		file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q4a.csv")
-		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q4b.csv")
+		# file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q4a.csv")
+		file = File.join(Rails.public_path, "divvy_data", "Divvy_Trips_2014-Q4b.csv")
 		CSV.foreach(file, headers: true) do |row|
 			Trip.create(
 				trip_id: row["trip_id"].to_i,
