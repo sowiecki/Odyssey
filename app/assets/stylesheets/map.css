@@ -21,9 +21,18 @@ and (max-width : 320px) {
 	}
 }
 
-div#error-box {
-	display: none;
-	text-align: center;
+div#explanation-box{
+	position: absolute;
+	margin: 6px;
+	padding: 10px;
+	top: 2%;
+	left: 4%;
+	height: 124px;
+	width: 550px;
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size: 22px;
+	background-color: rgba(230, 230, 230, 0.9);
+	border: 2px solid rgba(248, 248, 255, 0.25);
 }
 
 div#bike-control-container {
@@ -32,18 +41,28 @@ div#bike-control-container {
 	top: 2%;
 	right: 4%;
 }
+div#routes-display-container {
+	z-index: 200;
+	position: absolute;
+	bottom: 8%;
+	right: 4%;
+}
 .map-control-first-row > input, .map-control-second-row > input, .map-control-third-row > input {
 	margin: 6px 0 6px 0;
 	height: 40px;
 	outline: none;
-	background-color: #F8F8FF;
-	border: 2px solid #595959;
+	font-family: Arial;
+	text-transform: uppercase;
+	background-color: rgba(248, 248, 248, 0.25);
+	border: 2px solid rgba(248, 248, 255, 0.25);
+	/*border-radius: 5px;*/
 	/*box-shadow: 1px 1px 2px #bfbfbf;*/
 }
 .map-control-first-row > input:focus, .map-control-second-row > input:focus, .map-control-third-row > input:focus {
 	box-shadow: inset 0px 0px 10px #bfbfbf;
 }
 .map-control-first-row > input:hover, .map-control-second-row > input:hover, .map-control-third-row > input:hover {
+	background-color: rgba(230, 230, 255, 0.5);
 	border: 2px solid #007fbf;
 }
 .map-control-first-row > input:active, .map-control-second-row > input:active, .map-control-third-row > input:active {
@@ -59,6 +78,7 @@ div#bike-control-container {
 }
 .map-control-third-row > input {
 	width: 60px;
+	font-size: 26px;
 }
 .map-control-third-row > input:nth-child(2) {
 	margin: 6px 10px 6px 10px;
@@ -66,9 +86,9 @@ div#bike-control-container {
 
 div#routes-anchor {
   position: absolute;
-  margin: 8px;
+  margin: 0 auto auto;
   padding: 0 10px;
-  max-width: 70%;
+  max-width: 100%;
 }
 
 div.trip-box {
@@ -76,11 +96,11 @@ div.trip-box {
 	vertical-align: top;
 	margin: 8px 6px 8px 6px;
 	padding: 4px;
-	min-height: 160px;
-	width: 190px;
-	font-size: 12px;
+	min-height: 100px;
+	width: 120px;
+	font-size: 14px;
 	line-height: 18px;
-	background-color: #ff7f66;
+	background-color: rgba(255, 127, 102, 0.5);
 }
 div.trip-box > p {
 	margin: 0;

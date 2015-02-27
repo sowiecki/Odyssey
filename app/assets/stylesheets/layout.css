@@ -1,35 +1,37 @@
-@import url(http://fonts.googleapis.com/css?family=Monda);
-@import url(http://fonts.googleapis.com/css?family=Parisienne);
-
 header, footer {
+	z-index: 200;
 	margin: 0 auto auto;
 	padding: 10px 0 10px 0;
 	max-width: 960px;
 	text-align: center;
-	background-color: #F4F4F4;
+	color: #3DB6E4;
+	background-color: #e5e5e5;
 }
 footer {
 	position: fixed;
 	bottom: 0;
 	right: 0;
 	left: 0;
-	height: 10px;
+	height: 14px;
 }
 footer > a {
 	color: #3DB6E4;
 }
 
 div#wrapper {
-	position: relative;
-	margin: 0 auto 40px;
-	min-height: 100%;
+	margin: 0 auto;
 	max-width: 960px;
+	height: 94%;
+	background-color: #f2f2f2;
 }
 div#content {
+	z-index: 100;
+	position: relative;
 	padding: 0 0 10px 0; /* Leave room for the footer */
 }
 
 h1#divvy-header-text {
+	z-index: 200;
 	display: inline;
 	margin: 0;
 	text-transform: uppercase;

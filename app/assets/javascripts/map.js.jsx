@@ -5,7 +5,7 @@ $(function() {
   ];
   var mapOptions = {
           zoom: 11,
-          // disableDefaultUI: true,
+          disableDefaultUI: true,
           panControl: false,
           mapTypeControl: false,
           styles: mapStyle,
@@ -48,7 +48,7 @@ $(function() {
           routesInfo: wayptsInfo
         }
         $('#routes-anchor').html(routesPanel(routesData))
-        // React.render(<RoutesInfoBox />, document.getElementById('routes-anchor'))
+        React.render(<RoutesInfoBox />, document.getElementById('routes-display-container'))
       }
     });
   }
@@ -117,10 +117,10 @@ $(function() {
       return (
         <div id="map-control-interface">
           <div className="map-control-first-row">
-            <input id="bike-id-input" type="text" autofocus="true" placeholder="Select a bike ID to focus on" />
+            <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
           </div>
           <div className="map-control-second-row">
-            <input id="show-initial-routes" onClick={this.startRouting} type="submit" value="Follow the bike!" />
+            <input id="show-initial-routes" onClick={this.startRouting} type="submit" value="Focus" />
           </div>
           <div className="map-control-third-row">
             <input id="pause-traverse" onClick={this.pauseTraverse} type="submit" target="remote" value="&#9646;&#9646;" />
@@ -145,7 +145,7 @@ $(function() {
     render: function() {
       return (
         <div className="trip-box"  onClick={this.onClick}>
-          Test
+          Test React replacement
         </div>
       )
     }

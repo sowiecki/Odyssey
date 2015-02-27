@@ -15,12 +15,20 @@
  *= require_tree .
  *= require_self
  */
+
+@import url(http://fonts.googleapis.com/css?family=Monda);
+@import url(http://fonts.googleapis.com/css?family=Parisienne);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow);
+
 html {
-	overflow-y: scroll;
+	overflow-y: hidden;
+	height: 100%;
 }
 body {
 	margin: 0;
+	height: 100%;
 	font-family: helvetica;
+	background-color: #ff5e3c;
 }
 a {
 	text-decoration: none;
