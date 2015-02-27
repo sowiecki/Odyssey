@@ -48,7 +48,7 @@ $(function() {
           routesInfo: wayptsInfo
         }
         $('#routes-anchor').html(routesPanel(routesData))
-        React.render(<RoutesInfoBox />, document.getElementById('routes-anchor'))
+        // React.render(<RoutesInfoBox />, document.getElementById('routes-anchor'))
       }
     });
   }

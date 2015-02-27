@@ -1,0 +1,174 @@
+@import url(http://fonts.googleapis.com/css?family=Monda);
+@import url(http://fonts.googleapis.com/css?family=Parisienne);
+
+header, footer {
+	margin: 0 auto auto;
+	padding: 10px 0 10px 0;
+	max-width: 960px;
+	text-align: center;
+	background-color: #F4F4F4;
+}
+footer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 10px;
+}
+footer > a {
+	color: #3DB6E4;
+}
+
+div#wrapper {
+	position: relative;
+	margin: 0 auto 40px;
+	min-height: 100%;
+	max-width: 960px;
+}
+div#content {
+	padding: 0 0 10px 0; /* Leave room for the footer */
+}
+
+h1#divvy-header-text {
+	display: inline;
+	margin: 0;
+	text-transform: uppercase;
+	font-family: 'Monda', sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	transform:scale(1.75,1); /* W3C */
+    -webkit-transform:scale(1.75,1); /* Safari and Chrome */
+    -moz-transform:scale(1.75,1); /* Firefox */
+    -ms-transform:scale(1.75,1); /* IE 9 */
+    -o-transform:scale(1.75,1); /* Opera */
+}
+h1#odyssey-header-text {
+	display: inline;
+	margin: 0;
+	font-family: 'Parisienne', cursive;
+	font-size: 30px;
+	font-weight: normal;
+	color: #FF5E3C;
+	text-shadow: #d8d8d8 .02em .02em .02em;
+}
+span#vv {
+	color: #3DB7E4;
+}
+#map {
+	z-index: 0;
+	margin: 0 auto auto;
+	width: 100%;
+	min-height: 800px;
+	max-height: 100%;
+}
+
+/* Smartphone (lanscape) */
+@media only screen 
+and (min-width : 321px) {
+ #map {
+ 	
+ }
+}
+/* Smartphone (portrait) */
+@media only screen 
+and (max-width : 320px) {
+	#map {
+
+	}
+}
+
+div#error-box {
+	display: none;
+	text-align: center;
+}
+
+div#bike-control-container {
+	z-index: 200;
+	position: absolute;
+	top: 2%;
+	right: 4%;
+}
+.map-control-first-row > input, .map-control-second-row > input, .map-control-third-row > input {
+	margin: 6px 0 6px 0;
+	height: 40px;
+	outline: none;
+	background-color: #F8F8FF;
+	border: 2px solid #595959;
+	/*box-shadow: 1px 1px 2px #bfbfbf;*/
+}
+.map-control-first-row > input:focus, .map-control-second-row > input:focus, .map-control-third-row > input:focus {
+	box-shadow: inset 0px 0px 10px #bfbfbf;
+}
+.map-control-first-row > input:hover, .map-control-second-row > input:hover, .map-control-third-row > input:hover {
+	border: 2px solid #007fbf;
+}
+.map-control-first-row > input:active, .map-control-second-row > input:active, .map-control-third-row > input:active {
+	
+}
+.map-control-first-row > input {
+	padding: 0 8px 0 8px;
+	width: 180px;
+}
+.map-control-second-row > input {
+	width: 200px;
+	font-size: 20px;
+}
+.map-control-third-row > input {
+	width: 60px;
+}
+.map-control-third-row > input:nth-child(2) {
+	margin: 6px 10px 6px 10px;
+}
+
+div#routes-anchor {
+  position: absolute;
+  margin: 8px;
+  padding: 0 10px;
+  max-width: 70%;
+}
+
+div.trip-box {
+	display: inline-block;
+	vertical-align: top;
+	margin: 8px 6px 8px 6px;
+	padding: 4px;
+	min-height: 160px;
+	width: 190px;
+	font-size: 12px;
+	line-height: 18px;
+	background-color: #ff7f66;
+}
+div.trip-box > p {
+	margin: 0;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ * Color scheme blue!33DB6E4 red!FF5E3C yellow!FFC73C
+ *
+
+
+ */
+
+html {
+	overflow-y: scroll;
+}
+body {
+	margin: 0;
+	font-family: helvetica;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
