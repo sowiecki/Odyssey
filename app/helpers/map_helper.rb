@@ -8,10 +8,10 @@ module MapHelper
 	end
 
 	def next_ten_trips
-		Trip.where(bike_id: params[:bike_id].to_i).offset(trip_segment_params).limit(10).order(:start_time).to_a
+		Trip.where(bike_id: params[:bike_id].to_i).offset(0).limit(10).order(:start_time).to_a
 	end
 
 	def next_trip
-		Trip.where(bike_id: params[:bike_id].to_i).offset(next_trip_params).limit(1).order(:start_time).to_a
+		Trip.where(bike_id: params[:bike_id].to_i).offset(10).limit(1).order(:start_time).to_a
 	end
 end
