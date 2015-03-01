@@ -51,6 +51,8 @@ $(function() {
           routesInfo: wayptsInfo
         }
         $('#routes-anchor').html(routesPanel(routesData))
+        console.log(wayptsInfo[0].tripId)
+        RoutesInfoBoxes.setState({text: routesSegment.wayptsInfo[0].tripId})
         React.render(<RoutesInfoBoxes />, document.getElementById('routes-display-container'))
       }
     });
@@ -167,19 +169,19 @@ $(function() {
   })
   
   var RoutesInfoBoxes = React.createClass({
-    // propTypes: {
-    //   requiredArray: React.PropTypes.array.isRequired
-    // },
-    // getInitialState: function() {
-
-    // },
+    getInitialState: function() {
+      return {
+        text: "test"
+      }
+    },
     onClick: function() {
       console.log("test")
     },
     render: function() {
+      // this.setState({text: routesSegment.wayptsInfo[0].tripId})
       return (
         <a href="#" className="trip-box"  onClick={this.onClick}>
-          Test React replacement
+          {this.state.text}
         </a>
       )
     }
