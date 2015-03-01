@@ -11,10 +11,8 @@ class MapController < ApplicationController
 		  marker.lng(station.longitude)
 		  marker.json({
 		  	trip_id: trip.trip_id,
-		  	# start_time: DateTime.parse(trip.start_time).strftime("%I:%M%p on %m/%d/%Y"),
-		  	# stop_time: DateTime.parse(trip.stop_time).strftime("%I:%M%p on %m/%d/%Y"),
-		  	start_time: trip.start_time,
-		  	stop_time: trip.stop_time,
+		  	start_time: DateTime.parse(trip.start_time).strftime("%I:%M%p on %m/%d/%Y"),
+		  	stop_time: DateTime.parse(trip.stop_time).strftime("%I:%M%p on %m/%d/%Y"),
 		  	duration: trip.trip_duration
 		  })
 		end
