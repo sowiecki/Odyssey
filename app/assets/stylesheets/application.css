@@ -29,7 +29,8 @@ body {
 	margin: 0;
 	height: 100%;
 	font-family: helvetica;
-	background-color: #ff5e3c;
+	background-color: #FF5800;
+	background-image: url('/assets/background_orange.png')
 }
 a {
 	text-decoration: none;
