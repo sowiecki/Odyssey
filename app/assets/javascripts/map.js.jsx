@@ -16,7 +16,7 @@ $(function() {
           center: new google.maps.LatLng(41.890033, -87.6500523)
         }
   var markerOptions = {
-    icon: "images/marker.png",
+    icon: "assets/marker.png",
     optimized: true,
   }
   var rendererOptions = {
@@ -60,7 +60,6 @@ $(function() {
     this.getInitialTrips = function() {
       this.stopTraverse();
       routesSegment.offset = 0
-      routesSegment.bikeId = document.getElementById('bike-id-input').value;
       $.ajax({
         url: "trips_for/" + routesSegment.bikeId + "/offset_by/" + routesSegment.offset,
         method: "get",
@@ -111,18 +110,30 @@ $(function() {
     },
     startTraverse: function(e) {
       e.preventDefault();
+      routesSegment.bikeId = document.getElementById('bike-id-input').value;
+      RouteControl.getInitialTrips();
+      RouteControl.autoTraverseRoutes();
+      React.render(<ControlMap />, document.getElementById('bike-control-container'))
+    },
+    startRandomTraverse: function(e) {
+      e.preventDefault();
+      routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
       RouteControl.getInitialTrips();
       RouteControl.autoTraverseRoutes();
       React.render(<ControlMap />, document.getElementById('bike-control-container'))
     },
     render: function() {
       var child = this.state.mounted ?
-        <div>
+        <div id="map-control-interface">
           <div className="map-control-first-row">
             <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
           </div>
           <div className="map-control-second-row">
             <input id="start-traverse" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
+          </div>
+          <p>- or -</p>
+          <div className="map-control-second-row">
+            <input id="start-traverse" onClick={this.startRandomTraverse} type="submit" target="remote" value="Follow random bike" />
           </div>
         </div> : null;
       return (
