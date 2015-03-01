@@ -51,10 +51,11 @@ div#routes-display-container {
 	margin: 6px 0 6px 0;
 	height: 40px;
 	outline: none;
-	font-family: Arial;
+	font-family: 'Dosis', sans-serif;
 	text-transform: uppercase;
-	background-color: rgba(248, 248, 248, 0.25);
-	border: 2px solid rgba(248, 248, 255, 0.25);
+	color: #FFFFFF;
+	background-color: rgba(50, 50, 50, 0.25);
+	border: 1px solid #007fbf;
 	/*border-radius: 5px;*/
 	/*box-shadow: 1px 1px 2px #bfbfbf;*/
 }
@@ -63,27 +64,56 @@ div#routes-display-container {
 }
 .map-control-first-row > input:hover, .map-control-second-row > input:hover, .map-control-third-row > input:hover {
 	background-color: rgba(230, 230, 255, 0.5);
-	border: 2px solid #007fbf;
+	border: 1px solid #0098e5;
 }
 .map-control-first-row > input:active, .map-control-second-row > input:active, .map-control-third-row > input:active {
 	
 }
 .map-control-first-row > input {
-	padding: 0 8px 0 8px;
-	width: 180px;
+	margin: 0 8px 6px 0px;
+	padding: 0 6px 0 6px;
+	width: 110px;
+}
+.map-control-first-row > input:nth-child(2) {
+	width: 68px;
 }
 .map-control-second-row > input {
+	height: 40px;
 	width: 200px;
-	font-size: 20px;
+	font-size: 28px;
+	background-image: -webkit-linear-gradient(top, #8fbd5e, #5fbd00);
+  background-image: -moz-linear-gradient(top, #8fbd5e, #5fbd00);
+  background-image: -ms-linear-gradient(top, #8fbd5e, #5fbd00);
+  background-image: -o-linear-gradient(top, #8fbd5e, #5fbd00);
+  background-image: linear-gradient(to bottom, #8fbd5e, #5fbd00);
+}
+.map-control-second-row > input:hover {
+	background-image: -webkit-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background-image: -moz-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background-image: -ms-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background-image: -o-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background-image: linear-gradient(to bottom, #7ebd5e, #7ebd5e);
 }
 .map-control-third-row > input {
-	width: 60px;
+	height: 40px;
+	width: 95px;
 	font-size: 26px;
+	background-image: -webkit-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background-image: -moz-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background-image: -ms-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background-image: -o-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background-image: linear-gradient(to bottom, #7ebd5e, #7ebd5e);
 }
 .map-control-third-row > input:nth-child(2) {
 	margin: 6px 10px 6px 10px;
 }
-
+.map-control-third-row > input {
+	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+}
 div#routes-anchor {
   position: absolute;
   margin: 0 auto auto;
@@ -91,7 +121,7 @@ div#routes-anchor {
   max-width: 100%;
 }
 
-div.trip-box {
+a.trip-box {
 	display: inline-block;
 	vertical-align: top;
 	margin: 8px 6px 8px 6px;

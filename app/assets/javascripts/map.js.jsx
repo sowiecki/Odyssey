@@ -118,14 +118,14 @@ $(function() {
         <div id="map-control-interface">
           <div className="map-control-first-row">
             <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
-          </div>
-          <div className="map-control-second-row">
             <input id="show-initial-routes" onClick={this.startRouting} type="submit" value="Focus" />
           </div>
+          <div className="map-control-second-row">
+            <input id="start-traverse" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
+          </div>
           <div className="map-control-third-row">
-            <input id="pause-traverse" onClick={this.pauseTraverse} type="submit" target="remote" value="&#9646;&#9646;" />
-            <input id="start-traverse" onClick={this.startTraverse} type="submit" target="remote" value="&#9654;" />
-            <input id="next-segment" onClick={this.nextSegment} type="submit" target="remote" value="&#9654;&#9654;" />
+            <input id="pause-traverse" onClick={this.pauseTraverse} type="submit" target="remote" value="Pause" />
+            <input id="next-segment" onClick={this.nextSegment} type="submit" target="remote" value="Next" />
           </div>
         </div>
       )
@@ -140,13 +140,13 @@ $(function() {
 
     // },
     onClick: function() {
-
+      console.log("test")
     },
     render: function() {
       return (
-        <div className="trip-box"  onClick={this.onClick}>
+        <a href="#" className="trip-box"  onClick={this.onClick}>
           Test React replacement
-        </div>
+        </a>
       )
     }
   })
