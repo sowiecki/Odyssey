@@ -48,14 +48,14 @@ $(function() {
           routesInfo: wayptsInfo
         }
         $('#routes-anchor').html(routesPanel(routesData))
-        React.render(<RoutesInfoBox />, document.getElementById('routes-display-container'))
+        React.render(<RoutesInfoBoxes />, document.getElementById('routes-display-container'))
       }
     });
   }
 
   function RouteControl() {
     this.getInitialTrips = function() {
-      this.pauseTraverse();
+      this.stopTraverse();
       routesSegment.offset = 0
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
       $.ajax({
@@ -85,7 +85,7 @@ $(function() {
     this.autoTraverseRoutes = function() {
       intervalId = setInterval(RouteControl.getNextTrip, 1000);
     };
-    this.pauseTraverse = function() {
+    this.stopTraverse = function() {
       clearInterval(intervalId);
     };
     this.noTripsFound = function() {
@@ -99,16 +99,42 @@ $(function() {
   var routesSegment = new RoutesSegment
   var intervalId = null
 
-  var BikeControl = React.createClass({
-    startRouting: function(e) {
+  var InitializeMap = React.createClass({
+    getInitialState: function() {
+      return { mounted: false };
+    },
+    componentDidMount: function() {
+      this.setState({ mounted: true });
+    },
+    startTraverse: function(e) {
       e.preventDefault();
       RouteControl.getInitialTrips();
-    },
-    pauseTraverse: function() {
-      RouteControl.pauseTraverse();
-    },
-    startTraverse: function() {
       RouteControl.autoTraverseRoutes();
+      React.render(<ControlMap />, document.getElementById('bike-control-container'))
+    },
+    render: function() {
+      var child = this.state.mounted ?
+        <div>
+          <div className="map-control-first-row">
+            <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
+          </div>
+          <div className="map-control-second-row">
+            <input id="start-traverse" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
+          </div>
+        </div> : null;
+      return (
+        <div id="map-control-interface">
+          <ReactCSSTransitionGroup transitionName="button" transitionAppear={true}>
+            {child}
+          </ReactCSSTransitionGroup>
+        </div>
+      )
+    }
+  })
+  var ControlMap = React.createClass({
+    stopTraverse: function() {
+      RouteControl.stopTraverse();
+      React.render(<InitializeMap />, document.getElementById('bike-control-container'))
     },
     nextSegment: function() {
       RouteControl.getNextTrip();
@@ -116,23 +142,17 @@ $(function() {
     render: function() {
       return (
         <div id="map-control-interface">
-          <div className="map-control-first-row">
-            <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
-            <input id="show-initial-routes" onClick={this.startRouting} type="submit" value="Focus" />
-          </div>
-          <div className="map-control-second-row">
-            <input id="start-traverse" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
-          </div>
-          <div className="map-control-third-row">
-            <input id="pause-traverse" onClick={this.pauseTraverse} type="submit" target="remote" value="Pause" />
-            <input id="next-segment" onClick={this.nextSegment} type="submit" target="remote" value="Next" />
-          </div>
+          <ReactCSSTransitionGroup transitionName="button" transitionAppear={true}>
+            <div className="map-control-third-row">
+              <input id="stop-traverse" onClick={this.stopTraverse} type="submit" target="remote" value="stop" />
+            </div>
+          </ReactCSSTransitionGroup>
         </div>
       )
     }
   })
   
-  var RoutesInfoBox = React.createClass({
+  var RoutesInfoBoxes = React.createClass({
     // propTypes: {
     //   requiredArray: React.PropTypes.array.isRequired
     // },
@@ -151,5 +171,5 @@ $(function() {
     }
   })
 
-  React.render(<BikeControl />, document.getElementById('bike-control-container'))
+  React.render(<InitializeMap />, document.getElementById('bike-control-container'))
 })

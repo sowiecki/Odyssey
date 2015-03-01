@@ -23,6 +23,7 @@ and (max-width : 320px) {
 
 div#explanation-box{
 	position: absolute;
+	display: none;
 	margin: 6px;
 	padding: 10px;
 	top: 2%;
@@ -47,11 +48,16 @@ div#routes-display-container {
 	bottom: 8%;
 	right: 4%;
 }
+
 .map-control-first-row > input, .map-control-second-row > input, .map-control-third-row > input {
+	box-sizing: border-box;
 	margin: 6px 0 6px 0;
+	padding: 0 10px 0 10px;
 	height: 40px;
+	width: 200px;
 	outline: none;
 	font-family: 'Dosis', sans-serif;
+	font-size: 28px;
 	text-transform: uppercase;
 	color: #FFFFFF;
 	background-color: rgba(50, 50, 50, 0.25);
@@ -71,16 +77,11 @@ div#routes-display-container {
 }
 .map-control-first-row > input {
 	margin: 0 8px 6px 0px;
-	padding: 0 6px 0 6px;
-	width: 110px;
 }
 .map-control-first-row > input:nth-child(2) {
 	width: 68px;
 }
 .map-control-second-row > input {
-	height: 40px;
-	width: 200px;
-	font-size: 28px;
 	background-image: -webkit-linear-gradient(top, #8fbd5e, #5fbd00);
   background-image: -moz-linear-gradient(top, #8fbd5e, #5fbd00);
   background-image: -ms-linear-gradient(top, #8fbd5e, #5fbd00);
@@ -95,9 +96,6 @@ div#routes-display-container {
   background-image: linear-gradient(to bottom, #7ebd5e, #7ebd5e);
 }
 .map-control-third-row > input {
-	height: 40px;
-	width: 95px;
-	font-size: 26px;
 	background-image: -webkit-linear-gradient(top, #7ebd5e, #7ebd5e);
   background-image: -moz-linear-gradient(top, #7ebd5e, #7ebd5e);
   background-image: -ms-linear-gradient(top, #7ebd5e, #7ebd5e);

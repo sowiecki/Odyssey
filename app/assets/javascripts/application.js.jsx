@@ -23,3 +23,5 @@ _.templateSettings = {
   escape : /\{\{-(.+?)\}\}/g,
   evaluate: /\{\{(.+?)\}\}/g,
 };
+
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
