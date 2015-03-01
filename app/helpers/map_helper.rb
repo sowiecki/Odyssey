@@ -11,13 +11,13 @@ module MapHelper
 		Trip.where(bike_id: params[:bike_id].to_i)
 				.offset(trip_segment_params)
 				.limit(10)
-				.order(start_time: :asc)
+				.order(:start_time)
 	end
 
 	def next_trip
 		Trip.where(bike_id: params[:bike_id].to_i)
 				.offset(next_trip_params)
 				.limit(1)
-				.order(start_time: :asc)
+				.order(:start_time)
 	end
 end
