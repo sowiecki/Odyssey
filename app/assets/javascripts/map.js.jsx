@@ -26,7 +26,6 @@ $(function() {
   var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
   var directionsService = new google.maps.DirectionsService();
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);;
-  var routesPanel = _.template($('#routes-template').html());
   directionsDisplay.setMap(map);
 
   RoutesSegment.prototype.drawRoute = function () {

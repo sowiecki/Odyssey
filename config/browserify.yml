@@ -1,0 +1,7 @@
+javascript:
+  main:
+    require:
+      - react-slick
+  secondary:
+    external:
+      - react-slick

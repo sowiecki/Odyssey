@@ -12,17 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require underscore-min
 //= require react
 //= require react_ujs
 //= require components
 //= require_tree .
-
-_.templateSettings = {
-  interpolate : /\{\{=(.+?)\}\}/g,
-  escape : /\{\{-(.+?)\}\}/g,
-  evaluate: /\{\{(.+?)\}\}/g,
-};
 
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var ReactTransitionGroup = React.addons.TransitionGroup;
