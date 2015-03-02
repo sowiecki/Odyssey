@@ -34,12 +34,15 @@ function RoutesSegment() {
     this.drawRoute();
   }
   this.advanceRoute = function(trip) {
-    this.waypts.shift();
+    if (this.waypts.length == 10) {
+      this.waypts.shift();
+      this.wayptsInfo.shift();
+    }
+
     this.waypts.push({
       location: trip.lat + ", " + trip.lng
     });
 
-    this.wayptsInfo.shift();
     this.wayptsInfo.push({
       tripId: trip.trip_id,
       startTime: trip.start_time,
