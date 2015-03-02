@@ -44,7 +44,7 @@ $(function() {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
 
-        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'))
+        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo.reverse()} />, document.getElementById('routes-display-container'))
       }
     });
   }
@@ -62,7 +62,7 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 1000);
+      intervalId = setInterval(RouteControl.getTrip, 1200);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
@@ -145,8 +145,34 @@ $(function() {
       );
     }
   })
-  
+
+  var RoutesInfoContainer = React.createClass({
+    render: function() {
+      var routeNodes = this.props.data.map(function (data) {
+      return (
+          <RouteInfoBox key={data.tripId} data={data} />
+        );
+      });
+      return (
+        <div>
+          <ReactTransitionGroup transitionName="test" component={"div"}>
+            {routeNodes}
+          </ReactTransitionGroup>
+        </div>
+      );
+    }
+  })
+
   var RouteInfoBox = React.createClass({
+    // componentWillEnter: function(cb) {
+    //   var $element = $(this.getDOMNode());
+    //   var width = 200;
+    //   $element.stop(true).width(0).animate({width:width}, -200, cb);
+    // },
+    // componentWillLeave: function(cb) {
+    //   var $el = $(this.getDOMNode());
+    //   $el.stop(true).animate({width:0}, 20, cb);
+    // },
     onClick: function() {
       console.log("test" + this.props.data.tripId)
     },
@@ -154,32 +180,10 @@ $(function() {
       return (
         <div className="trip-box">
           <a href="#" onClick={this.onClick}>
-            {this.props.data}
+            <p>Trip ID: {this.props.data.tripId}</p> 
+            {this.props.data.startLocation} to {this.props.data.stopLocation}
+            
           </a>
-        </div>
-      );
-    }
-  })
-
-  var RoutesInfoContainer = React.createClass({
-    getInitialState: function() {
-      return {
-        tripArray: routesSegment.wayptsInfo
-      }
-    },
-    render: function() {
-      var routeNodes = this.props.data.map(function (data) {
-      return (
-          <div>
-            <RouteInfoBox key={data.id} data={data} />
-          </div>
-        );
-      });
-      return (
-        <div>
-          <ReactCSSTransitionGroup transitionName="routeInfoBox" transitionAppear={true}>
-            {routeNodes}
-          </ReactCSSTransitionGroup>
         </div>
       );
     }

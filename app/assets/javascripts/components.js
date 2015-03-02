@@ -18,21 +18,6 @@ function RoutesSegment() {
       );
     }
   }
-
-  this.buildInitialRoute = function (trips) {
-    this.waypts.length = 0
-    for (var i = 0; i < trips.length; i++) {
-      this.waypts.push({
-        location: trips[i].lat + ", " + trips[i].lng
-      });
-      this.wayptsInfo.push({
-        tripId: trips[i].trip_id,
-        startTime: trips[i].start_time,
-        stopTime: trips[i].stop_time
-      })
-    }
-    this.drawRoute();
-  }
   this.advanceRoute = function(trip) {
     if (this.waypts.length == 10) {
       this.waypts.shift();
@@ -46,7 +31,9 @@ function RoutesSegment() {
     this.wayptsInfo.push({
       tripId: trip.trip_id,
       startTime: trip.start_time,
-      stopTime: trip.stop_time
+      stopTime: trip.stop_time,
+      startLocation: trip.start_location,
+      stopLocation: trip.stop_location
     })
 
     this.drawRoute();

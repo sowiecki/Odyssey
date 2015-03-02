@@ -1,21 +1,21 @@
 .routeInfoBox-enter {
   opacity: 0.01;
-  transition: opacity .5s ease-in;
-  -webkit-transition-duration: 1.5s;
-    transition-duration: 1.5s;
-  -webkit-transform: translate3d(-50%, 0, 1px);
-    transform: translate3d(-50%, 0, 0);
+  transition: .01s ease-in;
+  -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards;
+    animation-delay: 2s;
 }
 .routeInfoBox-enter.routeInfoBox-enter-active {
   opacity: 1;
 }
 .routeInfoBox-leave {
   opacity: 1;
-  transition: opacity .5s ease-out;
-  -webkit-transition-duration: 1.5s;
-    transition-duration: 1.5s;
-  -webkit-transform: translate3d(-50%, 0, 1px);
-    transform: translate3d(-50%, 0, 0);
+  transition: .01s ease-in;
+  -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards;
+    animation-delay: 2s;
 }
 .routeInfoBox-leave.routeInfoBox-leave-active {
   opacity: 0.01;

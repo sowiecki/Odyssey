@@ -25,3 +25,4 @@ _.templateSettings = {
 };
 
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var ReactTransitionGroup = React.addons.TransitionGroup;
