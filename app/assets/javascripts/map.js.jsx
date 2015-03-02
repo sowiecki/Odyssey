@@ -49,6 +49,7 @@ $(function() {
 
   function RouteControl() {
     this.getTrip = function() {
+      React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.offset += 1
       $.ajax({
         url: "trip_for/" + routesSegment.bikeId + "/after/" + routesSegment.offset,
