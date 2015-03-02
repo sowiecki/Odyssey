@@ -13,8 +13,7 @@ $(function() {
     center: new google.maps.LatLng(41.890033, -87.6500523)
   }
   var markerOptions = {
-    // icon: "assets/marker.png",
-    // position: new google.maps.Point(100, 32),
+    icon: "assets/marker.png"
   }
   var rendererOptions = {
     map: map,
@@ -167,7 +166,7 @@ $(function() {
     // componentWillEnter: function(cb) {
     //   var $element = $(this.getDOMNode());
     //   var width = 200;
-    //   $element.stop(true).width(0).animate({width:width}, -200, cb);
+    //   $element.stop(true).width(0).animate({width:width}, 2, cb);
     // },
     // componentWillLeave: function(cb) {
     //   var $el = $(this.getDOMNode());
