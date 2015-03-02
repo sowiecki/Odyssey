@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.1.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -53,3 +54,5 @@ gem 'jasmine', group: [:test]
 gem 'gmaps4rails'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'browserify-rails', '~> 0.7'
+
+gem 'puma'
