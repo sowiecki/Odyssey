@@ -51,4 +51,8 @@ function RoutesSegment() {
 
     this.drawRoute();
   }
+  this.reset = function() {
+    this.waypts = [];
+    this.wayptsInfo = [];
+  }
 };

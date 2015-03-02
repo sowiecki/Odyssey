@@ -4,20 +4,17 @@ $(function() {
     {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":55}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
   ];
   var mapOptions = {
-          zoom: 12,
-          // disableDefaultUI: true,
-          panControl: false,
-          // scrollwheel: false,
-          // draggable: false,
-          tilt: 0,
-          mapTypeControl: false,
-          styles: mapStyle,
-          zoomControl: false,
-          center: new google.maps.LatLng(41.890033, -87.6500523)
-        }
+    zoom: 12,
+    panControl: false,
+    tilt: 0,
+    mapTypeControl: false,
+    styles: mapStyle,
+    zoomControl: false,
+    center: new google.maps.LatLng(41.890033, -87.6500523)
+  }
   var markerOptions = {
-    icon: "assets/marker.png",
-    optimized: true
+    // icon: "assets/marker.png",
+    // position: new google.maps.Point(100, 32),
   }
   var rendererOptions = {
     map: map,
@@ -47,12 +44,6 @@ $(function() {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
 
-        var routesData = {
-          routes: response.routes[0],
-          routesInfo: wayptsInfo
-        }
-        $('#routes-anchor').html(routesPanel(routesData))
-        console.log(wayptsInfo[0])
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'))
       }
     });
@@ -96,12 +87,14 @@ $(function() {
     },
     startTraverse: function(e) {
       e.preventDefault();
+      routesSegment.reset();
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
       RouteControl.autoTraverseRoutes();
       React.render(<ControlMap />, document.getElementById('bike-control-container'))
     },
     startRandomTraverse: function(e) {
       e.preventDefault();
+      routesSegment.reset();
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
       RouteControl.autoTraverseRoutes();
       React.render(<ControlMap />, document.getElementById('bike-control-container'))
@@ -154,11 +147,14 @@ $(function() {
   })
   
   var RouteInfoBox = React.createClass({
+    onClick: function() {
+      console.log("test" + this.props.data.tripId)
+    },
     render: function() {
       return (
-        <div>
-          <a href="#" className="trip-box"  onClick={this.onClick}>
-            {this.props.tripId}
+        <div className="trip-box">
+          <a href="#" onClick={this.onClick}>
+            {this.props.data}
           </a>
         </div>
       );
@@ -166,19 +162,23 @@ $(function() {
   })
 
   var RoutesInfoContainer = React.createClass({
-    // getInitialState: function() {
-    //   return {
-    //     tripArray: routesSegment.wayptsInfo
-    //   }
-    // },
-    onClick: function() {
-      console.log("test")
+    getInitialState: function() {
+      return {
+        tripArray: routesSegment.wayptsInfo
+      }
     },
     render: function() {
+      var routeNodes = this.props.data.map(function (data) {
+      return (
+          <div>
+            <RouteInfoBox key={data.id} data={data} />
+          </div>
+        );
+      });
       return (
         <div>
-          <ReactCSSTransitionGroup transitionName="button" transitionAppear={true}>
-            <RouteInfoBox data={this.props.data} />
+          <ReactCSSTransitionGroup transitionName="routeInfoBox" transitionAppear={true}>
+            {routeNodes}
           </ReactCSSTransitionGroup>
         </div>
       );

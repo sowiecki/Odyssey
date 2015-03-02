@@ -1,22 +1,22 @@
-.button-enter {
+.routeInfoBox-enter {
   opacity: 0.01;
   transition: opacity .5s ease-in;
+  -webkit-transition-duration: 1.5s;
+    transition-duration: 1.5s;
+  -webkit-transform: translate3d(-50%, 0, 1px);
+    transform: translate3d(-50%, 0, 0);
 }
-.button-enter.button-enter-active {
+.routeInfoBox-enter.routeInfoBox-enter-active {
   opacity: 1;
 }
-.button-leave {
+.routeInfoBox-leave {
   opacity: 1;
-  transition: opacity .5s ease-in;
+  transition: opacity .5s ease-out;
+  -webkit-transition-duration: 1.5s;
+    transition-duration: 1.5s;
+  -webkit-transform: translate3d(-50%, 0, 1px);
+    transform: translate3d(-50%, 0, 0);
 }
-.button-leave.button-leave-active {
+.routeInfoBox-leave.routeInfoBox-leave-active {
   opacity: 0.01;
-}
-.button-appear {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
-}
-
-.button-appear.button-appear-active {
-  opacity: 1;
 }

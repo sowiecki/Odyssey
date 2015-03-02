@@ -48,12 +48,6 @@ div#bike-control-container {
 div#map-control-interface > p {
 	margin: 2px;
 }
-div#routes-display-container {
-	z-index: 200;
-	position: absolute;
-	bottom: 8%;
-	right: 4%;
-}
 
 .map-control-first-row > input, .map-control-second-row > input, .map-control-third-row > input {
 	box-sizing: border-box;
@@ -121,16 +115,24 @@ div#routes-anchor {
   max-width: 100%;
 }
 
-a.trip-box {
+div#routes-display-container {
+	z-index: 200;
+	position: absolute;
+	bottom: 8%;
+	right: 4%;
+	width: 200px;
+}
+div.trip-box{
 	display: inline-block;
-	vertical-align: top;
-	margin: 8px 6px 8px 6px;
+	/*vertical-align: top;*/
+	margin: 4px;
 	padding: 4px;
-	min-height: 100px;
-	width: 120px;
-	font-size: 14px;
+	min-height: 20px;
+	width: 220px;
+	font-size: 12px;
 	line-height: 18px;
-	background-color: rgba(255, 127, 102, 0.5);
+	background-color: rgba(255, 127, 102, 1);
+	background-image: url("/assets/background_blue.png");
 }
 div.trip-box > p {
 	margin: 0;
