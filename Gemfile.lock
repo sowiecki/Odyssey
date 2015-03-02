@@ -138,6 +138,8 @@ GEM
     orm_adapter (0.5.0)
     os (0.9.6)
     phantomjs (1.9.8.0)
+    puma (2.11.1)
+      rack (>= 1.1, < 2.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -241,6 +243,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   neo4j
+  puma
   rails (= 4.2.0)
   rails_12factor
   react-rails (~> 1.0.0.pre)!
