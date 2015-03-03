@@ -134,11 +134,13 @@ $(function() {
       RouteControl.stopTraverse();
       map = new google.maps.Map(document.getElementById('map'), mapOptions);;
       React.render(<span />, document.getElementById('routes-display-container'))
+      React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
       React.render(<ReactCSSTransitionGroup transitionName="button"><InitializeMap /></ReactCSSTransitionGroup>, document.getElementById('bike-control-container'));
     },
     pauseTraverse: function() {
       clearInterval(intervalId);
       this.setState({started: !this.state.started});
+      React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
     },
     continueTraverse: function() {
       RouteControl.autoTraverseRoutes();
