@@ -193,12 +193,11 @@ $(function() {
       return (
         <div key={this.props.data.tripId} className="trip-box">
           <a href="#" onClick={this.onClick}>
-            <p>Origin: {this.props.data.startLocation}</p>
-            <p>at {this.props.data.startTime}</p>
+            <p><b>Origin:</b> {this.props.data.startLocation}</p>
+            <p className="indent">at {this.props.data.startTime}</p>
             <span className="extended-info">
-              <p>Destination: {this.props.data.stopLocation}</p>
-              <p>{this.props.data.startTime}</p> 
-              <p>at {this.props.data.stopTime}</p>
+              <p><b>Destination:</b> {this.props.data.stopLocation}</p> 
+              <p className="indent">at {this.props.data.stopTime}</p>
               <p className="trip-id">Trip ID: {this.props.data.tripId}</p> 
             </span>        
           </a>
