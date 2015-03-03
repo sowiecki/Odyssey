@@ -7,13 +7,14 @@ $(function() {
     zoom: 12,
     panControl: false,
     tilt: 0,
+    disableAutoPan: true,
     mapTypeControl: false,
     styles: mapStyle,
     zoomControl: false,
     center: new google.maps.LatLng(41.890033, -87.6500523)
   }
   var markerOptions = {
-    icon: "assets/marker.png"
+    icon: "assets/marker_orange.png"
   }
   var rendererOptions = {
     map: map,
@@ -42,14 +43,13 @@ $(function() {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
 
-        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo.reverse()} />, document.getElementById('routes-display-container'))
+        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'))
       }
     });
   }
 
   function RouteControl() {
     this.getTrip = function() {
-      React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.offset += 1
       $.ajax({
         url: "trip_for/" + routesSegment.bikeId + "/after/" + routesSegment.offset,
@@ -61,7 +61,7 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 1200);
+      intervalId = setInterval(RouteControl.getTrip, 1000);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
@@ -87,6 +87,7 @@ $(function() {
     startTraverse: function(e) {
       e.preventDefault();
       routesSegment.reset();
+      React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
       RouteControl.autoTraverseRoutes();
       React.render(<ControlMap />, document.getElementById('bike-control-container'))
@@ -94,6 +95,7 @@ $(function() {
     startRandomTraverse: function(e) {
       e.preventDefault();
       routesSegment.reset();
+      React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
       RouteControl.autoTraverseRoutes();
       React.render(<ControlMap />, document.getElementById('bike-control-container'))
@@ -129,9 +131,9 @@ $(function() {
       RouteControl.stopTraverse();
       React.render(<InitializeMap />, document.getElementById('bike-control-container'))
     },
-    nextSegment: function() {
-      RouteControl.getTrip();
-    },
+    // nextSegment: function() {
+    //   RouteControl.getTrip();
+    // },
     render: function() {
       return (
         <div id="map-control-interface">
@@ -154,7 +156,7 @@ $(function() {
       });
       return (
         <div>
-          <ReactTransitionGroup transitionName="test" component={"div"}>
+          <ReactTransitionGroup transitionName="routeInfoBox" component={"div"}>
             {routeNodes}
           </ReactTransitionGroup>
         </div>
@@ -180,8 +182,11 @@ $(function() {
         <div className="trip-box">
           <a href="#" onClick={this.onClick}>
             <p>Trip ID: {this.props.data.tripId}</p> 
-            {this.props.data.startLocation} to {this.props.data.stopLocation}
-            
+            <span className="extended-info">
+              <p>{this.props.data.startLocation} to {this.props.data.stopLocation}</p>
+              <p>Arrived at {this.props.data.startTime}</p>
+              <p>Left at {this.props.data.stopTime}</p>   
+            </span>        
           </a>
         </div>
       );

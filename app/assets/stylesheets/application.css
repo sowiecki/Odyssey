@@ -22,14 +22,14 @@
 @import url(http://fonts.googleapis.com/css?family=Dosis);
 
 html {
-	overflow-y: hidden;
+	/*overflow-y: hidden;*/
 	height: 100%;
 }
 body {
 	margin: 0;
 	height: 100%;
 	font-family: helvetica;
-	background-color: #FF5800;
+	background-color: #00111A;
 	background-image: url('/assets/background_orange.png')
 }
 a {
