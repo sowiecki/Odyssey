@@ -1,22 +1,33 @@
 .routeInfoBox-enter {
   opacity: 0.01;
-  transition: .01s ease-in;
-  -webkit-animation: slide 0.5s forwards;
-    -webkit-animation-delay: 2s;
-    animation: slide 0.5s forwards;
-    animation-delay: 2s;
+  transition: opacity .5s ease-in;
+  -webkit-transition: opacity .5s ease-in;
 }
 .routeInfoBox-enter.routeInfoBox-enter-active {
   opacity: 1;
 }
 .routeInfoBox-leave {
-  opacity: 1;
-  transition: .01s ease-in;
-  -webkit-animation: slide 0.5s forwards;
-    -webkit-animation-delay: 2s;
-    animation: slide 0.5s forwards;
-    animation-delay: 2s;
+  opacity: 0;
+  transition: opacity .5s ease-in;
+  -webkit-transition: opacity .5s ease-in;
 }
 .routeInfoBox-leave.routeInfoBox-leave-active {
+  opacity: 0.01;
+}
+
+.button-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+  /*-webkit-transition: opacity .5s ease-in;*/
+}
+.button-enter.button-enter-active {
+  opacity: 1;
+}
+.button-leave {
+  opacity: 0;
+  transition: opacity .5s ease-in;
+  /*-webkit-transition: opacity .5s ease-in;*/
+}
+.button-leave.button-leave-active {
   opacity: 0.01;
 }

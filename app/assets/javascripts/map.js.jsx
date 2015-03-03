@@ -43,7 +43,7 @@ $(function() {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
 
-        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'))
+        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo.reverse()} />, document.getElementById('routes-display-container'));
       }
     });
   }
@@ -61,7 +61,7 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 1000);
+      intervalId = setInterval(RouteControl.getTrip, 2800);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
@@ -89,6 +89,7 @@ $(function() {
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
+      RouteControl.getTrip();
       RouteControl.autoTraverseRoutes();
       React.render(<ControlMap />, document.getElementById('bike-control-container'))
     },
@@ -97,11 +98,12 @@ $(function() {
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
+      RouteControl.getTrip();
       RouteControl.autoTraverseRoutes();
       React.render(<ControlMap />, document.getElementById('bike-control-container'))
     },
     render: function() {
-      var buttons = this.state.mounted ?
+      var buttons =
         <div id="map-control-interface">
           <div className="map-control-first-row">
             <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
@@ -113,13 +115,10 @@ $(function() {
           <div className="map-control-second-row">
             <input id="start-traverse" onClick={this.startRandomTraverse} type="submit" target="remote" value="Follow random bike" />
           </div>
-        </div> :
-        <div className="map-control-second-row">
-          <input id="continue-traverse" onClick={this.stopTraverse} type="submit" target="remote" value="Continue" />
-        </div>;
+        </div>
       return (
         <div id="map-control-interface">
-          <ReactCSSTransitionGroup transitionName="button" transitionAppear={true}>
+          <ReactCSSTransitionGroup transitionName="button">
             {buttons}
           </ReactCSSTransitionGroup>
         </div>
@@ -127,20 +126,43 @@ $(function() {
     }
   })
   var ControlMap = React.createClass({
+    getInitialState: function() {
+      return {started: false};
+    },
     stopTraverse: function() {
       RouteControl.stopTraverse();
-      React.render(<InitializeMap />, document.getElementById('bike-control-container'))
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);;
+      React.render(<span />, document.getElementById('routes-display-container'))
+      React.render(<InitializeMap />, document.getElementById('bike-control-container'));
+    },
+    pauseTraverse: function() {
+      clearInterval(intervalId);
+      this.setState({started: !this.state.started});
+    },
+    continueTraverse: function() {
+      RouteControl.autoTraverseRoutes();
+      this.setState({started: !this.state.started});
     },
     // nextSegment: function() {
     //   RouteControl.getTrip();
     // },
     render: function() {
+      var pause = this.state.started ? 
+        <div className="map-control-third-row">
+          <input id="continue-traverse" onClick={this.continueTraverse} type="submit" target="remote" value="Continue" />
+        </div> :
+        <div className="map-control-second-row">
+          <input id="pause-traverse" onClick={this.pauseTraverse} type="submit" target="remote" value="Pause" />
+        </div>
       return (
         <div id="map-control-interface">
-          <ReactCSSTransitionGroup transitionName="button" transitionAppear={true}>
-            <div className="map-control-third-row">
+          <ReactCSSTransitionGroup transitionName="button">
+            <div className="map-control stop">
               <input id="stop-traverse" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
             </div>
+            <ReactTransitionGroup transitionName="routeInfoBox" component={"div"}>
+              {pause}
+            </ReactTransitionGroup>
           </ReactCSSTransitionGroup>
         </div>
       );
@@ -148,10 +170,20 @@ $(function() {
   })
 
   var RoutesInfoContainer = React.createClass({
+    // componentWillEnter: function(cb) {
+    //   var $element = $(this.getDOMNode());
+    //   var height = 200;
+    //   $element.stop(true).height(0).animate({height:height}, 2, cb);
+    // },
+    // componentWillLeave: function(cb) {
+    //   var $el = $(this.getDOMNode());
+    //   $el.stop(true).animate({height:0}, 20, cb);
+    // },
     render: function() {
+      var key = 0
       var routeNodes = this.props.data.map(function (data) {
       return (
-          <RouteInfoBox key={data.tripId} data={data} />
+          <RouteInfoBox key={key++} data={data} />
         );
       });
       return (
@@ -165,27 +197,20 @@ $(function() {
   })
 
   var RouteInfoBox = React.createClass({
-    componentWillEnter: function(cb) {
-      var $element = $(this.getDOMNode());
-      var width = 200;
-      $element.stop(true).width(0).animate({width:width}, 2, cb);
-    },
-    componentWillLeave: function(cb) {
-      var $el = $(this.getDOMNode());
-      $el.stop(true).animate({width:0}, 20, cb);
-    },
     onClick: function() {
       console.log("test" + this.props.data.tripId)
     },
     render: function() {
       return (
-        <div className="trip-box">
+        <div key={this.props.data.tripId} className="trip-box">
           <a href="#" onClick={this.onClick}>
-            <p>Trip ID: {this.props.data.tripId}</p> 
+            <p>{this.props.data.startLocation}</p>
+            <p>at {this.props.data.startTime}</p>
             <span className="extended-info">
-              <p>{this.props.data.startLocation} to {this.props.data.stopLocation}</p>
-              <p>Arrived at {this.props.data.startTime}</p>
-              <p>Left at {this.props.data.stopTime}</p>   
+              <p>Arrived to: {this.props.data.stopLocation}</p>
+              <p>{this.props.data.startTime}</p> 
+              <p>at {this.props.data.stopTime}</p>
+              <p className="trip-id">Trip ID: {this.props.data.tripId}</p> 
             </span>        
           </a>
         </div>

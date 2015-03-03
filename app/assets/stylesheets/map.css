@@ -76,6 +76,20 @@ div#map-control-interface > p {
 .map-control-first-row > input:nth-child(2) {
 	width: 68px;
 }
+.map-control-stop-row > input {
+	background-image: -webkit-linear-gradient(top, #d93434, #bd0000);
+  background-image: -moz-linear-gradient(top, #d93434, #bd0000);
+  background-image: -ms-linear-gradient(top, #d93434, #bd0000);
+  background-image: -o-linear-gradient(top, #d93434, #bd0000);
+  background-image: linear-gradient(to bottom, #d93434, #bd0000);
+}
+.map-control-stop-row > input:hover {
+	background-image: -webkit-linear-gradient(top, #8fbd5e, #5fbd00);
+  background-image: -moz-linear-gradient(top, #8fbd5e, #5fbd00);
+  background-image: -ms-linear-gradient(top, #8fbd5e, #5fbd00);
+  background-image: -o-linear-gradient(top, #8fbd5e, #5fbd00);
+  background-image: linear-gradient(to bottom, #8fbd5e, #5fbd00);
+}
 .map-control-second-row > input {
 	background-image: -webkit-linear-gradient(top, #8fbd5e, #5fbd00);
   background-image: -moz-linear-gradient(top, #8fbd5e, #5fbd00);
@@ -107,20 +121,13 @@ div#map-control-interface > p {
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
 }
-div#routes-anchor {
-  position: absolute;
-  margin: 0 auto auto;
-  padding: 0 10px;
-  max-width: 100%;
-}
 
 div#routes-display-container {
 	z-index: 200;
 	position: absolute;
-	margin: 0 auto auto;
 	width: 200px;
 	text-align: right;
-	top: 30%;
+	top: 20%;
 	right: 4%;
 }
 div.trip-box {
@@ -128,7 +135,7 @@ div.trip-box {
 	vertical-align: top;
 	margin: 6px;
 	padding: 4px;
-	height: 20px;
+	max-height: 40px;
 	width: 200px;;
 	font-size: 14px;
 	text-align: left;
@@ -136,11 +143,16 @@ div.trip-box {
 	border: 1px solid black;
 	background-color: rgba(255, 127, 102, 1);
 	background-image: url("/assets/background_blue.png");
-	-webkit-transition:width .25s, height .25s, font-size .5s, -webkit-transform .25s;
-  transition:width .25s, height .25s, font-size .5s, transform .25s;
+	-webkit-transition:width .25s, max-height .25s, font-size .25s, -webkit-transform .25s;
+  transition:width .25s, max-height .25s, font-size .25s, transform .25s;
+}
+div.trip-box:first-child {
+	max-height: 500px;
+	font-size: 13px;
+	border: 1px solid black;
 }
 div.trip-box:hover {
-	height: 120px;
+	max-height: 300px;
 	font-size: 13px;
 	border: 1px solid black;
 }
@@ -156,7 +168,15 @@ div.trip-box > a > span > p, div.trip-box > a > p {
 span.extended-info {
 	visibility: hidden;
 }
+div.trip-box:first-child span.extended-info {
+	visibility: visible;
+	transition:visibility 0.2s linear 0.2s,opacity 0.2s linear;
+}
 div.trip-box:hover span.extended-info {
 	visibility: visible;
-	transition:visibility 0.25s linear 0.25s,opacity 0.25s linear;
+	transition:visibility 0.2s linear 0.2s,opacity 0.2s linear;
+}
+p.trip-id {
+	margin: 2px 0 0 0;
+	font-size: 10px;
 }
