@@ -20,19 +20,14 @@ and (max-width : 320px) {
 	}
 }
 
-div#explanation-box{
+div#error-container {
+	box-sizing: border-box;
+	z-index: 200;
 	position: absolute;
-	display: none;
-	margin: 6px;
-	padding: 10px;
-	top: 2%;
-	left: 2%;
-	height: 40px;
-	width: 550px;
+	margin: 0 6px 0 10px;
+	top: 18%;
+	right: 2%;
 	font-family: 'Dosis', sans-serif;
-	font-size: 22px;
-	background-color: rgba(230, 230, 230, 0.9);
-	border: 2px solid rgba(248, 248, 255, 0.25);
 }
 
 div#bike-control-container {
@@ -61,19 +56,6 @@ div#map-control-interface > p {
 	color: #FFFFFF;
 	background-color: rgba(50, 50, 50, 0.5);
 	box-shadow: 1px 1px 2px rgba(127, 127, 127, 0.1);
-}
-.map-control-first-row > input:focus, .map-control-second-row > input:focus, .map-control-third-row > input:focus {
-	box-shadow: inset 0px 0px 10px #bfbfbf;
-}
-.map-control-first-row > input:hover, .map-control-second-row > input:hover, .map-control-third-row > input:hover {
-	background-color: rgba(50, 50, 50, 0.75);
-	border: 1px solid #0098e5;
-}
-.map-control-first-row > input:active, .map-control-second-row > input:active, .map-control-third-row > input:active {
-	
-}
-.map-control-first-row > input:nth-child(2) {
-	width: 68px;
 }
 
 div#routes-display-container {

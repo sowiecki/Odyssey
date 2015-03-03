@@ -1,15 +1,15 @@
 .routeInfoBox-enter {
   opacity: 0.01;
   transition: opacity .5s ease-in;
-  -webkit-transition: opacity .5s ease-in;
+  transform: translate3d(0,100px,0);
 }
 .routeInfoBox-enter.routeInfoBox-enter-active {
   opacity: 1;
 }
 .routeInfoBox-leave {
-  opacity: 0;
+  opacity: 1;
+  transform: translate3d(0,-100px,0);
   transition: opacity .5s ease-in;
-  -webkit-transition: opacity .5s ease-in;
 }
 .routeInfoBox-leave.routeInfoBox-leave-active {
   opacity: 0.01;
@@ -18,15 +18,15 @@
 .button-enter {
   opacity: 0.01;
   transition: opacity .5s ease-in;
-  /*-webkit-transition: opacity .5s ease-in;*/
+  transform: translate3d(0,100px,0);
 }
 .button-enter.button-enter-active {
   opacity: 1;
 }
 .button-leave {
-  opacity: 0;
+  opacity: 1;
+  transform: translate3d(0,-100px,0);
   transition: opacity .5s ease-in;
-  /*-webkit-transition: opacity .5s ease-in;*/
 }
 .button-leave.button-leave-active {
   opacity: 0.01;

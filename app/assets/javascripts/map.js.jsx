@@ -42,9 +42,10 @@ $(function() {
       console.log(status)
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo.reverse()} />, document.getElementById('routes-display-container'));
+        React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
+        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
-        React.render(<ErrorContainer data={[{error: "Waiting on Google"}]} />, document.getElementById('routes-display-container'));
+        React.render(<ErrorContainer data={[{message: "Waiting on Google"}]} />, document.getElementById('error-container'));
       }
     });
   }
@@ -133,7 +134,7 @@ $(function() {
       RouteControl.stopTraverse();
       map = new google.maps.Map(document.getElementById('map'), mapOptions);;
       React.render(<span />, document.getElementById('routes-display-container'))
-      React.render(<InitializeMap />, document.getElementById('bike-control-container'));
+      React.render(<ReactCSSTransitionGroup transitionName="button"><InitializeMap /></ReactCSSTransitionGroup>, document.getElementById('bike-control-container'));
     },
     pauseTraverse: function() {
       clearInterval(intervalId);
@@ -143,9 +144,6 @@ $(function() {
       RouteControl.autoTraverseRoutes();
       this.setState({started: !this.state.started});
     },
-    // nextSegment: function() {
-    //   RouteControl.getTrip();
-    // },
     render: function() {
       var pause = this.state.started ? 
         <div className="map-control button-green">
@@ -156,41 +154,30 @@ $(function() {
         </div>
       return (
         <div id="map-control-interface">
-          <ReactCSSTransitionGroup transitionName="button">
             <div className="map-control button-red">
               <input id="stop-traverse" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
             </div>
-            <ReactTransitionGroup transitionName="routeInfoBox" component={"div"}>
+            <ReactCSSTransitionGroup transitionName="button">
               {pause}
-            </ReactTransitionGroup>
-          </ReactCSSTransitionGroup>
+            </ReactCSSTransitionGroup>
         </div>
       );
     }
   })
 
   var RoutesInfoContainer = React.createClass({
-    // componentWillEnter: function(cb) {
-    //   var $element = $(this.getDOMNode());
-    //   var height = 200;
-    //   $element.stop(true).height(0).animate({height:height}, 2, cb);
-    // },
-    // componentWillLeave: function(cb) {
-    //   var $el = $(this.getDOMNode());
-    //   $el.stop(true).animate({height:0}, 20, cb);
-    // },
     render: function() {
-      var key = 0
-      var routeNodes = this.props.data.map(function (data) {
+      var key = 0;
+      var routeNodes = this.props.data.reverse().map(function (data) {
       return (
           <RouteInfoBox key={key++} data={data} />
         );
       });
       return (
         <div>
-          <ReactTransitionGroup transitionName="routeInfoBox" component={"div"}>
+          <ReactCSSTransitionGroup transitionName="routeInfoBox" component="div">
             {routeNodes}
-          </ReactTransitionGroup>
+          </ReactCSSTransitionGroup>
         </div>
       );
     }
@@ -214,6 +201,47 @@ $(function() {
             </span>        
           </a>
         </div>
+      );
+    }
+  })
+
+  var ErrorContainer = React.createClass({
+    render: function() {
+      var key = 0;
+      var errors = this.props.data.map(function (error) {
+      return (
+          <ErrorMessage key={key++} data={error} />
+        );
+      });
+      return (
+        <div>
+          <ReactCSSTransitionGroup transitionName="routeInfoBox" component="div">
+            {errors}
+          </ReactCSSTransitionGroup>
+        </div>
+      );
+    }
+  })
+  var ErrorMessage = React.createClass({
+    getInitialState: function() {
+      return {dashFlash: "."};
+    },
+    flash: function() {
+      if (this.state.dashFlash.length > 26) {
+        this.setState({dashFlash: ""});
+      } else {
+        this.setState({dashFlash: this.state.dashFlash + "."});
+      }
+    },
+    componentDidMount: function() {
+      this.interval = setInterval(this.flash, 100);
+    },
+    componentWillUnmount: function() {
+      clearInterval(this.interval);
+    },
+    render: function() {
+      return (
+        <div>{this.state.dashFlash} {this.props.data.message}</div>
       );
     }
   })
