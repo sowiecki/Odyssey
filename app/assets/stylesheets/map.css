@@ -53,14 +53,13 @@ div#map-control-interface > p {
 	margin: 6px 0 6px 0;
 	padding: 0 10px 0 10px;
 	height: 30px;
-	width: 220px;
+	width: 200px;
 	outline: none;
 	font-family: 'Dosis', sans-serif;
 	font-size: 20px;
 	text-transform: uppercase;
 	color: #FFFFFF;
 	background-color: rgba(50, 50, 50, 0.5);
-	border: 1px solid #007fbf;
 	box-shadow: 1px 1px 2px rgba(127, 127, 127, 0.1);
 }
 .map-control-first-row > input:focus, .map-control-second-row > input:focus, .map-control-third-row > input:focus {
@@ -76,60 +75,12 @@ div#map-control-interface > p {
 .map-control-first-row > input:nth-child(2) {
 	width: 68px;
 }
-.button-red > input {
-	background: #d93434;
-	background: -webkit-linear-gradient(top, #d93434, #bd0000);
-  background: -moz-linear-gradient(top, #d93434, #bd0000);
-  background: -ms-linear-gradient(top, #d93434, #bd0000);
-  background: -o-linear-gradient(top, #d93434, #bd0000);
-  background: linear-gradient(to bottom, #d93434, #bd0000);
-}
-.button-red > input:hover {
-	background: #e00000;
-  background: -webkit-linear-gradient(top, #e00000, #910000);
-  background: -moz-linear-gradient(top, #e00000, #910000);
-  background: -ms-linear-gradient(top, #e00000, #910000);
-  background: -o-linear-gradient(top, #e00000, #910000);
-  background: linear-gradient(to bottom, #e00000, #910000);
-}
-.button-green > input {
-	background: #8fbd5e;
-	background: -webkit-linear-gradient(top, #8fbd5e, #5fbd00);
-  background: -moz-linear-gradient(top, #8fbd5e, #5fbd00);
-  background: -ms-linear-gradient(top, #8fbd5e, #5fbd00);
-  background: -o-linear-gradient(top, #8fbd5e, #5fbd00);
-  background: linear-gradient(to bottom, #8fbd5e, #5fbd00);
-}
-.button-green > input:hover {
-	background: #7ebd5e;
-	background: -webkit-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background: -moz-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background: -ms-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background: -o-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background: linear-gradient(to bottom, #7ebd5e, #7ebd5e);
-}
-.button-blue > input {
-	background: #3cb0fd;
-	background: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background: linear-gradient(to bottom, #3cb0fd, #3498db);
-}
-.button-blue > input:hover {
-	background: #33b4ff;
-  background: -webkit-linear-gradient(top, #33b4ff, #1371ab);
-  background: -moz-linear-gradient(top, #33b4ff, #1371ab);
-  background: -ms-linear-gradient(top, #33b4ff, #1371ab);
-  background: -o-linear-gradient(top, #33b4ff, #1371ab);
-  background: linear-gradient(to bottom, #33b4ff, #1371ab);
-}
 
 div#routes-display-container {
 	z-index: 200;
 	position: absolute;
 	margin: 0 6px 0 6px;
-	width: 220px;
+	width: 200px;
 	text-align: right;
 	top: 20%;
 	right: 2%;
@@ -141,24 +92,28 @@ div.trip-box {
 	margin: 6px;
 	padding: 4px;
 	max-height: 48px;
-	width: 220px;;
+	width: 200px;;
 	font-size: 12px;
+	font-family: 'PT Sans Narrow', sans-serif;
 	text-align: left;
 	line-height: 18px;
+	opacity: .25;
 	border: 1px solid black;
-	background-color: rgba(255, 127, 102, 1);
+	background-color: rgba(225, 225, 225, 1);
 	background-image: url("/assets/background_blue.png");
-	-webkit-transition:width .25s, max-height .25s, font-size .25s, -webkit-transform .25s;
-  transition:width .25s, max-height .25s, font-size .25s, transform .25s;
+	-webkit-transition:opacity .5s, width .25s, max-height .25s, font-size .25s, -webkit-transform .25s;
+  transition:opacity .5s, width .25s, max-height .25s, font-size .25s, transform .25s;
 }
 div.trip-box:first-child {
 	max-height: 500px;
 	font-size: 16px;
+	opacity: 1;
 	border: 1px solid black;
 }
 div.trip-box:hover {
 	max-height: 300px;
 	font-size: 16px;
+	opacity: 1;
 	border: 1px solid black;
 }
 div.trip-box > a {

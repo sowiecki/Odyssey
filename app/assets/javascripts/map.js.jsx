@@ -31,7 +31,7 @@ $(function() {
 
   RoutesSegment.prototype.drawRoute = function () {
     this.makeSafeWaypts();
-    var wayptsInfo = this.wayptsInfo;
+
     var request = {
         origin: this.waypts[0].location,
         destination: this.waypts[this.waypts.length - 1].location,
@@ -42,8 +42,9 @@ $(function() {
       console.log(status)
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo.reverse()} />, document.getElementById('routes-display-container'));
+      } else {
+        React.render(<ErrorContainer data={[{error: "Waiting on Google"}]} />, document.getElementById('routes-display-container'));
       }
     });
   }
@@ -66,9 +67,8 @@ $(function() {
     this.stopTraverse = function() {
       clearInterval(intervalId);
     };
-    this.noTripsFound = function() {
-      // document.getElementById('error-box').toggle();
-      // document.getElementById('error-box').html("No trips found!");
+    this.zeroResults = function() {
+      console.log("No results")
     }
   }
 
@@ -105,7 +105,7 @@ $(function() {
     render: function() {
       var buttons =
         <div id="map-control-interface">
-          <div className="map-control">
+          <div className="map-control text-field">
             <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
           </div>
           <div className="map-control button-green">
@@ -204,10 +204,10 @@ $(function() {
       return (
         <div key={this.props.data.tripId} className="trip-box">
           <a href="#" onClick={this.onClick}>
-            <p>{this.props.data.startLocation}</p>
+            <p>Origin: {this.props.data.startLocation}</p>
             <p>at {this.props.data.startTime}</p>
             <span className="extended-info">
-              <p>Arrived to: {this.props.data.stopLocation}</p>
+              <p>Destination: {this.props.data.stopLocation}</p>
               <p>{this.props.data.startTime}</p> 
               <p>at {this.props.data.stopTime}</p>
               <p className="trip-id">Trip ID: {this.props.data.tripId}</p> 
