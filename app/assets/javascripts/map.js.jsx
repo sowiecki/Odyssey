@@ -165,15 +165,15 @@ $(function() {
   })
 
   var RouteInfoBox = React.createClass({
-    // componentWillEnter: function(cb) {
-    //   var $element = $(this.getDOMNode());
-    //   var width = 200;
-    //   $element.stop(true).width(0).animate({width:width}, 2, cb);
-    // },
-    // componentWillLeave: function(cb) {
-    //   var $el = $(this.getDOMNode());
-    //   $el.stop(true).animate({width:0}, 20, cb);
-    // },
+    componentWillEnter: function(cb) {
+      var $element = $(this.getDOMNode());
+      var width = 200;
+      $element.stop(true).width(0).animate({width:width}, 2, cb);
+    },
+    componentWillLeave: function(cb) {
+      var $el = $(this.getDOMNode());
+      $el.stop(true).animate({width:0}, 20, cb);
+    },
     onClick: function() {
       console.log("test" + this.props.data.tripId)
     },
