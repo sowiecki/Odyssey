@@ -105,14 +105,14 @@ $(function() {
     render: function() {
       var buttons =
         <div id="map-control-interface">
-          <div className="map-control-first-row">
+          <div className="map-control">
             <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
           </div>
-          <div className="map-control-second-row">
+          <div className="map-control button-green">
             <input id="start-traverse" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
           </div>
           <p>- or -</p>
-          <div className="map-control-second-row">
+          <div className="map-control button-green">
             <input id="start-traverse" onClick={this.startRandomTraverse} type="submit" target="remote" value="Follow random bike" />
           </div>
         </div>
@@ -148,16 +148,16 @@ $(function() {
     // },
     render: function() {
       var pause = this.state.started ? 
-        <div className="map-control-third-row">
+        <div className="map-control button-green">
           <input id="continue-traverse" onClick={this.continueTraverse} type="submit" target="remote" value="Continue" />
         </div> :
-        <div className="map-control-second-row">
+        <div className="map-control button-blue">
           <input id="pause-traverse" onClick={this.pauseTraverse} type="submit" target="remote" value="Pause" />
         </div>
       return (
         <div id="map-control-interface">
           <ReactCSSTransitionGroup transitionName="button">
-            <div className="map-control stop">
+            <div className="map-control button-red">
               <input id="stop-traverse" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
             </div>
             <ReactTransitionGroup transitionName="routeInfoBox" component={"div"}>

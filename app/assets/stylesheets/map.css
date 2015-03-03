@@ -48,7 +48,7 @@ div#map-control-interface > p {
 	margin: 2px;
 }
 
-.map-control-first-row > input, .map-control-second-row > input, .map-control-third-row > input {
+.map-control > input {
 	box-sizing: border-box;
 	margin: 6px 0 6px 0;
 	padding: 0 10px 0 10px;
@@ -76,50 +76,53 @@ div#map-control-interface > p {
 .map-control-first-row > input:nth-child(2) {
 	width: 68px;
 }
-.map-control-stop-row > input {
-	background-image: -webkit-linear-gradient(top, #d93434, #bd0000);
-  background-image: -moz-linear-gradient(top, #d93434, #bd0000);
-  background-image: -ms-linear-gradient(top, #d93434, #bd0000);
-  background-image: -o-linear-gradient(top, #d93434, #bd0000);
-  background-image: linear-gradient(to bottom, #d93434, #bd0000);
+.button-red > input {
+	background: #d93434;
+	background: -webkit-linear-gradient(top, #d93434, #bd0000);
+  background: -moz-linear-gradient(top, #d93434, #bd0000);
+  background: -ms-linear-gradient(top, #d93434, #bd0000);
+  background: -o-linear-gradient(top, #d93434, #bd0000);
+  background: linear-gradient(to bottom, #d93434, #bd0000);
 }
-.map-control-stop-row > input:hover {
-	background-image: -webkit-linear-gradient(top, #8fbd5e, #5fbd00);
-  background-image: -moz-linear-gradient(top, #8fbd5e, #5fbd00);
-  background-image: -ms-linear-gradient(top, #8fbd5e, #5fbd00);
-  background-image: -o-linear-gradient(top, #8fbd5e, #5fbd00);
-  background-image: linear-gradient(to bottom, #8fbd5e, #5fbd00);
+.button-red > input:hover {
+	background: #e00000;
+  background: -webkit-linear-gradient(top, #e00000, #910000);
+  background: -moz-linear-gradient(top, #e00000, #910000);
+  background: -ms-linear-gradient(top, #e00000, #910000);
+  background: -o-linear-gradient(top, #e00000, #910000);
+  background: linear-gradient(to bottom, #e00000, #910000);
 }
-.map-control-second-row > input {
-	background-image: -webkit-linear-gradient(top, #8fbd5e, #5fbd00);
-  background-image: -moz-linear-gradient(top, #8fbd5e, #5fbd00);
-  background-image: -ms-linear-gradient(top, #8fbd5e, #5fbd00);
-  background-image: -o-linear-gradient(top, #8fbd5e, #5fbd00);
-  background-image: linear-gradient(to bottom, #8fbd5e, #5fbd00);
+.button-green > input {
+	background: #8fbd5e;
+	background: -webkit-linear-gradient(top, #8fbd5e, #5fbd00);
+  background: -moz-linear-gradient(top, #8fbd5e, #5fbd00);
+  background: -ms-linear-gradient(top, #8fbd5e, #5fbd00);
+  background: -o-linear-gradient(top, #8fbd5e, #5fbd00);
+  background: linear-gradient(to bottom, #8fbd5e, #5fbd00);
 }
-.map-control-second-row > input:hover {
-	background-image: -webkit-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background-image: -moz-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background-image: -ms-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background-image: -o-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background-image: linear-gradient(to bottom, #7ebd5e, #7ebd5e);
+.button-green > input:hover {
+	background: #7ebd5e;
+	background: -webkit-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background: -moz-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background: -ms-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background: -o-linear-gradient(top, #7ebd5e, #7ebd5e);
+  background: linear-gradient(to bottom, #7ebd5e, #7ebd5e);
 }
-.map-control-third-row > input {
-	background-image: -webkit-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background-image: -moz-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background-image: -ms-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background-image: -o-linear-gradient(top, #7ebd5e, #7ebd5e);
-  background-image: linear-gradient(to bottom, #7ebd5e, #7ebd5e);
+.button-blue > input {
+	background: #3cb0fd;
+	background: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background: linear-gradient(to bottom, #3cb0fd, #3498db);
 }
-.map-control-third-row > input:nth-child(2) {
-	/*margin: 6px 10px 6px 10px;*/
-}
-.map-control-third-row > input {
-	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+.button-blue > input:hover {
+	background: #33b4ff;
+  background: -webkit-linear-gradient(top, #33b4ff, #1371ab);
+  background: -moz-linear-gradient(top, #33b4ff, #1371ab);
+  background: -ms-linear-gradient(top, #33b4ff, #1371ab);
+  background: -o-linear-gradient(top, #33b4ff, #1371ab);
+  background: linear-gradient(to bottom, #33b4ff, #1371ab);
 }
 
 div#routes-display-container {
