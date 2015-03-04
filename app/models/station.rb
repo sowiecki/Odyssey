@@ -1,7 +1,7 @@
 class Station
 	include Neo4j::ActiveNode
 
-	property :station_id, type: Integer, constraint: :unique
+	property :station_id, type: Integer, constraint: :unique, index: :exact
 	property :name, type: String, constraint: :unique
 	property :latitude, type: Float
 	property :longitude, type: Float
