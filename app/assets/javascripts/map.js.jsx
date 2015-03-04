@@ -45,7 +45,7 @@ $(function() {
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
-        React.render(<ErrorContainer data={[{message: "Waiting on Google"}]} />, document.getElementById('error-container'));
+        React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
       }
     });
   }
@@ -58,12 +58,16 @@ $(function() {
         method: "get",
         dataType: "json",
         success: function(data) {
-          routesSegment.advanceRoute(data[0]);
+          if (data.length) {
+            routesSegment.advanceRoute(data[0]);
+          } else {
+            React.render(<ErrorContainer data={[{message: "Bike not found, try another!", loadAnim: false}]} />, document.getElementById('error-container'));
+          }
         }
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 2800);
+      intervalId = setInterval(RouteControl.getTrip, 800);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
@@ -164,7 +168,7 @@ $(function() {
       }.bind(this));
       return (
         <div>
-          <ReactCSSTransitionGroup transitionName="routeInfoBox">
+          <ReactCSSTransitionGroup transitionName="routeInfoBox" component="div">
             {routeNodes}
           </ReactCSSTransitionGroup>
         </div>
@@ -203,7 +207,7 @@ $(function() {
       });
       return (
         <div>
-          <ReactCSSTransitionGroup transitionName="button" transitionAppear={true}>
+          <ReactCSSTransitionGroup transitionName="button">
             {errors}
           </ReactCSSTransitionGroup>
         </div>
@@ -212,7 +216,7 @@ $(function() {
   })
   var ErrorMessage = React.createClass({
     getInitialState: function() {
-      return {dashFlash: "."};
+      return {dashFlash: " "};
     },
     flash: function() {
       if (this.state.dashFlash.length > 26) {
@@ -222,7 +226,7 @@ $(function() {
       }
     },
     componentDidMount: function() {
-      this.interval = setInterval(this.flash, 100);
+      if (this.props.data.loadAnim) { this.interval = setInterval(this.flash, 100); }
     },
     componentWillUnmount: function() {
       clearInterval(this.interval);

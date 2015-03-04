@@ -68,15 +68,15 @@ div.trip-box {
 	padding: 4px;
 	max-height: 48px;
 	width: 200px;
-	font-size: 12px;
+	font-size: 11px;
 	font-family: 'PT Sans Narrow', sans-serif;
 	text-align: left;
 	line-height: 18px;
-	opacity: .35;
+	opacity: .25;
 	color: #FFFFFF;
 	text-shadow: 0px 1px 1px #283966;
-	background-color: #005786;
-	border-top: 4px solid #3DB7E4;
+	background-color: #2E93F8;
+	border-top: 4px solid #00DC81;
 	box-shadow: rgba(0, 0, 0, 0.15) 0 0 4px;
   transition: all .5s ease .2s;
   /*background-image: url(/assets/background_blue_dark.png);*/
