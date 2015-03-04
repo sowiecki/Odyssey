@@ -68,9 +68,6 @@ $(function() {
     this.stopTraverse = function() {
       clearInterval(intervalId);
     };
-    this.zeroResults = function() {
-      console.log("No results")
-    }
   }
 
   // Initialize control dependencies
@@ -107,16 +104,10 @@ $(function() {
     render: function() {
       var buttons =
         <div id="map-control-interface">
-          <div className="map-control text-field">
-            <input id="bike-id-input" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
-          </div>
-          <div className="map-control button-green">
-            <input id="start-traverse" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
-          </div>
+          <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
+          <input id="start-traverse" className="map-control button-green" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
           <p>- or -</p>
-          <div className="map-control button-green">
-            <input id="start-traverse" onClick={this.startRandomTraverse} type="submit" target="remote" value="Follow random bike" />
-          </div>
+          <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="Follow random bike" />
         </div>
       return (
         <div id="map-control-interface">
@@ -149,20 +140,14 @@ $(function() {
     },
     render: function() {
       var pause = this.state.started ? 
-        <div className="map-control button-green">
-          <input id="continue-traverse" onClick={this.continueTraverse} type="submit" target="remote" value="Continue" />
-        </div> :
-        <div className="map-control button-blue">
-          <input id="pause-traverse" onClick={this.pauseTraverse} type="submit" target="remote" value="Pause" />
-        </div>
+          <input id="continue-traverse" className="map-control button-green" onClick={this.continueTraverse} type="submit" target="remote" value="Continue" /> :
+          <input id="pause-traverse" className="map-control button-blue" onClick={this.pauseTraverse} type="submit" target="remote" value="Pause" />
       return (
         <div id="map-control-interface">
-            <div className="map-control button-red">
-              <input id="stop-traverse" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
-            </div>
-            <ReactCSSTransitionGroup transitionName="button">
-              {pause}
-            </ReactCSSTransitionGroup>
+          <input id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
+          <ReactCSSTransitionGroup transitionName="button" component="div">
+            {pause}
+          </ReactCSSTransitionGroup>
         </div>
       );
     }
@@ -172,9 +157,10 @@ $(function() {
     render: function() {
       var key = 0;
       var routeNodes = this.props.data.reverse().map(function (data) {
-      return (
-          <RouteInfoBox key={key++} data={data} />
-        );
+        return (
+            <RouteInfoBox key={key++} data={data} />
+          );
+        if (key > 10) { key = 10 };
       });
       return (
         <div>

@@ -18,14 +18,12 @@
 .button-enter {
   opacity: 0.01;
   transition: opacity .5s ease-in;
-  transform: translate3d(0,100px,0);
 }
 .button-enter.button-enter-active {
   opacity: 1;
 }
 .button-leave {
   opacity: 1;
-  transform: translate3d(0,-100px,0);
   transition: opacity .5s ease-in;
 }
 .button-leave.button-leave-active {
