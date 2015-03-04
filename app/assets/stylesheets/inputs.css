@@ -1,5 +1,6 @@
 input.map-control {
   box-sizing: border-box;
+  pointer-events: all;
   display: block;
   margin: 6px 0 6px 0;
   padding: 0 10px 0 10px;
