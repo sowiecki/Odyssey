@@ -14,7 +14,7 @@ $(function() {
     center: new google.maps.LatLng(41.890033, -87.6500523)
   }
   var markerOptions = {
-    icon: "assets/marker_orange.png"
+    icon: "assets/marker_green.png"
   }
   var rendererOptions = {
     map: map,
@@ -90,6 +90,7 @@ $(function() {
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
+      routesSegment.offset = 0;
       RouteControl.getTrip();
       RouteControl.autoTraverseRoutes();
       React.render(<ControlMap />, document.getElementById('bike-control-container'))
@@ -132,7 +133,7 @@ $(function() {
     },
     stopTraverse: function() {
       RouteControl.stopTraverse();
-      map = new google.maps.Map(document.getElementById('map'), mapOptions);;
+      map.setZoom(12);
       React.render(<span />, document.getElementById('routes-display-container'))
       React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
       React.render(<ReactCSSTransitionGroup transitionName="button"><InitializeMap /></ReactCSSTransitionGroup>, document.getElementById('bike-control-container'));
