@@ -14,12 +14,22 @@ $(function() {
     center: new google.maps.LatLng(41.890033, -87.6500523)
   },
   markerOptions = {
-    icon: "assets/marker_green.png"
+    icon: "assets/marker_green.png",
+    zIndex: 50
+  },
+  clickThroughShape = {
+      coord: [0],
+      type: 'poly'
   },
   rendererOptions = {
     map: map,
     markerOptions: markerOptions,
-    suppressBicyclingLayer: true
+    suppressBicyclingLayer: true,
+    polylineOptions: {
+      strokeColor: "#FF5E3C",
+      strokeOpacity: 0.5
+    },
+    preserveViewport: true
   }
 
   // Initialize Map Dependencies
@@ -28,13 +38,13 @@ $(function() {
       directionsService = new google.maps.DirectionsService(),
       map = new google.maps.Map(document.getElementById('map'), mapOptions),
       path = new google.maps.MVCArray(),
-      service = new google.maps.DirectionsService(), poly;
+      poly = new google.maps.Polyline({ map: map }),
+      bikeMarker;
 
   directionsDisplay.setMap(map);
 
   RoutesSegment.prototype.drawRoute = function () {
     this.makeSafeWaypts();
-
     var request = {
         origin: this.waypts[0].location,
         destination: this.waypts[this.waypts.length - 1].location,
@@ -45,6 +55,16 @@ $(function() {
       console.log(status)
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
+        map.panTo(routesSegment.coordinates);
+        map.setZoom(15);
+        if (bikeMarker) { bikeMarker.setMap(null); }
+        bikeMarker = new google.maps.Marker({
+          zIndex: 200,
+          position: routesSegment.coordinates,
+          map: map,
+          shape: clickThroughShape,
+          icon: "assets/marker_blue.png"
+        });
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
@@ -70,7 +90,7 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 2800);
+      intervalId = setInterval(RouteControl.getTrip, 500);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
