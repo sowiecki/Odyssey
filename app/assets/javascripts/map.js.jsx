@@ -35,6 +35,11 @@ $(function() {
         preserveViewport: true
       }
 
+  // StreetView Options
+  var streetViewOptions = {
+        position: new google.maps.LatLng(41.890033, -87.6500523)
+      };
+
   // Initialize Map Dependencies
   var RoutesSegment = require('./components').model,
       directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions),
@@ -44,6 +49,11 @@ $(function() {
       poly = new google.maps.Polyline({ map: map }),
       bikeMarker;
 
+  // Initialize StreetView Dependencies
+  var streetView = new google.maps.StreetViewPanorama(document.getElementById('streetview'), streetViewOptions);
+
+  map.setStreetView(streetView);
+  map.bindTo("center", streetView, "position");
   directionsDisplay.setMap(map);
 
   RoutesSegment.prototype.drawRoute = function () {
@@ -68,7 +78,7 @@ $(function() {
           shape: clickThroughShape,
           icon: "assets/marker_blue.png"
         });
-        
+
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
