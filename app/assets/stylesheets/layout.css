@@ -1,5 +1,6 @@
 header, footer {
-	z-index: 200;
+	position: relative;
+	z-index: 100;
 	margin: 0 auto auto;
 	padding: 10px 0 10px 0;
 	max-width: 1140px;
@@ -7,6 +8,8 @@ header, footer {
 	color: #7f7f7f;
 	text-align: center;
 	background-color: #F8F8FF;
+	opacity: 0.75;
+	pointer-events: none;
 }
 header {
 	border-bottom: 5px solid #FF5E3C;
@@ -22,6 +25,7 @@ footer {
 footer > a, nav > a {
 	font-family: 'Dosis', sans-serif;
 	color: #7f7f7f;
+	pointer-events: all;
 }
 nav {
 	box-sizing: border-box;
@@ -32,18 +36,21 @@ nav {
 	text-align: right;
 	font-size: 18px;
 }
-nav:hover:before {
+#faq-link:hover:before {
 	content: "Coming soon ";
 }
 
 div#wrapper {
+	position: absolute;
 	margin: 0 auto;
-	max-width: 1140px;
-	height: 94%;
+	top: 0;
+	right: 0;
+	left: 0;
+	width: 1140px;
+	height: 100%;
 	background-color: #f2f2f2;
 }
 div#content {
-	z-index: 100;
 	position: relative;
 	padding: 0 0 10px 0; /* Leave room for the footer */
 	height: 100%;
