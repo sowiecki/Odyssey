@@ -113,7 +113,7 @@ $(function() {
     },
     startTraverse: function(e) {
       e.preventDefault();
-      map.setZoom(15);
+      map.setZoom(14);
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
