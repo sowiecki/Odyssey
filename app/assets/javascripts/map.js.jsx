@@ -11,7 +11,10 @@ $(function() {
     mapTypeControl: false,
     styles: mapStyle,
     zoomControl: false,
-    center: new google.maps.LatLng(41.890033, -87.6500523)
+    center: new google.maps.LatLng(41.890033, -87.6500523),
+    streetViewControlOptions: {
+      position: google.maps.ControlPosition.LEFT_CENTER
+    }
   },
   markerOptions = {
     icon: "assets/marker_green.png",
@@ -90,7 +93,7 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 500);
+      intervalId = setInterval(RouteControl.getTrip, 2500);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);

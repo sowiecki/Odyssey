@@ -30,7 +30,7 @@ div#error-container {
 	font-family: 'Dosis', sans-serif;
 	font-weight: bold;
 	color: #FFFFFF;
-	text-shadow: 0px 1px 2px #854629;
+	text-shadow: 0px 1px 2px #000000;
 }
 
 div#bike-control-container {
