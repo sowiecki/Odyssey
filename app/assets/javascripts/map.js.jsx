@@ -68,27 +68,6 @@ $(function() {
           shape: clickThroughShape,
           icon: "assets/marker_blue.png"
         });
-        // var line = new google.maps.Polyline({
-        //       path: path,
-        //       strokeColor: "#000000",
-        //       strokeOpacity: 0.5,
-        //       strokeWeight: 2,
-        //       geodesic: true,
-        //       map: map
-        //     });
-        // var step = 0,
-        //     numSteps = 1,
-        //     timePerStep = 250,
-        //     interval = setInterval(function() {
-        //       step++;
-        //       if (step > numSteps) {
-        //         clearInterval(interval);
-        //       } else {
-        //         for (var i = 0, len = response.routes[0].overview_path.length - 1; i < len; i++) {
-        //           path.push(response.routes[0].overview_path[i]);
-        //         }
-        //       }
-        //   }, timePerStep);
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
