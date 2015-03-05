@@ -59,7 +59,6 @@ $(function() {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
         map.panTo(routesSegment.coordinates);
-        map.setZoom(15);
         if (bikeMarker) { bikeMarker.setMap(null); }
         bikeMarker = new google.maps.Marker({
           zIndex: 200,
@@ -114,6 +113,7 @@ $(function() {
     },
     startTraverse: function(e) {
       e.preventDefault();
+      map.setZoom(15);
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
@@ -124,6 +124,7 @@ $(function() {
     },
     startRandomTraverse: function(e) {
       e.preventDefault();
+      map.setZoom(15);
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
