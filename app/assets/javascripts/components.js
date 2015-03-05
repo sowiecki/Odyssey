@@ -37,6 +37,7 @@ function RoutesSegment() {
     })
 
     this.drawRoute();
+    this.coordinates = new google.maps.LatLng(trip.lat, trip.lng);
   }
   this.reset = function() {
     this.waypts = [];

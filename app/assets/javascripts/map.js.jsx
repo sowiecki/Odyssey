@@ -2,8 +2,8 @@ $(function() {
   // Map options
   var mapStyle = [
     {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":55}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
-  ];
-  var mapOptions = {
+  ],
+  mapOptions = {
     zoom: 12,
     panControl: false,
     tilt: 0,
@@ -11,27 +11,43 @@ $(function() {
     mapTypeControl: false,
     styles: mapStyle,
     zoomControl: false,
-    center: new google.maps.LatLng(41.890033, -87.6500523)
-  }
-  var markerOptions = {
-    icon: "assets/marker_green.png"
-  }
-  var rendererOptions = {
+    center: new google.maps.LatLng(41.890033, -87.6500523),
+    streetViewControlOptions: {
+      position: google.maps.ControlPosition.LEFT_CENTER
+    }
+  },
+  markerOptions = {
+    icon: "assets/marker_green.png",
+    zIndex: 50
+  },
+  clickThroughShape = {
+      coord: [0],
+      type: 'poly'
+  },
+  rendererOptions = {
     map: map,
     markerOptions: markerOptions,
-    suppressBicyclingLayer: true
+    suppressBicyclingLayer: true,
+    polylineOptions: {
+      strokeColor: "#FF5E3C",
+      strokeOpacity: 0.5
+    },
+    preserveViewport: true
   }
 
   // Initialize Map Dependencies
-  var RoutesSegment = require('./components').model;
-  var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
-  var directionsService = new google.maps.DirectionsService();
-  var map = new google.maps.Map(document.getElementById('map'), mapOptions);;
+  var RoutesSegment = require('./components').model,
+      directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions),
+      directionsService = new google.maps.DirectionsService(),
+      map = new google.maps.Map(document.getElementById('map'), mapOptions),
+      path = new google.maps.MVCArray(),
+      poly = new google.maps.Polyline({ map: map }),
+      bikeMarker;
+
   directionsDisplay.setMap(map);
 
   RoutesSegment.prototype.drawRoute = function () {
     this.makeSafeWaypts();
-
     var request = {
         origin: this.waypts[0].location,
         destination: this.waypts[this.waypts.length - 1].location,
@@ -42,6 +58,16 @@ $(function() {
       console.log(status)
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
+        map.panTo(routesSegment.coordinates);
+        map.setZoom(15);
+        if (bikeMarker) { bikeMarker.setMap(null); }
+        bikeMarker = new google.maps.Marker({
+          zIndex: 200,
+          position: routesSegment.coordinates,
+          map: map,
+          shape: clickThroughShape,
+          icon: "assets/marker_blue.png"
+        });
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
@@ -67,7 +93,7 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 2800);
+      intervalId = setInterval(RouteControl.getTrip, 2500);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
@@ -75,9 +101,9 @@ $(function() {
   }
 
   // Initialize control dependencies
-  var RouteControl = new RouteControl
-  var routesSegment = new RoutesSegment
-  var intervalId = null
+  var RouteControl = new RouteControl,
+      routesSegment = new RoutesSegment,
+      intervalId;
 
   var InitializeMap = React.createClass({
     getInitialState: function() {
