@@ -68,6 +68,7 @@ $(function() {
           shape: clickThroughShape,
           icon: "assets/marker_blue.png"
         });
+        
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
