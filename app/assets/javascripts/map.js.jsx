@@ -1,39 +1,39 @@
 $(function() {
   // Map options
   var mapStyle = [
-    {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":55}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
-  ],
-  mapOptions = {
-    zoom: 12,
-    panControl: false,
-    tilt: 0,
-    disableAutoPan: true,
-    mapTypeControl: false,
-    styles: mapStyle,
-    zoomControl: false,
-    center: new google.maps.LatLng(41.890033, -87.6500523),
-    streetViewControlOptions: {
-      position: google.maps.ControlPosition.LEFT_CENTER
-    }
-  },
-  markerOptions = {
-    icon: "assets/marker_green.png",
-    zIndex: 50
-  },
-  clickThroughShape = {
-      coord: [0],
-      type: 'poly'
-  },
-  rendererOptions = {
-    map: map,
-    markerOptions: markerOptions,
-    suppressBicyclingLayer: true,
-    polylineOptions: {
-      strokeColor: "#FF5E3C",
-      strokeOpacity: 0.5
-    },
-    preserveViewport: true
-  }
+        {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":55}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
+      ],
+      mapOptions = {
+        zoom: 12,
+        panControl: false,
+        tilt: 0,
+        disableAutoPan: true,
+        mapTypeControl: false,
+        styles: mapStyle,
+        zoomControl: false,
+        center: new google.maps.LatLng(41.890033, -87.6500523),
+        streetViewControlOptions: {
+          position: google.maps.ControlPosition.LEFT_CENTER
+        }
+      },
+      markerOptions = {
+        icon: "assets/marker_green.png",
+        zIndex: 50
+      },
+      clickThroughShape = {
+          coord: [0],
+          type: 'poly'
+      },
+      rendererOptions = {
+        map: map,
+        markerOptions: markerOptions,
+        suppressBicyclingLayer: true,
+        polylineOptions: {
+          strokeColor: "#FF5E3C",
+          strokeOpacity: 0.5
+        },
+        preserveViewport: true
+      }
 
   // Initialize Map Dependencies
   var RoutesSegment = require('./components').model,
@@ -48,25 +48,47 @@ $(function() {
 
   RoutesSegment.prototype.drawRoute = function () {
     this.makeSafeWaypts();
-    var request = {
-        origin: this.waypts[0].location,
-        destination: this.waypts[this.waypts.length - 1].location,
-        waypoints: this.safeWaypts,
-        travelMode: google.maps.TravelMode.BICYCLING
-    };
+    var destination = routesSegment.waypts[routesSegment.waypts.length-1].location,
+        request = {
+          origin: this.waypts[0].location,
+          destination: destination,
+          waypoints: this.safeWaypts,
+          travelMode: google.maps.TravelMode.BICYCLING
+        };
     directionsService.route(request, function(response, status) {
       console.log(status)
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        map.panTo(routesSegment.coordinates);
+        map.panTo(destination);
         if (bikeMarker) { bikeMarker.setMap(null); }
         bikeMarker = new google.maps.Marker({
           zIndex: 200,
-          position: routesSegment.coordinates,
+          position: destination,
           map: map,
           shape: clickThroughShape,
           icon: "assets/marker_blue.png"
         });
+        // var line = new google.maps.Polyline({
+        //       path: path,
+        //       strokeColor: "#000000",
+        //       strokeOpacity: 0.5,
+        //       strokeWeight: 2,
+        //       geodesic: true,
+        //       map: map
+        //     });
+        // var step = 0,
+        //     numSteps = 1,
+        //     timePerStep = 250,
+        //     interval = setInterval(function() {
+        //       step++;
+        //       if (step > numSteps) {
+        //         clearInterval(interval);
+        //       } else {
+        //         for (var i = 0, len = response.routes[0].overview_path.length - 1; i < len; i++) {
+        //           path.push(response.routes[0].overview_path[i]);
+        //         }
+        //       }
+        //   }, timePerStep);
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {

@@ -25,7 +25,7 @@ function RoutesSegment() {
     }
 
     this.waypts.push({
-      location: trip.lat + ", " + trip.lng
+      location: new google.maps.LatLng(trip.lat, trip.lng)
     });
 
     this.wayptsInfo.push({
@@ -37,7 +37,6 @@ function RoutesSegment() {
     })
 
     this.drawRoute();
-    this.coordinates = new google.maps.LatLng(trip.lat, trip.lng);
   }
   this.reset = function() {
     this.waypts = [];
