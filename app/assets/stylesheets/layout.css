@@ -2,25 +2,43 @@ header, footer {
 	z-index: 200;
 	margin: 0 auto auto;
 	padding: 10px 0 10px 0;
-	max-width: 960px;
+	max-width: 1140px;
+	font-family: 'Dosis', sans-serif;
+	color: #7f7f7f;
 	text-align: center;
-	color: #3DB6E4;
-	background-color: #e5e5e5;
+	background-color: #F8F8FF;
+}
+header {
+	border-bottom: 5px solid #FF5E3C;
 }
 footer {
 	position: fixed;
 	bottom: 0;
 	right: 0;
 	left: 0;
-	height: 14px;
+	height: 20px;
+	border-top: 5px solid #FF5E3C;
 }
-footer > a {
-	color: #3DB6E4;
+footer > a, nav > a {
+	font-family: 'Dosis', sans-serif;
+	color: #7f7f7f;
+}
+nav {
+	box-sizing: border-box;
+	position: absolute;
+	padding: 22px;
+	top: 0;
+	width: 1140px;
+	text-align: right;
+	font-size: 18px;
+}
+nav:hover:before {
+	content: "Coming soon ";
 }
 
 div#wrapper {
 	margin: 0 auto;
-	max-width: 960px;
+	max-width: 1140px;
 	height: 94%;
 	background-color: #f2f2f2;
 }
@@ -50,10 +68,10 @@ h1#odyssey-header-text {
 	display: inline;
 	margin: 0;
 	font-family: 'Parisienne', cursive;
-	font-size: 30px;
+	font-size: 35px;
 	font-weight: normal;
 	color: #FF5E3C;
-	text-shadow: #d8d8d8 .02em .02em .02em;
+	/*text-shadow: #d8d8d8 1px 1px 0px;*/
 }
 span#vv {
 	color: #3DB7E4;

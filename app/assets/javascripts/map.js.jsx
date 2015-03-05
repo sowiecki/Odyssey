@@ -67,7 +67,7 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 800);
+      intervalId = setInterval(RouteControl.getTrip, 2800);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);

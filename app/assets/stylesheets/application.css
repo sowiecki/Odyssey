@@ -29,8 +29,8 @@ body {
 	margin: 0;
 	height: 100%;
 	font-family: helvetica;
-	background-color: #00111A;
-	background-image: url('/assets/background.png')
+	background-color: #252526;
+	/*background-image: url('/assets/background.png')*/
 }
 a {
 	text-decoration: none;
