@@ -11,19 +11,8 @@ $(function() {
     mapTypeControl: false,
     styles: mapStyle,
     zoomControl: false,
-    center: new google.maps.LatLng(41.890033, -87.6500523),
-    streetViewControlOptions: {
-        position: google.maps.ControlPosition.LEFT_CENTER
-    },
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    streetView: panorama
+    center: new google.maps.LatLng(41.890033, -87.6500523)
   }
-  var panoramaOptions = {
-    addressControlOptions : { position : google.maps.ControlPosition.LEFT_CENTER },
-    zoomControlOptions : { position : google.maps.ControlPosition.LEFT_CENTER},
-    enableCloseButton : true,
-    visible: false //set to false so streetview is not triggered on the initial map load
-  };
   var markerOptions = {
     icon: "assets/marker_green.png"
   }
@@ -35,10 +24,9 @@ $(function() {
 
   // Initialize Map Dependencies
   var RoutesSegment = require('./components').model;
-  var panorama = new  google.maps.StreetViewPanorama(document.getElementById("map"), panoramaOptions);
-  var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+  var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);;
   var directionsService = new google.maps.DirectionsService();
-  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);;
   directionsDisplay.setMap(map);
 
   RoutesSegment.prototype.drawRoute = function () {

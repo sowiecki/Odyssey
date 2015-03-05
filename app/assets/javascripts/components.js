@@ -43,3 +43,4 @@ function RoutesSegment() {
     this.wayptsInfo = [];
   }
 };
+
