@@ -16,10 +16,12 @@ header {
 }
 footer {
 	position: fixed;
+	padding: 4px 0 8px 0;
 	bottom: 0;
 	right: 0;
 	left: 0;
-	height: 20px;
+	height: 10px;
+	font-size: 12px;
 	border-top: 5px solid #FF5E3C;
 }
 footer > a, nav > a {
@@ -46,7 +48,7 @@ div#wrapper {
 	top: 0;
 	right: 0;
 	left: 0;
-	width: 1140px;
+	max-width: 1140px;
 	height: 100%;
 	background-color: #f2f2f2;
 }

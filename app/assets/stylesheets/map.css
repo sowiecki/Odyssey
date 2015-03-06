@@ -47,12 +47,14 @@ div#error-container {
 	z-index: 200;
 	position: absolute;
 	margin: 0 6px 0 10px;
-	top: 18%;
-	right: 2%;
+	top: 54%;
+	width: 100%;
+	text-align: center;
 	font-family: 'Dosis', sans-serif;
 	font-weight: bold;
 	color: #FFFFFF;
 	text-shadow: 0px 1px 2px #000000;
+	pointer-events: none;
 }
 
 div#bike-control-container {
@@ -84,9 +86,9 @@ div#routes-display-container {
 	box-sizing: border-box;
 	position: absolute;
 	width: 100%;
-	max-height: 120px;
-	bottom: 53%;
+	bottom: 51.5%;
 	left: 0;
+	pointer-events: none;
 }
 div.trip-box {
 	box-sizing: border-box;
@@ -106,6 +108,7 @@ div.trip-box {
 	background-color: #2E93F8;
 	border-top: 4px solid #00DC81;
 	box-shadow: rgba(0, 0, 0, 0.15) 0 0 4px;
+	pointer-events: all;
   transition: all 1s ease .2s;
 }
 div.trip-box:active {

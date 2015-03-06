@@ -54,9 +54,6 @@ $(function() {
 
   // Initialize StreetView Dependencies
   var streetView = new google.maps.StreetViewPanorama(document.getElementById('streetview'), streetViewOptions);
-
-  // map.setStreetView(streetView);
-  // map.bindTo("center", streetView, "position");
   directionsDisplay.setMap(map);
 
   RoutesSegment.prototype.drawRoute = function () {
@@ -72,7 +69,7 @@ $(function() {
       console.log(status)
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        map.panTo(destination);
+        streetView.setPosition(destination);
         if (bikeMarker) { bikeMarker.setMap(null); }
         bikeMarker = new google.maps.Marker({
           zIndex: 200,
@@ -81,7 +78,7 @@ $(function() {
           shape: clickThroughShape,
           icon: "assets/marker_blue.png"
         });
-
+        streetView.setPosition(destination);
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
@@ -102,6 +99,7 @@ $(function() {
             routesSegment.advanceRoute(data[0]);
           } else {
             React.render(<ErrorContainer data={[{message: "Bike not found, try another!", loadAnim: false}]} />, document.getElementById('error-container'));
+            RouteControl.stopTraverse();
           }
         }
       })
@@ -251,7 +249,7 @@ $(function() {
       });
       return (
         <div>
-          <ReactCSSTransitionGroup transitionName="button">
+          <ReactCSSTransitionGroup transitionName="error">
             {errors}
           </ReactCSSTransitionGroup>
         </div>
@@ -266,7 +264,7 @@ $(function() {
       if (this.state.dashFlash.length > 26) {
         this.setState({dashFlash: ""});
       } else {
-        this.setState({dashFlash: this.state.dashFlash + "."});
+        this.setState({dashFlash: this.state.dashFlash + "-"});
       }
     },
     componentDidMount: function() {
@@ -277,7 +275,7 @@ $(function() {
     },
     render: function() {
       return (
-        <div>{this.state.dashFlash} {this.props.data.message}</div>
+        <div>{this.state.dashFlash} {this.props.data.message} {this.state.dashFlash}</div>
       );
     }
   })

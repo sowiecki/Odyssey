@@ -19,8 +19,7 @@
 
 .button-enter {
   opacity: 0.01;
-  transition: opacity 1.5s ease-in;
-  transform: translate3d(-300px,0,0);
+  transition: opacity .5s ease-in;
   transition: all .5s ease .2s;
 }
 .button-enter.button-enter-active {
@@ -29,9 +28,27 @@
 .button-leave {
   opacity: 1;
   transition: opacity .5s ease-in;
-  transform: translate3d(-300px,0,0);
+  transform: translate3d(0,300px,0);
   transition: all .5s ease .2s;
 }
 .button-leave.button-leave-active {
+  opacity: 0.01;
+}
+
+.error-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+  transition: all .5s ease .2s;
+}
+.error-enter.error-enter-active {
+  opacity: 1;
+}
+.error-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+  transform: translate3d(0,300px,0);
+  transition: all .5s ease .2s;
+}
+.error-leave.error-leave-active {
   opacity: 0.01;
 }
