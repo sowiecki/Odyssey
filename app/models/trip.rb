@@ -1,5 +1,6 @@
 class Trip
 	include Neo4j::ActiveNode
+	include ActionView::Helpers::DateHelper
 
 	has_one :out, :next_trip, model_class: Trip
 
@@ -29,4 +30,8 @@ class Trip
 						:origin_station_id,
 						:destination_station_id,
 						numericality: { only_integer: true }
+
+	def duration
+		distance_of_time_in_words(self.trip_duration)
+	end
 end

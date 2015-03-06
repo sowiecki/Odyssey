@@ -23,6 +23,7 @@
 
 html {
 	overflow-y: hidden;
+	overflow-x: hidden;
 	height: 100%;
 }
 body {
@@ -30,7 +31,6 @@ body {
 	height: 100%;
 	font-family: helvetica;
 	background-color: #252526;
-	/*background-image: url('/assets/background.png')*/
 }
 a {
 	text-decoration: none;

@@ -33,7 +33,8 @@ function RoutesSegment() {
       startTime: trip.start_time,
       stopTime: trip.stop_time,
       startLocation: trip.start_location,
-      stopLocation: trip.stop_location
+      stopLocation: trip.stop_location,
+      duration: trip.duration
     })
 
     this.drawRoute();

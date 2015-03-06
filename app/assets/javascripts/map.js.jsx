@@ -37,7 +37,10 @@ $(function() {
 
   // StreetView Options
   var streetViewOptions = {
-        position: new google.maps.LatLng(41.890033, -87.6500523)
+        position: new google.maps.LatLng(41.890033, -87.6500523),
+        addressControl: false,
+        zoomControl: false,
+        panControl: false
       };
 
   // Initialize Map Dependencies
@@ -52,8 +55,8 @@ $(function() {
   // Initialize StreetView Dependencies
   var streetView = new google.maps.StreetViewPanorama(document.getElementById('streetview'), streetViewOptions);
 
-  map.setStreetView(streetView);
-  map.bindTo("center", streetView, "position");
+  // map.setStreetView(streetView);
+  // map.bindTo("center", streetView, "position");
   directionsDisplay.setMap(map);
 
   RoutesSegment.prototype.drawRoute = function () {
@@ -115,7 +118,8 @@ $(function() {
   var RouteControl = new RouteControl,
       routesSegment = new RoutesSegment,
       intervalId;
-
+  map.setStreetView(streetView);
+  map.bindTo("center", streetView, "position");
   var InitializeMap = React.createClass({
     getInitialState: function() {
       return { mounted: false };
@@ -149,7 +153,7 @@ $(function() {
         <div id="map-control-interface">
           <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
           <input id="start-traverse" className="map-control button-green" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
-          <p className="click-through">- or -</p>
+          <p className="click-through">or</p>
           <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="Follow random bike" />
         </div>
       return (
@@ -224,10 +228,11 @@ $(function() {
         <div key={this.props.data.tripId} className="trip-box">
           <a href="#" onClick={this.onClick}>
             <p><b>Origin:</b> {this.props.data.startLocation}</p>
-            <p className="indent">at {this.props.data.startTime}</p>
             <span className="extended-info">
-              <p><b>Destination:</b> {this.props.data.stopLocation}</p> 
+              <p className="indent">at {this.props.data.startTime}</p>
+              <p><b>Destination:</b> {this.props.data.stopLocation}</p>
               <p className="indent">at {this.props.data.stopTime}</p>
+              <p><b>Duration:</b> {this.props.data.duration}</p>
               <p className="trip-id">Trip ID: {this.props.data.tripId}</p> 
             </span>        
           </a>

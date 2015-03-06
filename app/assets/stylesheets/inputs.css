@@ -1,8 +1,8 @@
 input.map-control {
   box-sizing: border-box;
   pointer-events: all;
-  display: block;
-  margin: 6px 0 6px 0;
+  display: inline;
+  margin: 0 6px 0 6px;
   padding: 0 10px 0 10px;
   height: 30px;
   width: 200px;
@@ -12,7 +12,6 @@ input.map-control {
   font-size: 20px;
   text-transform: uppercase;
   background-color: rgba(50, 50, 50, 0.5);
-  box-shadow: 1px 1px 2px rgba(127, 127, 127, 0.1);
 }
 input.text-field {
   color: #000000;
@@ -20,7 +19,6 @@ input.text-field {
   outline: 0;
   background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
   background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
-  box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 }
 input.text-field:focus {
   border-color: #C9C9C9;

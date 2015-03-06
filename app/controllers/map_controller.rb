@@ -14,7 +14,7 @@ class MapController < ApplicationController
 		  	trip_id: trip.trip_id,
 		  	start_time: DateTime.parse(trip.start_time).strftime("%I:%M%p on %m/%d/%Y"),
 		  	stop_time: DateTime.parse(trip.stop_time).strftime("%I:%M%p on %m/%d/%Y"),
-		  	duration: trip.trip_duration,
+		  	duration: trip.duration,
 		  	start_location: origin_station.name,
 		  	stop_location: destination_station.name
 		  })
