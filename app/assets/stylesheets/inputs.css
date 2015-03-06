@@ -69,3 +69,13 @@ input.button-blue:active {
   position:relative;
   top:1px;
 }
+
+div#initial-buttons, div#initial-buttons > div {
+  display: inline;
+}
+
+div#hold-buttons {
+  position: absolute;
+  right: 0;
+  left: 0;
+}

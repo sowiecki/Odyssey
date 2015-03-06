@@ -134,8 +134,8 @@ $(function() {
       });
     },
     startTraverse: function() {
-      map.setZoom(14);
       this.setState({traversing: !this.state.traversing});
+      map.setZoom(14);
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
@@ -144,7 +144,8 @@ $(function() {
       RouteControl.autoTraverseRoutes();
     },
     startRandomTraverse: function() {
-      map.setZoom(15);
+      this.setState({traversing: !this.state.traversing});
+      map.setZoom(14);
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
@@ -152,6 +153,7 @@ $(function() {
       RouteControl.autoTraverseRoutes();
     },
     stopTraverse: function() {
+      this.setState({traversing: !this.state.traversing});
       RouteControl.stopTraverse();
       map.setZoom(12);
       React.render(<span />, document.getElementById('routes-display-container'))
@@ -168,7 +170,7 @@ $(function() {
     },
     render: function() {
       var initiateButtons =
-          <div key="initial-buttons" id="map-control-interface">
+          <div key="initial-buttons" id="initial-buttons">
             <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
             <input id="start-traverse" className="map-control button-green" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
             <p className="click-through">or</p>
@@ -177,11 +179,12 @@ $(function() {
         continueButton =
           <input key="continue-traverse" id="continue-traverse" className="map-control button-green" onClick={this.handlePause} type="submit" target="remote" value="Continue" />,
         pauseButton =
-          <input key="pause-travers" id="pause-traverse" className="map-control button-blue" onClick={this.handlePause} type="submit" target="remote" value="Pause" />,
+          <input key="pause-traverse" id="pause-traverse" className="map-control button-blue" onClick={this.handlePause} type="submit" target="remote" value="Pause" />,
         stopButton =
           <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
 
       var buttons;
+      var key = 0;
 
       if (!this.state.traversing) {
         buttons = [initiateButtons]
@@ -191,10 +194,9 @@ $(function() {
         buttons = [pauseButton, stopButton]
       }
 
-      var key = 0;
-      buttons.map(function (data) {
+      buttons.map(function (buttonArray) {
         return (
-            <RouteInfoBox key={key++} data={data} />
+            <RouteInfoBox key={key++} data={buttonArray} />
           );
         if (key > 10) { key = 0 };
       }.bind(this));
@@ -202,7 +204,7 @@ $(function() {
       return (
         <div>
           <ReactCSSTransitionGroup transitionName="buttons">
-            {buttons}
+            <MapControl key={key++} data={buttons} />
           </ReactCSSTransitionGroup>
         </div>
       );
@@ -216,10 +218,10 @@ $(function() {
     },
     render: function() {
       console.log("test child")
-      console.log(this.props.buttons)
+      console.log(this.props.data)
       this.props.buttons = []
       return (
-        <div>{this.props.buttons}</div>
+        <div id="hold-buttons">{this.props.data}</div>
       );
     }
   })
@@ -236,7 +238,7 @@ $(function() {
       return (
         <div>
           <ReactCSSTransitionGroup transitionName="routeInfoBox" component="div">
-            {routeNodes}
+              {routeNodes}
           </ReactCSSTransitionGroup>
         </div>
       );

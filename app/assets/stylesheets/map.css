@@ -75,13 +75,6 @@ div#bike-control-container {
 	border-bottom: 4px solid rgba(255, 94, 60, 0.75);
 }
 
-div#map-control-interface > p {
-	margin: 2px;
-}
-div.map-control-interface, div#map-control-interface > div {
-	display: inline;
-}
-
 div#routes-display-container {
 	box-sizing: border-box;
 	position: absolute;
