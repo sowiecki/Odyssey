@@ -116,84 +116,110 @@ $(function() {
   var RouteControl = new RouteControl,
       routesSegment = new RoutesSegment,
       intervalId;
+
   map.setStreetView(streetView);
   map.bindTo("center", streetView, "position");
-  var InitializeMap = React.createClass({
+
+  var MapControlContainer = React.createClass({
     getInitialState: function() {
-      return { mounted: false };
+      return {
+        mounted: false,
+        traversing: false,
+        paused: false
+      };
     },
     componentDidMount: function() {
-      this.setState({ mounted: true });
+      this.setState({
+        mounted: true
+      });
     },
-    startTraverse: function(e) {
-      e.preventDefault();
+    startTraverse: function() {
       map.setZoom(14);
+      this.setState({traversing: !this.state.traversing});
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
       routesSegment.offset = 0;
       RouteControl.getTrip();
       RouteControl.autoTraverseRoutes();
-      React.render(<ControlMap />, document.getElementById('bike-control-container'))
     },
-    startRandomTraverse: function(e) {
-      e.preventDefault();
+    startRandomTraverse: function() {
       map.setZoom(15);
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
       RouteControl.getTrip();
       RouteControl.autoTraverseRoutes();
-      React.render(<ControlMap />, document.getElementById('bike-control-container'))
-    },
-    render: function() {
-      var buttons =
-        <div id="map-control-interface">
-          <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
-          <input id="start-traverse" className="map-control button-green" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
-          <p className="click-through">or</p>
-          <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="Follow random bike" />
-        </div>
-      return (
-        <div id="map-control-interface">
-          <ReactCSSTransitionGroup transitionName="button">
-            {buttons}
-          </ReactCSSTransitionGroup>
-        </div>
-      );
-    }
-  })
-  var ControlMap = React.createClass({
-    getInitialState: function() {
-      return {started: false};
     },
     stopTraverse: function() {
       RouteControl.stopTraverse();
       map.setZoom(12);
       React.render(<span />, document.getElementById('routes-display-container'))
       React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
-      React.render(<ReactCSSTransitionGroup transitionName="button"><InitializeMap /></ReactCSSTransitionGroup>, document.getElementById('bike-control-container'));
     },
-    pauseTraverse: function() {
-      clearInterval(intervalId);
-      this.setState({started: !this.state.started});
-      React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
-    },
-    continueTraverse: function() {
-      RouteControl.autoTraverseRoutes();
-      this.setState({started: !this.state.started});
+    handlePause: function() {
+      this.setState({paused: !this.state.paused});
+      if (!this.state.paused) {
+        clearInterval(intervalId);
+        React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
+      } else {
+        RouteControl.autoTraverseRoutes();
+      }
     },
     render: function() {
-      var pause = this.state.started ? 
-        <input id="continue-traverse" className="map-control button-green" onClick={this.continueTraverse} type="submit" target="remote" value="Continue" /> :
-        <input id="pause-traverse" className="map-control button-blue" onClick={this.pauseTraverse} type="submit" target="remote" value="Pause" />
+      var initiateButtons =
+          <div key="initial-buttons" id="map-control-interface">
+            <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
+            <input id="start-traverse" className="map-control button-green" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
+            <p className="click-through">or</p>
+            <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="Follow random bike" />
+          </div>,
+        continueButton =
+          <input key="continue-traverse" id="continue-traverse" className="map-control button-green" onClick={this.handlePause} type="submit" target="remote" value="Continue" />,
+        pauseButton =
+          <input key="pause-travers" id="pause-traverse" className="map-control button-blue" onClick={this.handlePause} type="submit" target="remote" value="Pause" />,
+        stopButton =
+          <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
+
+      var buttons;
+
+      if (!this.state.traversing) {
+        buttons = [initiateButtons]
+      } else if (this.state.paused) {
+        buttons = [continueButton, stopButton]
+      } else {
+        buttons = [pauseButton, stopButton]
+      }
+
+      var key = 0;
+      buttons.map(function (data) {
+        return (
+            <RouteInfoBox key={key++} data={data} />
+          );
+        if (key > 10) { key = 0 };
+      }.bind(this));
+
       return (
-        <div id="map-control-interface">
-          <input id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
-          <ReactCSSTransitionGroup transitionName="button" component="div">
-            {pause}
+        <div>
+          <ReactCSSTransitionGroup transitionName="buttons">
+            {buttons}
           </ReactCSSTransitionGroup>
         </div>
+      );
+    }
+  })
+  var MapControl = React.createClass({
+    getInitialState: function() {
+      return {
+        mounted: false
+      };
+    },
+    render: function() {
+      console.log("test child")
+      console.log(this.props.buttons)
+      this.props.buttons = []
+      return (
+        <div>{this.props.buttons}</div>
       );
     }
   })
@@ -205,7 +231,7 @@ $(function() {
         return (
             <RouteInfoBox key={key++} data={data} />
           );
-        if (key > 10) { key = 10 };
+        if (key > 10) { key = 0 };
       }.bind(this));
       return (
         <div>
@@ -243,7 +269,7 @@ $(function() {
     render: function() {
       var key = 0;
       var errors = this.props.data.map(function (error) {
-      return (
+        return (
           <ErrorMessage key={key++} data={error} />
         );
       });
@@ -279,6 +305,6 @@ $(function() {
       );
     }
   })
-
-  React.render(<InitializeMap />, document.getElementById('bike-control-container'))
+// React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
+  React.render(<MapControlContainer />, document.getElementById('bike-control-container'))
 })

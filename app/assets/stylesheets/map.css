@@ -78,7 +78,7 @@ div#bike-control-container {
 div#map-control-interface > p {
 	margin: 2px;
 }
-div#map-control-interface > div {
+div.map-control-interface, div#map-control-interface > div {
 	display: inline;
 }
 
