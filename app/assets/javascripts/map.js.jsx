@@ -17,7 +17,7 @@ $(function() {
         }
       },
       markerOptions = {
-        icon: "assets/marker_green.png",
+        icon: "assets/marker_orange.png",
         zIndex: 50
       },
       clickThroughShape = {
@@ -29,8 +29,8 @@ $(function() {
         markerOptions: markerOptions,
         suppressBicyclingLayer: true,
         polylineOptions: {
-          strokeColor: "#FF5E3C",
-          strokeOpacity: 0.5
+          strokeColor: "#00a9ff",
+          strokeOpacity: 1
         },
         preserveViewport: true
       }
@@ -76,11 +76,11 @@ $(function() {
           position: destination,
           map: map,
           shape: clickThroughShape,
-          icon: "assets/marker_blue.png"
+          icon: "assets/marker_green.png"
         });
         streetView.setPosition(destination);
         React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
-        React.render(<RoutesInfoContainer data={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
+        React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
         React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
       }
@@ -105,10 +105,11 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
-      intervalId = setInterval(RouteControl.getTrip, 2500);
+      intervalId = setInterval(RouteControl.getTrip, 2800);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
+      directionsDisplay.set('directions', null);
     };
   }
 
@@ -183,7 +184,9 @@ $(function() {
         pauseButton =
           <input key="pause-traverse" id="pause-traverse" className="map-control button-blue" onClick={this.handlePause} type="submit" target="remote" value="Pause" />,
         stopButton =
-          <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
+          <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />,
+        currentBike =
+          <span key="current-bike" id="info-left">Current bike: #{routesSegment.bikeId}</span>
 
       var buttonArray;
       var key = 0;
@@ -191,9 +194,9 @@ $(function() {
       if (!this.state.traversing) {
         buttonArray = [initiateButtons]
       } else if (this.state.paused) {
-        buttonArray = [continueButton, stopButton]
+        buttonArray = [stopButton, continueButton, currentBike]
       } else {
-        buttonArray = [pauseButton, stopButton]
+        buttonArray = [stopButton, pauseButton, currentBike]
       }
 
       buttonArray.map(function (button) {
@@ -228,7 +231,7 @@ $(function() {
   var RoutesInfoContainer = React.createClass({
     render: function() {
       var key = 0;
-      var routeNodes = this.props.data.map(function (data) {
+      var routeNodes = this.props.tripsInfo.map(function (data) {
         return (
             <RouteInfoBox key={key++} data={data} />
           );
@@ -237,7 +240,7 @@ $(function() {
       return (
         <div>
           <ReactCSSTransitionGroup transitionName="routeInfoBox" component="div">
-              {routeNodes}
+            {routeNodes}
           </ReactCSSTransitionGroup>
         </div>
       );
@@ -246,7 +249,8 @@ $(function() {
 
   var RouteInfoBox = React.createClass({
     onClick: function() {
-      console.log("test" + this.props.data.tripId)
+      var location = new google.maps.LatLng(this.props.data.latitude, this.props.data.longitude)
+      map.panTo(location);
     },
     render: function() {
       return (
@@ -306,6 +310,6 @@ $(function() {
       );
     }
   })
-// React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
+
   React.render(<MapControlContainer />, document.getElementById('bike-control-container'))
 })

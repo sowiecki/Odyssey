@@ -85,6 +85,7 @@ div#routes-display-container {
 }
 div.trip-box {
 	box-sizing: border-box;
+	position: relative;
 	display: inline-block;
 	vertical-align: bottom;
 	margin: 2px;
@@ -102,13 +103,14 @@ div.trip-box {
 	border-top: 4px solid #00DC81;
 	box-shadow: rgba(0, 0, 0, 0.15) 0 0 4px;
 	pointer-events: all;
-  transition: all 1s ease .2s;
+  transition: all .5s;
 }
 div.trip-box:active {
   position:relative;
   top:1px;
 }
 div.trip-box:last-child, div.trip-box:hover {
+	pointer-events: all;
 	max-height: 300px;
 	width: 240px;
 	font-size: 16px;
@@ -147,4 +149,15 @@ p.indent {
 p.click-through {
 	display: inline;
 	pointer-events: none;
+}
+span#info-left {
+  position: absolute;
+  margin: 0 20px 0 20px;
+  padding: 2px;
+}
+span#info-left {
+  left: 0;
+}
+span#info-right {
+  right: 0;
 }
