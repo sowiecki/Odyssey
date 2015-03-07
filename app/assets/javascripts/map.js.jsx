@@ -1,6 +1,7 @@
 $(function() {
   // Map options
-  var mapStyle = [
+  var Chicago = new google.maps.LatLng(41.866867, -87.607076),
+      mapStyle = [
         {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":55}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
       ],
       mapOptions = {
@@ -11,7 +12,7 @@ $(function() {
         mapTypeControl: false,
         styles: mapStyle,
         zoomControl: false,
-        center: new google.maps.LatLng(41.866867, -87.607076),
+        center: Chicago,
         streetViewControlOptions: {
           position: google.maps.ControlPosition.LEFT_CENTER
         }
@@ -37,7 +38,7 @@ $(function() {
 
   // StreetView Options
   var streetViewOptions = {
-        position: new google.maps.LatLng(41.866867, -87.607076),
+        position: Chicago,
         pov: {
           heading: 320,
           pitch: 10
@@ -99,6 +100,7 @@ $(function() {
         method: "get",
         dataType: "json",
         success: function(data) {
+          if (!intervalId) { RouteControl.autoTraverseRoutes(); }
           if (data.length) {
             routesSegment.advanceRoute(data[0]);
           } else {
@@ -114,6 +116,8 @@ $(function() {
     this.stopTraverse = function() {
       clearInterval(intervalId);
       directionsDisplay.set('directions', null);
+      map.panTo(Chicago);
+      bikeMarker.setMap(null);
     };
   }
 
@@ -149,7 +153,6 @@ $(function() {
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
       routesSegment.offset = 0;
       RouteControl.getTrip();
-      RouteControl.autoTraverseRoutes();
       loading();
     },
     startRandomTraverse: function() {
@@ -158,7 +161,6 @@ $(function() {
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
       RouteControl.getTrip();
-      RouteControl.autoTraverseRoutes();
       loading();
     },
     stopTraverse: function() {
@@ -194,7 +196,7 @@ $(function() {
         stopButton =
           <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />,
         currentBike =
-          <span key="current-bike" id="info-left">Current bike: #{routesSegment.bikeId}</span>
+          <span key="current-bike" id="info-left">Following trips made by bike #{routesSegment.bikeId}</span>
 
       var buttonArray;
       var key = 0;
