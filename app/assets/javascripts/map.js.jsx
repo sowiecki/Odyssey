@@ -73,8 +73,6 @@ $(function() {
         React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
         React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
-        clearInterval(intervalId);
-        RouteControl.autoTraverseRoutes();
       }
     });
   }
@@ -103,7 +101,7 @@ $(function() {
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
-      intervalId = true;
+      intervalId = 0;
       directionsDisplay.set('directions', null);
       map.panTo(Chicago);
       streetView.setPosition(Chicago);
