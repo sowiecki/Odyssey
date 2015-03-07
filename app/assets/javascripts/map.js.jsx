@@ -64,6 +64,7 @@ $(function() {
           travelMode: google.maps.TravelMode.BICYCLING
         };
     directionsService.route(request, function(response, status) {
+      RouteControl.drawPoly(response);
       // console.log("Google response status: " + status)
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
@@ -110,6 +111,30 @@ $(function() {
     },
     this.loading = function() {
       React.render(<ErrorContainer data={[{message: "Loading trips for #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
+    },
+    this.drawPoly = function(result) {
+      var routesArray = result.routes[0].overview_path,
+          leg = 0,
+          polyOptions = {
+            strokeColor: '#000000',
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+          },
+          poly = new google.maps.Polyline(polyOptions);
+
+      poly.setMap(map);
+      console.log(routesArray)
+      var path = poly.getPath();
+
+      path.push(routesArray[leg].latLng);
+
+      var marker = new google.maps.Marker({
+        position: routesArray[leg],
+        title: '#' + path.getLength(),
+        map: map
+      });
+
+      leg++
     };
   }
 
@@ -185,7 +210,7 @@ $(function() {
         stopButton =
           <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />,
         currentBike =
-          <span key="current-bike" id="info-left">Following trips made by bike #{routesSegment.bikeId}</span>
+          <span key="current-bike" id="info-left">Following bike #{routesSegment.bikeId} through 2014</span>
 
       var buttonArray;
       var key = 0;
