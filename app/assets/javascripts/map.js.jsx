@@ -11,7 +11,7 @@ $(function() {
         mapTypeControl: false,
         styles: mapStyle,
         zoomControl: false,
-        center: new google.maps.LatLng(41.890033, -87.6500523),
+        center: new google.maps.LatLng(41.866867, -87.607076),
         streetViewControlOptions: {
           position: google.maps.ControlPosition.LEFT_CENTER
         }
@@ -37,7 +37,11 @@ $(function() {
 
   // StreetView Options
   var streetViewOptions = {
-        position: new google.maps.LatLng(41.890033, -87.6500523),
+        position: new google.maps.LatLng(41.866867, -87.607076),
+        pov: {
+          heading: 320,
+          pitch: 10
+        },
         addressControl: false,
         zoomControl: false,
         panControl: false
@@ -121,6 +125,10 @@ $(function() {
   map.setStreetView(streetView);
   map.bindTo("center", streetView, "position");
 
+  function loading() {
+    React.render(<ErrorContainer data={[{message: "Loading trips for " + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
+  };
+
   var MapControlContainer = React.createClass({
     getInitialState: function() {
       return {
@@ -136,22 +144,22 @@ $(function() {
     },
     startTraverse: function() {
       this.setState({traversing: !this.state.traversing});
-      map.setZoom(14);
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
       routesSegment.offset = 0;
       RouteControl.getTrip();
       RouteControl.autoTraverseRoutes();
+      loading();
     },
     startRandomTraverse: function() {
       this.setState({traversing: !this.state.traversing});
-      map.setZoom(14);
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
       RouteControl.getTrip();
       RouteControl.autoTraverseRoutes();
+      loading();
     },
     stopTraverse: function() {
       this.setState({traversing: !this.state.traversing});
@@ -292,10 +300,10 @@ $(function() {
       return {dashFlash: " "};
     },
     flash: function() {
-      if (this.state.dashFlash.length > 26) {
+      if (this.state.dashFlash.length > 20) {
         this.setState({dashFlash: ""});
       } else {
-        this.setState({dashFlash: this.state.dashFlash + "-"});
+        this.setState({dashFlash: this.state.dashFlash + "—"});
       }
     },
     componentDidMount: function() {
