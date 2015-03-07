@@ -154,8 +154,10 @@ $(function() {
     },
     stopTraverse: function() {
       this.setState({traversing: !this.state.traversing});
+      this.setState({paused: false});
       RouteControl.stopTraverse();
       map.setZoom(12);
+      clearInterval(intervalId);
       React.render(<span />, document.getElementById('routes-display-container'))
       React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
     },
@@ -183,20 +185,20 @@ $(function() {
         stopButton =
           <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />
 
-      var buttons;
+      var buttonArray;
       var key = 0;
 
       if (!this.state.traversing) {
-        buttons = [initiateButtons]
+        buttonArray = [initiateButtons]
       } else if (this.state.paused) {
-        buttons = [continueButton, stopButton]
+        buttonArray = [continueButton, stopButton]
       } else {
-        buttons = [pauseButton, stopButton]
+        buttonArray = [pauseButton, stopButton]
       }
 
-      buttons.map(function (buttonArray) {
+      buttonArray.map(function (button) {
         return (
-            <RouteInfoBox key={key++} data={buttonArray} />
+            <RouteInfoBox key={key++} data={button} />
           );
         if (key > 10) { key = 0 };
       }.bind(this));
@@ -204,7 +206,7 @@ $(function() {
       return (
         <div>
           <ReactCSSTransitionGroup transitionName="buttons">
-            <MapControl key={key++} data={buttons} />
+            <MapControl key={key++} data={buttonArray} />
           </ReactCSSTransitionGroup>
         </div>
       );
@@ -217,9 +219,6 @@ $(function() {
       };
     },
     render: function() {
-      console.log("test child")
-      console.log(this.props.data)
-      this.props.buttons = []
       return (
         <div id="hold-buttons">{this.props.data}</div>
       );
