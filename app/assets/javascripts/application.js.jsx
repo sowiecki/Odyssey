@@ -19,22 +19,3 @@
 
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var ReactTransitionGroup = React.addons.TransitionGroup;
-
-var AppFaq = React.createClass({
-		getInitialState: function() {
-      return {visible: false};
-    },
-    componentDidMount: function() {
-
-    },
-    componentWillUnmount: function() {
-    },
-    render: function() {
-      var display = this.state.visible ? "Test1" : "Test2";
-      return (
-        <div>{display}</div>
-      );
-    }
-});
-
-React.render(<AppFaq />, document.getElementById('faq-link'))

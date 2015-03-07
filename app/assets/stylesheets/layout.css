@@ -16,9 +16,7 @@ header {
 footer {
 	position: fixed;
 	padding: 4px 0 8px 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
+	bottom: 0; right: 0; left: 0;
 	height: 10px;
 	font-size: 12px;
 	border-top: 3px solid #FF5E3C;
@@ -31,11 +29,13 @@ footer > a, nav > a {
 nav {
 	box-sizing: border-box;
 	position: absolute;
-	padding: 22px;
+	padding: 16px;
 	top: 0;
+	right: 6px;
 	width: 1140px;
 	text-align: right;
-	font-size: 18px;
+	font-size: 24px;
+	pointer-events: all
 }
 
 #faq-link:hover:before {
@@ -46,8 +46,7 @@ div#wrapper {
 	position: absolute;
 	margin: 0 auto;
 	top: 0;
-	right: 0;
-	left: 0;
+	right: 0; left: 0;
 	max-width: 1140px;
 	height: 100%;
 	background-color: #f2f2f2;
@@ -83,6 +82,32 @@ h1#odyssey-header-text {
 }
 span#vv {
 	color: #3DB7E4;
+}
+
+div#faq-popup {
+	z-index: 200px;
+	position: absolute;
+	margin: 0 auto auto;
+	padding: 20px;
+	top: 200px;
+	right: 0; left: 0;
+	height: 600px; width: 800px;
+	text-align: left;
+	font-family: 'PT Sans Narrow', sans-serif;
+	background-color: rgba(248, 248, 255, 0.95);
+}
+p#close {
+	position: absolute;
+	padding: 6px;
+	top: -20px; right: 6px;
+	font-family: Arial;
+}
+p#close > a, div#faq-popup > p > a, div#faq-popup > ul > li > a {
+	color: #8c9da5;
+}
+p#close > a:hover {
+	text-decoration: none;
+	background-color: #bfbfbf;
 }
 
 /* Smartphone (portrait) */
