@@ -73,6 +73,8 @@ $(function() {
         React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
         React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
+        clearInterval(intervalId);
+        RouteControl.autoTraverseRoutes();
       }
     });
   }
