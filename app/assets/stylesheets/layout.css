@@ -12,7 +12,7 @@ header, footer {
 	pointer-events: none;
 }
 header {
-	border-bottom: 5px solid #FF5E3C;
+	border-bottom: 3px solid #FF5E3C;
 }
 footer {
 	position: fixed;
@@ -22,7 +22,7 @@ footer {
 	left: 0;
 	height: 10px;
 	font-size: 12px;
-	border-top: 5px solid #FF5E3C;
+	border-top: 3px solid #FF5E3C;
 }
 footer > a, nav > a {
 	font-family: 'Dosis', sans-serif;
@@ -81,8 +81,14 @@ h1#odyssey-header-text {
 	font-size: 35px;
 	font-weight: normal;
 	color: #FF5E3C;
-	/*text-shadow: #d8d8d8 1px 1px 0px;*/
 }
 span#vv {
 	color: #3DB7E4;
+}
+
+/* Smartphone (portrait) */
+@media only screen and (max-width : 640px) {
+	div#wrapper {
+		width: 100%;
+	}
 }

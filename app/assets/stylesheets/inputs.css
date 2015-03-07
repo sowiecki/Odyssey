@@ -48,7 +48,7 @@ input.button-green {
 	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
   -webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
   box-shadow:inset 0px 1px 0px 0px #a4e271;
-  background-color:#00e284;
+  background-color:#02C39A;
   border: 0px solid #74b807;
 }
 input.button-green:hover {
@@ -84,4 +84,11 @@ div#hold-buttons {
   position: absolute;
   right: 0;
   left: 0;
+}
+
+/* Smartphone (portrait) */
+@media only screen and (max-width : 640px) {
+  input.map-control {
+    height: 60px;
+  }
 }

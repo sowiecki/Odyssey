@@ -27,21 +27,6 @@
 	right: 0;
 }
 
-/* Smartphone (lanscape) */
-@media only screen 
-and (min-width : 321px) {
- #map {
- 	
- }
-}
-/* Smartphone (portrait) */
-@media only screen 
-and (max-width : 320px) {
-	#map {
-
-	}
-}
-
 div#error-container {
 	box-sizing: border-box;
 	z-index: 200;
@@ -71,14 +56,14 @@ div#bike-control-container {
 	color: #595959;
 	text-transform: uppercase;
 	background-color: #F8F8FF;
-	border-top: 4px solid rgba(255, 94, 60, 0.75);
-	border-bottom: 4px solid rgba(255, 94, 60, 0.75);
+	border-top: 3px solid rgba(255, 94, 60, 0.75);
+	border-bottom: 3px solid rgba(255, 94, 60, 0.75);
 }
 
 div#routes-display-container {
 	box-sizing: border-box;
 	position: absolute;
-	width: 100%;
+	width: 120%;
 	bottom: 51.5%;
 	left: 0;
 	pointer-events: none;
@@ -91,7 +76,7 @@ div.trip-box {
 	margin: 2px;
 	padding: 4px;
 	max-height: 48px;
-	width: 74px;
+	max-width: 74px;
 	font-size: 10px;
 	font-family: 'PT Sans Narrow', sans-serif;
 	text-align: left;
@@ -99,23 +84,23 @@ div.trip-box {
 	opacity: .5;
 	color: #FFFFFF;
 	text-shadow: 0px 1px 1px #283966;
-	background-color: #2E93F8;
+	background-color: #2F3E46;
 	border-top: 4px solid #00DC81;
 	box-shadow: rgba(0, 0, 0, 0.15) 0 0 4px;
 	pointer-events: all;
-  transition: all .5s;
-}
-div.trip-box:active {
-  position:relative;
-  top:1px;
+  transition: all 0.25s;
 }
 div.trip-box:last-child, div.trip-box:hover {
 	pointer-events: all;
 	max-height: 300px;
-	width: 240px;
+	max-width: 280px;
 	font-size: 16px;
 	opacity: 1;
 	border-top: 6px solid #3DB7E4;
+}
+div.trip-box:active {
+  position:relative;
+  top: 1px;
 }
 div.trip-box > a {
 	color: #FFFFFF
@@ -128,15 +113,13 @@ div.trip-box > a > span > p, div.trip-box > a > p {
 }
 span.extended-info {
 	visibility: hidden;
+	position: absolute;
 	pointer-events: none;
 }
-div.trip-box:last-child span.extended-info {
+div.trip-box:hover span.extended-info, div.trip-box:last-child span.extended-info {
 	visibility: visible;
-	transition:visibility 0.5s linear 0.5s,opacity 0.5s linear;
-}
-div.trip-box:hover span.extended-info {
-	visibility: visible;
-	transition:visibility 0.5s linear 0.5s,opacity 0.5s linear;
+	position: relative;
+	transition: all .75s;
 }
 p.trip-id {
 	margin: 2px 0 0 0;
