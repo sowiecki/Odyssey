@@ -71,7 +71,7 @@ $(function() {
           travelMode: google.maps.TravelMode.BICYCLING
         };
     directionsService.route(request, function(response, status) {
-      console.log(status)
+      console.log("Google response status: " + status)
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
         streetView.setPosition(destination);
@@ -117,7 +117,7 @@ $(function() {
       clearInterval(intervalId);
       directionsDisplay.set('directions', null);
       map.panTo(Chicago);
-      bikeMarker.setMap(null);
+      if (bikeMarker) { bikeMarker.setMap(null); }
     };
   }
 
@@ -309,7 +309,11 @@ $(function() {
       }
     },
     componentDidMount: function() {
-      if (this.props.data.loadAnim) { this.interval = setInterval(this.flash, 100); }
+      if (this.props.data.loadAnim) {
+        this.interval = setInterval(this.flash, 100);
+      } else {
+        this.interval = null;
+      }
     },
     componentWillUnmount: function() {
       clearInterval(this.interval);
