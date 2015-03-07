@@ -93,6 +93,7 @@ $(function() {
   }
 
   function RouteControl() {
+
     this.getTrip = function() {
       routesSegment.offset += 1
       $.ajax({
@@ -100,8 +101,9 @@ $(function() {
         method: "get",
         dataType: "json",
         success: function(data) {
-          if (!intervalId) { RouteControl.autoTraverseRoutes(); }
           if (data.length) {
+            console.log("test -> " + intervalId)
+            if (!intervalId) { RouteControl.autoTraverseRoutes(); }
             routesSegment.advanceRoute(data[0]);
           } else {
             React.render(<ErrorContainer data={[{message: "Bike not found, try another!", loadAnim: false}]} />, document.getElementById('error-container'));
@@ -111,10 +113,12 @@ $(function() {
       })
     };
     this.autoTraverseRoutes = function() {
+      clearInterval(intervalId);
       intervalId = setInterval(RouteControl.getTrip, 2800);
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
+      intervalId = null;
       directionsDisplay.set('directions', null);
       map.panTo(Chicago);
       if (bikeMarker) { bikeMarker.setMap(null); }
@@ -127,7 +131,6 @@ $(function() {
       intervalId;
 
   map.setStreetView(streetView);
-  map.bindTo("center", streetView, "position");
 
   function loading() {
     React.render(<ErrorContainer data={[{message: "Loading trips for " + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
@@ -168,7 +171,6 @@ $(function() {
       this.setState({paused: false});
       RouteControl.stopTraverse();
       map.setZoom(12);
-      clearInterval(intervalId);
       React.render(<span />, document.getElementById('routes-display-container'))
       React.render(<ErrorContainer data={[]} />, document.getElementById('error-container'));
     },
