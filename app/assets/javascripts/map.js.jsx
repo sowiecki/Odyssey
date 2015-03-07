@@ -37,7 +37,7 @@ $(function() {
         position: Chicago,
         pov: {
           heading: 320,
-          pitch: 10
+          pitch: 1
         },
         addressControl: false,
         zoomControl: false,
@@ -68,7 +68,7 @@ $(function() {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
         map.panTo(destination);
-        streetView.setPosition(destination);
+        RouteControl.fixate(destination);
         React.render(<span />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
@@ -110,7 +110,14 @@ $(function() {
     },
     this.loading = function() {
       React.render(<ErrorContainer data={[{message: "Loading trips for #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
-    };
+    },
+    this.fixate = function(location) {
+      streetView.setPosition(location);
+      var heading = google.maps.geometry.spherical.computeHeading(streetView.location.latLng, location),
+          pov = streetView.getPov();
+      pov.heading = heading;
+      streetView.setPov(pov);
+    }
   }
 
   // Initialize control dependencies
@@ -247,7 +254,7 @@ $(function() {
     onClick: function() {
       var location = new google.maps.LatLng(this.props.data.latitude, this.props.data.longitude)
       map.panTo(location);
-      streetView.setPosition(location);
+      RouteControl.fixate(location);
     },
     render: function() {
       return (
