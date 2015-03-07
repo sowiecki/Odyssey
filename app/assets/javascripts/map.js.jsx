@@ -101,7 +101,7 @@ $(function() {
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
-      intervalId = null;
+      intervalId = true;
       directionsDisplay.set('directions', null);
       map.panTo(Chicago);
       streetView.setPosition(Chicago);
@@ -320,5 +320,5 @@ $(function() {
     }
   })
 
-  React.render(<MapControlContainer />, document.getElementById('bike-control-container'))
+  React.render(<MapControlContainer />, document.getElementById('bike-control-container'));
 })
