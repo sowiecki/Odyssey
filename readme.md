@@ -1,11 +1,17 @@
-# Divvy Data Challenge 2015
+# Entry for [Divvy Data Challenge 2015](https://www.divvybikes.com/datachallenge)
 
-Deadline: March 18, 2015, at 11:59 PM CST
+Visualize the odyssies of each Divvy bike trip from 2014.
 
-Initial project goals:
+[Live site](http://divvy-odyssey.herokuapp.com/)
 
-1. Create models for unique bicycles and model the relations of their sequentially-ordered trips.
+## Configuration
 
-2. Parse trip data into usable objects within the database.
++ Ruby on Rails 4.2.0
 
-3. Explore options to display trip data.
++ Neo4j
+
++ React.js 1.0.0
+
++ Browserify
+
++ Google maps API
