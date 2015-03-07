@@ -38,6 +38,7 @@ nav {
 	text-align: right;
 	font-size: 18px;
 }
+
 #faq-link:hover:before {
 	content: "Coming soon ";
 }

@@ -1,38 +1,41 @@
 .routeInfoBox-enter {
   opacity: 0.01;
-  transition: opacity 1.5s ease-in;
-  /*transform: translate3d(0,0,100px);*/
-  transition: all .5s ease .2s;
+  transition: all 0.25s;
+  pointer-events: none;
 }
 .routeInfoBox-enter.routeInfoBox-enter-active {
   opacity: 1;
+  pointer-events: none;
 }
 .routeInfoBox-leave {
   opacity: 1;
-  transition: opacity .5s ease-in;
-  transform: translate3d(-100px,0,0);
-  transition: all .5s ease .2s;
+  transform: translate3d(-200px,0,0);
+  transition: all 0.25s;
+  pointer-events: none;
 }
 .routeInfoBox-leave.routeInfoBox-leave-active {
   opacity: 0.01;
+  pointer-events: none;
 }
 
-.button-enter {
+.buttons-enter {
   opacity: 0.01;
-  transition: opacity .5s ease-in;
-  transition: all .5s ease .2s;
+  transition: all 0.5s;
+  pointer-events: none;
 }
-.button-enter.button-enter-active {
+.buttons-enter.buttons-enter-active {
   opacity: 1;
+  pointer-events: none;
 }
-.button-leave {
+.buttons-leave {
   opacity: 1;
-  transition: opacity .5s ease-in;
-  transform: translate3d(0,300px,0);
-  transition: all .5s ease .2s;
+  transform: translate3d(-200px,0,0);
+  transition: all 0.25s;
+  pointer-events: none;
 }
-.button-leave.button-leave-active {
+.buttons-leave.buttons-leave-active {
   opacity: 0.01;
+  pointer-events: none;
 }
 
 .error-enter {
