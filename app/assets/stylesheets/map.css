@@ -35,6 +35,7 @@ div#error-container {
 	top: 54%;
 	width: 100%;
 	text-align: center;
+	font-size: 22px;
 	font-family: 'Dosis', sans-serif;
 	font-weight: bold;
 	color: #FFFFFF;

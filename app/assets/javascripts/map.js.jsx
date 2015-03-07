@@ -109,7 +109,7 @@ $(function() {
       React.render(<span />, document.getElementById('error-container'));
     },
     this.loading = function() {
-      React.render(<ErrorContainer data={[{message: "Loading trips for #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
+      React.render(<ErrorContainer data={[{message: "Loading trips for bike #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
     },
     this.fixate = function(location) {
       streetView.setPosition(location);
@@ -296,10 +296,10 @@ $(function() {
       return {dashFlash: " "};
     },
     flash: function() {
-      if (this.state.dashFlash.length > 16) {
+      if (this.state.dashFlash.length > 10) {
         this.setState({dashFlash: ""});
       } else {
-        this.setState({dashFlash: this.state.dashFlash + "—"});
+        this.setState({dashFlash: this.state.dashFlash + "•"});
       }
     },
     componentDidMount: function() {

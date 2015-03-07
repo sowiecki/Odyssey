@@ -7,8 +7,7 @@ header, footer {
 	font-family: 'Dosis', sans-serif;
 	color: #7f7f7f;
 	text-align: center;
-	background-color: #F8F8FF;
-	opacity: 0.75;
+	background-color: rgba(248, 248, 255, 0.65);
 	pointer-events: none;
 }
 header {
@@ -65,20 +64,20 @@ h1#divvy-header-text {
 	margin: 0;
 	text-transform: uppercase;
 	font-family: 'Monda', sans-serif;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 	color: #000000;
-	transform:scale(1.75,1); /* W3C */
-    -webkit-transform:scale(1.75,1); /* Safari and Chrome */
-    -moz-transform:scale(1.75,1); /* Firefox */
-    -ms-transform:scale(1.75,1); /* IE 9 */
-    -o-transform:scale(1.75,1); /* Opera */
+	transform: scale(1.75,1); /* W3C */
+    -webkit-transform: scale(1.75,1); /* Safari and Chrome */
+    -moz-transform: scale(1.75,1); /* Firefox */
+    -ms-transform: scale(1.75,1); /* IE 9 */
+    -o-transform: scale(1.75,1); /* Opera */
 }
 h1#odyssey-header-text {
 	display: inline;
 	margin: 0;
 	font-family: 'Parisienne', cursive;
-	font-size: 35px;
+	font-size: 30px;
 	font-weight: normal;
 	color: #FF5E3C;
 }
