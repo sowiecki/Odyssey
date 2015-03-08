@@ -33,7 +33,7 @@ input.button-red {
   -webkit-box-shadow: inset 0px 1px 0px 0px #cf866c;
   box-shadow:inset 0px 1px 0px 0px #cf866c;
   background-color: #d82020;
-  border: 0px solid #942911;
+  border: 1px solid #7f625f;
 }
 input.button-red:hover {
   background-color:#bc3315;
@@ -48,8 +48,8 @@ input.button-green {
 	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
   -webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
   box-shadow:inset 0px 1px 0px 0px #a4e271;
-  background-color:#02C39A;
-  border: 0px solid #74b807;
+  background-color: #02C39A;
+  border: 1px solid #5f7f78;
 }
 input.button-green:hover {
   background-color:#11b26c;
@@ -65,7 +65,7 @@ input.button-blue {
   -webkit-box-shadow: inset 0px 1px 0px 0px #9fb4f2;
   box-shadow:inset 0px 1px 0px 0px #9fb4f2;
   background-color: #388ce0;
-  border: 0px solid #4e6096;
+  border: 1px solid #4e6096;
 }
 input.button-blue:hover {
   background-color:#2967a5;
@@ -84,6 +84,7 @@ div#hold-buttons {
   position: absolute;
   right: 0;
   left: 0;
+  pointer-events: none;
 }
 
 /* Smartphone (portrait) */

@@ -10,6 +10,7 @@
     "npm": "2.1.x"
   },
   "dependencies": {
-    "browserify": "^9.0.3"
+    "browserify": "^9.0.3",
+    "react-skylight": "0.1.4"
   }
 }

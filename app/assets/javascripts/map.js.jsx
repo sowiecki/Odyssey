@@ -37,7 +37,7 @@ $(function() {
         position: Chicago,
         pov: {
           heading: 320,
-          pitch: 10
+          pitch: 1
         },
         addressControl: false,
         zoomControl: false,
@@ -69,7 +69,7 @@ $(function() {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
         map.panTo(destination);
-        streetView.setPosition(destination);
+        RouteControl.fixate(destination);
         React.render(<span />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
@@ -102,15 +102,12 @@ $(function() {
     };
     this.stopTraverse = function() {
       clearInterval(intervalId);
-      intervalId = null;
+      intervalId = 0;
       directionsDisplay.set('directions', null);
       map.panTo(Chicago);
       streetView.setPosition(Chicago);
       React.render(<span />, document.getElementById('routes-display-container'))
       React.render(<span />, document.getElementById('error-container'));
-    },
-    this.loading = function() {
-      React.render(<ErrorContainer data={[{message: "Loading trips for #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
     },
     this.drawPoly = function(result) {
       var routesArray = result.routes[0].overview_path,
@@ -135,6 +132,16 @@ $(function() {
       });
 
       leg++
+    },
+    this.loading = function() {
+      React.render(<ErrorContainer data={[{message: "Loading trips for bike #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
+    },
+    this.fixate = function(location) {
+      streetView.setPosition(location);
+      var heading = google.maps.geometry.spherical.computeHeading(streetView.location.latLng, location),
+          pov = streetView.getPov();
+      pov.heading = heading;
+      streetView.setPov(pov);
     };
   }
 
@@ -272,7 +279,7 @@ $(function() {
     onClick: function() {
       var location = new google.maps.LatLng(this.props.data.latitude, this.props.data.longitude)
       map.panTo(location);
-      streetView.setPosition(location);
+      RouteControl.fixate(location);
     },
     render: function() {
       return (
@@ -314,10 +321,10 @@ $(function() {
       return {dashFlash: " "};
     },
     flash: function() {
-      if (this.state.dashFlash.length > 16) {
+      if (this.state.dashFlash.length > 10) {
         this.setState({dashFlash: ""});
       } else {
-        this.setState({dashFlash: this.state.dashFlash + "—"});
+        this.setState({dashFlash: this.state.dashFlash + "•"});
       }
     },
     componentDidMount: function() {
@@ -338,5 +345,5 @@ $(function() {
     }
   })
 
-  React.render(<MapControlContainer />, document.getElementById('bike-control-container'))
+  React.render(<MapControlContainer />, document.getElementById('bike-control-container'));
 })

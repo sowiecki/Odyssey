@@ -29,12 +29,13 @@
 
 div#error-container {
 	box-sizing: border-box;
-	z-index: 200;
+	z-index: 50;
 	position: absolute;
 	margin: 0 6px 0 10px;
 	top: 54%;
 	width: 100%;
 	text-align: center;
+	font-size: 22px;
 	font-family: 'Dosis', sans-serif;
 	font-weight: bold;
 	color: #FFFFFF;
@@ -43,7 +44,7 @@ div#error-container {
 }
 
 div#bike-control-container {
-	z-index: 200;
+	z-index: 50;
 	position: absolute;
 	padding: 3px 0 3px 0;
 	top: 48%;
