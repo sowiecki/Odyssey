@@ -8,7 +8,7 @@ $(function() {
         zoom: 12,
         panControl: false,
         tilt: 0,
-        disableAutoPan: true,
+        // disableAutoPan: true,
         mapTypeControl: false,
         styles: mapStyle,
         zoomControl: false,
