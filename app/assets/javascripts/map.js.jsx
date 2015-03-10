@@ -71,6 +71,7 @@ $(function() {
         map.panTo(destination);
         RouteControl.fixate(destination);
         React.render(<span />, document.getElementById('error-container'));
+        React.render(<span />, document.getElementById('routes-display-container')); // Hacky fix for the routes display container occasionally bugging out with extra tables.
         React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
         React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
