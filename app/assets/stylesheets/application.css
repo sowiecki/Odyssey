@@ -1,0 +1,40 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ * Color scheme blue!33DB6E4 red!FF5E3C yellow!FFC73C
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Monda);
+@import url(http://fonts.googleapis.com/css?family=Parisienne);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow);
+@import url(http://fonts.googleapis.com/css?family=Dosis);
+
+html {
+	overflow-y: hidden;
+	overflow-x: hidden;
+	height: 100%;
+}
+body {
+	margin: 0;
+	height: 100%;
+	font-family: helvetica;
+	background-color: #252526;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}

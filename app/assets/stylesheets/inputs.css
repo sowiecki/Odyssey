@@ -1,0 +1,95 @@
+input.map-control {
+  box-sizing: border-box;
+  pointer-events: all;
+  display: inline;
+  margin: 0 6px 0 6px;
+  padding: 0 10px 0 10px;
+  height: 30px;
+  width: 200px;
+  outline: none;
+  color: #FFFFFF;
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: rgba(50, 50, 50, 0.5);
+  transition: all .5s;
+}
+input.text-field {
+  color: #000000;
+  border: solid 1px #E5E5E5;
+  outline: 0;
+  background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+  background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+  transition: all .5s;
+}
+input.text-field:focus {
+  border-color: #C9C9C9;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 0 8px;
+  transition: all .5s;
+}
+input.button-red {
+  display:inline-block;
+	-moz-box-shadow: inset 0px 1px 0px 0px #cf866c;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #cf866c;
+  box-shadow:inset 0px 1px 0px 0px #cf866c;
+  background-color: #d82020;
+  border: 1px solid #7f625f;
+}
+input.button-red:hover {
+  background-color:#bc3315;
+  transition: all .5s;
+}
+.button-red:active {
+  position: relative;
+  top: 1px;
+}
+input.button-green {
+  display:inline-block;
+	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+  box-shadow:inset 0px 1px 0px 0px #a4e271;
+  background-color: #02C39A;
+  border: 1px solid #5f7f78;
+}
+input.button-green:hover {
+  background-color:#11b26c;
+  transition: all .5s;
+}
+input.button-green:active {
+  position: relative;
+  top: 1px;
+}
+input.button-blue {
+  display:inline-block;
+	-moz-box-shadow: inset 0px 1px 0px 0px #9fb4f2;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #9fb4f2;
+  box-shadow:inset 0px 1px 0px 0px #9fb4f2;
+  background-color: #388ce0;
+  border: 1px solid #4e6096;
+}
+input.button-blue:hover {
+  background-color:#2967a5;
+  transition: all .5s;
+}
+input.button-blue:active {
+  position: relative;
+  top: 1px;
+}
+
+div#initial-buttons, div#initial-buttons > div {
+  display: inline;
+}
+
+div#hold-buttons {
+  position: absolute;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+/* Smartphone (portrait) */
+@media only screen and (max-width : 640px) {
+  input.map-control {
+    height: 60px;
+  }
+}

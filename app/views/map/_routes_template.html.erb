@@ -1,0 +1,14 @@
+<script type="template" id='routes-template'>
+  {{ for (var i = 0; i < routes.legs.length; i++) { }}
+	  <div class="trip-box">
+		  <b>Trip ID:</b> {{= routesInfo[i].tripId }}
+	  	<p>
+		  	{{= routes.legs[i].start_address }} to 
+		  	{{= routes.legs[i].end_address }}
+	  	</p>
+		  <p><b>Started:</b> {{= routesInfo[i].startTime }}</p>
+		  <p><b>Finished:</b> {{= routesInfo[i].stopTime }}</p>
+	  	<p><b>Approx. distance:</b> {{= routes.legs[i].distance.text }}</p>
+  	</div>
+  {{ } }}
+</script>
