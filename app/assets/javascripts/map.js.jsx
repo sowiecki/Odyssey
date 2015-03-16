@@ -68,8 +68,9 @@ $(function() {
     directionsService.route(request, function(response, status) {
       clearInterval(rideInterval);
       // console.log("Google response status: " + status)
+      RouteControl.drawPoly(response);
       if (status == google.maps.DirectionsStatus.OK) {
-        RouteControl.drawPoly(response);
+        RouteControl.animate();
         directionsDisplay.setDirections(response);
         React.render(<span />, document.getElementById('error-container'));
         React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
@@ -109,7 +110,6 @@ $(function() {
       var routesArray = result.routes[0].overview_path;
       poly.setMap(map);
       poly.setPath(routesArray);
-      RouteControl.animate();
     },
     this.loading = function() {
       React.render(<ErrorContainer data={[{message: "Loading trips for bike #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
