@@ -92,7 +92,7 @@ div.trip-box {
 	pointer-events: all;
   transition: all 0.25s;
 }
-div.trip-box:last-child, div.trip-box:hover {
+div.trip-box:nth-last-child(2), div.trip-box:hover {
 	pointer-events: all;
 	max-height: 300px;
 	max-width: 280px;
@@ -118,7 +118,7 @@ span.extended-info {
 	position: absolute;
 	pointer-events: none;
 }
-div.trip-box:hover span.extended-info, div.trip-box:last-child span.extended-info {
+div.trip-box:hover span.extended-info, div.trip-box:nth-last-child(2) span.extended-info {
 	visibility: visible;
 	position: relative;
 	transition: all .75s;

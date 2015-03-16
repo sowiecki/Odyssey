@@ -109,31 +109,35 @@ $(function() {
     this.drawPoly = function(result) {
       var routesArray = result.routes[0].overview_path;
       poly.setMap(map);
+      // var are_we_there_yet = google.maps.geometry.spherical.interpolate(location,poly.getPath().getAt(counter),counter/250);
+      // poly.setPath([location, are_we_there_yet]);
       poly.setPath(routesArray);
     },
     this.loading = function() {
       React.render(<ErrorContainer data={[{message: "Loading trips for bike #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
     },
     this.fixate = function(location) {
+      map.panTo(location);
       streetView.setPosition(location);
       var heading = google.maps.geometry.spherical.computeHeading(streetView.location.latLng, location),
           pov = streetView.getPov();
       pov.heading = heading;
       streetView.setPov(pov);
-      map.panTo(location);
     },
     this.animate = function() {
+      // poly.setPath(interpolatePath)
       rideInterval = window.setInterval(function() { 
         var location = poly.getPath().getAt(counter);
         if (counter >= poly.getPath().length - 1) {
-          // window.clearInterval(rideInterval);
+          window.clearInterval(rideInterval);
           RouteControl.getTrip();
+        } else {
+          interpolatePath = google.maps.geometry.spherical.interpolate(poly.getPath().getAt(counter),poly.getPath().getAt(counter + 1),counter/250);
+          RouteControl.fixate(interpolatePath);
+          RouteControl.fixate(location);
+          counter++;
         }
-        // var are_we_there_yet = google.maps.geometry.spherical.interpolate(location,poly.getPath().getAt(counter),counter/250);
-        // poly.setPath([location, are_we_there_yet]);
-        RouteControl.fixate(location);
-        counter++;
-      }, 500);
+      }, 900);
     },
     this.initiate = function() {
       routesSegment.reset();
@@ -158,7 +162,8 @@ $(function() {
             strokeOpacity: 0.25,
             strokeWeight: 3
           },
-      poly = new google.maps.Polyline(polyOptions);;
+      poly = new google.maps.Polyline(polyOptions),
+      interpolatePath;
 
   map.setStreetView(streetView);
 
@@ -190,6 +195,8 @@ $(function() {
       RouteControl.initiate();
     },
     stopTraverse: function() {
+      routesSegment.reset();
+      counter = 0;
       poly.setMap(null);
       clearInterval(rideInterval);
       this.setState({traversing: !this.state.traversing});

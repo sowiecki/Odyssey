@@ -17,7 +17,7 @@ function RoutesSegment() {
         this.waypts[i]
       );
     }
-  }
+  };
   this.advanceRoute = function(trip) {
     if (this.waypts.length == 10) {
       this.waypts.shift();
@@ -40,7 +40,7 @@ function RoutesSegment() {
     })
 
     this.drawRoute();
-  }
+  };
   this.reset = function() {
     this.waypts = [];
     this.wayptsInfo = [];
