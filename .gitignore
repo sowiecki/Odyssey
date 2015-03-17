@@ -13,3 +13,4 @@
 /tmp
 /vendor/bundle/*
 npm-debug.log
+/config/initializers/api.rb

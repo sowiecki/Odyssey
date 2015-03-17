@@ -1,5 +1,5 @@
 class MapController < ApplicationController
-	include MapHelper
+	include MapHelper, WeatherHelper
 
 	def index
 	end
@@ -16,7 +16,8 @@ class MapController < ApplicationController
 		  	stop_time: DateTime.parse(trip.stop_time).strftime("%I:%M%p on %m/%d/%Y"),
 		  	duration: trip.duration,
 		  	start_location: origin_station.name,
-		  	stop_location: destination_station.name
+		  	stop_location: destination_station.name,
+		  	weather: weather_for_trip(trip.start_time.to_date)
 		  })
 		end
 		render json: hash
