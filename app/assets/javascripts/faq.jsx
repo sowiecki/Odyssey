@@ -18,6 +18,9 @@ $(function() {
       var faqPage =
         <div key="faq-popup" id="faq-popup">
           <p id="close"><a href="#" onClick={this.handleClick}>X</a></p>
+          <p>
+            This application is best viewed on a <b>non-</b>mobile device.
+          </p>
           <h2>How do I use <i>Odyssey</i>?</h2>
           <p>
             Enter a bike ID (most any number from 1 to 3000) and hit Begin, or just hit "Random."
