@@ -219,7 +219,7 @@ $(function() {
         if (this.state.speedier) {
           routesSegment.speedInterval = 1400;
         } else {
-          routesSegment.speedInterval = 300;
+          routesSegment.speedInterval = 600;
         };
         RouteControl.animate();
       }
