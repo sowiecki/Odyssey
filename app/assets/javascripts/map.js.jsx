@@ -68,8 +68,8 @@ $(function() {
     directionsService.route(request, function(response, status) {
       clearInterval(rideInterval);
       // console.log("Google response status: " + status)
-      RouteControl.drawPoly(response);
       if (status == google.maps.DirectionsStatus.OK) {
+        RouteControl.drawPoly(response);
         RouteControl.animate();
         directionsDisplay.setDirections(response);
         React.render(<span />, document.getElementById('error-container'));
@@ -140,7 +140,6 @@ $(function() {
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'));
       routesSegment.offset = 0;
-      RouteControl.getTrip();
       RouteControl.getTrip();
       map.setZoom(15);
       RouteControl.loading();
