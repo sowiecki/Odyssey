@@ -18,7 +18,7 @@ $(function() {
       var faqPage =
         <div key="faq-popup" id="faq-popup">
           <p id="close"><a href="#" onClick={this.handleClick}>X</a></p>
-          <h2>How do I use this?</h2>
+          <h2>How do I use <i>Odyssey</i>?</h2>
           <p>
             Enter a bike ID (most any number from 1 to 3000) and hit Begin, or just hit "Random."
           </p>
@@ -29,7 +29,7 @@ $(function() {
             Up to 10 previous destinations are kept on the map at a time. Previous destinations can be clicked on to snap 
             the map and streetview back to those coordinates.
           </p>
-          <h2>How does this work?</h2>
+          <h2>How does <i>Odyssey</i> work?</h2>
           <p>
             All <a href="https://www.divvybikes.com/datachallenge" target="_blank">Divvy trips made during 2014</a> are 
             loaded in this application{"'"}s database. Those trips are then cross-referenced with the 

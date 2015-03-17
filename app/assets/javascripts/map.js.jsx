@@ -163,6 +163,21 @@ $(function() {
 
   map.setStreetView(streetView);
 
+  // Reset streetview if it gets pushed off an available path
+  function removeListener() {
+    google.maps.event.removeListener(streetViewListener);
+  };
+  var resetCounter = 0;
+  var streetViewListener = google.maps.event.addListener(streetView, 'visible_changed', function() {
+    if (resetCounter <= 10 && !streetView.getVisible()) {
+      resetCounter++;
+      streetView.setVisible();
+      RouteControl.fixate(routesSegment.waypts[routesSegment.waypts.length - 1]);
+    } else {
+      resetCounter = 0;
+    }
+  });
+
   var MapControlContainer = React.createClass({
     getInitialState: function() {
       return {
