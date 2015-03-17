@@ -81,6 +81,7 @@ span#vv {
 }
 
 div#faq-popup {
+	overflow-y: scroll;
 	z-index: 200px;
 	position: absolute;
 	margin: 0 auto auto;
@@ -88,6 +89,7 @@ div#faq-popup {
 	top: 40px;
 	right: 0; left: 0;
 	width: 860px;
+	height: 400px;
 	text-align: left;
 	font-size: 20px;
 	font-family: 'PT Sans Narrow', sans-serif;
