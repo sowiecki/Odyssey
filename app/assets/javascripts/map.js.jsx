@@ -70,6 +70,7 @@ $(function() {
       // console.log("Google response status: " + status)
       RouteControl.drawPoly(response);
       if (status == google.maps.DirectionsStatus.OK) {
+        console.log(routesSegment.speedInterval)
         RouteControl.animate();
         directionsDisplay.setDirections(response);
         React.render(<span />, document.getElementById('error-container'));
@@ -134,7 +135,7 @@ $(function() {
           RouteControl.fixate(location);
           counter++;
         }
-      }, 900);
+      }, routesSegment.speedInterval);
     },
     this.initiate = function() {
       routesSegment.reset();
@@ -169,7 +170,8 @@ $(function() {
       return {
         mounted: false,
         traversing: false,
-        paused: false
+        paused: false,
+        speedier: false
       };
     },
     componentDidMount: function() {
@@ -197,7 +199,7 @@ $(function() {
       poly.setMap(null);
       clearInterval(rideInterval);
       this.setState({traversing: !this.state.traversing});
-      this.setState({paused: false});
+      this.setState({paused: false, speedier: false});
       RouteControl.stopTraverse();
       map.setZoom(12);
     },
@@ -209,6 +211,16 @@ $(function() {
       } else {
         RouteControl.animate();
       }
+    },
+    changeSpeed: function() {
+      this.setState({speedier: !this.state.speedier});
+      clearInterval(rideInterval);
+      if (this.state.speedier) {
+        routesSegment.speedInterval = 900;
+      } else {
+        routesSegment.speedInterval = 300;
+      };
+      RouteControl.animate();
     },
     render: function() {
       var initiateButtons =
@@ -226,7 +238,11 @@ $(function() {
         stopButton =
           <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />,
         currentBike =
-          <span key="current-bike" id="info-left">Following bike #{routesSegment.bikeId} through 2014</span>
+          <span key="current-bike" id="info-left">Following bike #{routesSegment.bikeId} through 2014</span>,
+        speedUp =
+          <input key="speed-up" id="speed-up" className="map-control button-green" onClick={this.changeSpeed} type="submit" target="remote" value="Faster" />,
+        speedDown =
+          <input key="speed-down" id="speed-down" className="map-control button-blue" onClick={this.changeSpeed} type="submit" target="remote" value="Slower" />
 
       var buttonArray;
       var key = 0;
@@ -237,6 +253,12 @@ $(function() {
         buttonArray = [stopButton, continueButton, currentBike]
       } else {
         buttonArray = [stopButton, pauseButton, currentBike]
+      }
+
+      if (this.state.speedier && this.state.traversing) {
+        buttonArray.push(speedDown)
+      } else if (this.state.traversing) {
+        buttonArray.push(speedUp)
       }
 
       buttonArray.map(function (button) {

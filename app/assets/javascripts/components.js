@@ -7,6 +7,7 @@ function RoutesSegment() {
   this.offset = null;
   this.waypts = [];
   this.wayptsInfo = [];
+  this.speedInterval = 1600;
 
   // Prevent MAX_WAYPOINTS_EXEEDED
   this.safeWaypts = [];
@@ -44,6 +45,7 @@ function RoutesSegment() {
   this.reset = function() {
     this.waypts = [];
     this.wayptsInfo = [];
+    this.speedInterval = 1600;
   }
 };
 
