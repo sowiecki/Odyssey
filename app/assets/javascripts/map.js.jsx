@@ -215,7 +215,7 @@ $(function() {
       this.setState({speedier: !this.state.speedier});
       clearInterval(rideInterval);
       if (this.state.speedier) {
-        routesSegment.speedInterval = 1200;
+        routesSegment.speedInterval = 1400;
       } else {
         routesSegment.speedInterval = 300;
       };
@@ -239,9 +239,9 @@ $(function() {
         currentBike =
           <span key="current-bike" id="info-left">Following bike #{routesSegment.bikeId} through 2014</span>,
         speedUp =
-          <input key="speed-up" id="speed-up" className="map-control button-green" onClick={this.changeSpeed} type="submit" target="remote" value="Faster" />,
+          <input key="speed-up" id="speed-up" className="map-control button-green" onClick={this.changeSpeed} type="submit" target="remote" value="Fast" />,
         speedDown =
-          <input key="speed-down" id="speed-down" className="map-control button-blue" onClick={this.changeSpeed} type="submit" target="remote" value="Slower" />
+          <input key="speed-down" id="speed-down" className="map-control button-blue" onClick={this.changeSpeed} type="submit" target="remote" value="Slow" />
 
       var buttonArray;
       var key = 0;
