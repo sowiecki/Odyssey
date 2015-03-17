@@ -20,13 +20,13 @@ $(function() {
           <p id="close"><a href="#" onClick={this.handleClick}>X</a></p>
           <h2>How do I use this?</h2>
           <p>
-            Enter a bike ID (most any number from 1 to 3000) and hit Begin, or just hit "Random Bike."
+            Enter a bike ID (most any number from 1 to 3000) and hit Begin, or just hit "Random."
           </p>
           <p>
             <i>Odyssey</i> will then begin traversing through all of the trips taken by that particular bike during the year 2014. It will start from the first trip of the year and move chronologically forward until it reaches the last trip of the year.
           </p>
           <p>
-            Up to 10 trips are kept on the map at a time. Previous trips can be clicked on to snap 
+            Up to 10 previous destinations are kept on the map at a time. Previous destinations can be clicked on to snap 
             the map and streetview back to those coordinates.
           </p>
           <h2>How does this work?</h2>

@@ -8,7 +8,7 @@ $(function() {
         zoom: 12,
         panControl: false,
         tilt: 0,
-        disableAutoPan: true,
+        // disableAutoPan: true,
         mapTypeControl: false,
         styles: mapStyle,
         zoomControl: false,
@@ -27,10 +27,10 @@ $(function() {
         suppressBicyclingLayer: true,
         polylineOptions: {
           strokeColor: "#00a9ff",
-          strokeOpacity: 1
+          strokeOpacity: 0
         },
         preserveViewport: true
-      }
+      };
 
   // StreetView Options
   var streetViewOptions = {
@@ -46,9 +46,11 @@ $(function() {
 
   // Initialize Map Dependencies
   var RoutesSegment = require('./components').model,
+      coordinates = [],
       directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions),
       directionsService = new google.maps.DirectionsService(),
-      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      map = new google.maps.Map(document.getElementById('map'), mapOptions),
+      counter = 0;
 
   // Initialize StreetView Dependencies
   var streetView = new google.maps.StreetViewPanorama(document.getElementById('streetview'), streetViewOptions);
@@ -64,17 +66,18 @@ $(function() {
           travelMode: google.maps.TravelMode.BICYCLING
         };
     directionsService.route(request, function(response, status) {
+      clearInterval(rideInterval);
       // console.log("Google response status: " + status)
+      RouteControl.drawPoly(response);
       if (status == google.maps.DirectionsStatus.OK) {
+        console.log(routesSegment.speedInterval)
+        RouteControl.animate();
         directionsDisplay.setDirections(response);
-        map.panTo(destination);
-        RouteControl.fixate(destination);
         React.render(<span />, document.getElementById('error-container'));
-        React.render(<span />, document.getElementById('routes-display-container')); // Hacky fix for the routes display container occasionally bugging out with extra tables.
         React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
         React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
-      }
+      };
     });
   }
 
@@ -87,7 +90,6 @@ $(function() {
         dataType: "json",
         success: function(data) {
           if (data.length) {
-            if (!intervalId) { RouteControl.autoTraverseRoutes(); }
             routesSegment.advanceRoute(data[0]);
           } else {
             RouteControl.stopTraverse();
@@ -95,13 +97,9 @@ $(function() {
           }
         }
       })
-    };
-    this.autoTraverseRoutes = function() {
-      clearInterval(intervalId);
-      intervalId = setInterval(RouteControl.getTrip, 2800);
-    };
+    },
     this.stopTraverse = function() {
-      clearInterval(intervalId);
+      clearInterval(rideInterval);
       intervalId = 0;
       directionsDisplay.set('directions', null);
       map.panTo(Chicago);
@@ -109,22 +107,61 @@ $(function() {
       React.render(<span />, document.getElementById('routes-display-container'))
       React.render(<span />, document.getElementById('error-container'));
     },
+    this.drawPoly = function(result) {
+      var routesArray = result.routes[0].overview_path;
+      poly.setMap(map);
+      poly.setPath(routesArray);
+    },
     this.loading = function() {
       React.render(<ErrorContainer data={[{message: "Loading trips for bike #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
     },
     this.fixate = function(location) {
+      map.panTo(location);
       streetView.setPosition(location);
       var heading = google.maps.geometry.spherical.computeHeading(streetView.location.latLng, location),
           pov = streetView.getPov();
       pov.heading = heading;
       streetView.setPov(pov);
-    }
+    },
+    this.animate = function() {
+      rideInterval = window.setInterval(function() { 
+        var location = poly.getPath().getAt(counter);
+        if (counter >= poly.getPath().length - 1) {
+          window.clearInterval(rideInterval);
+          RouteControl.getTrip();
+        } else {
+          interpolatePath = google.maps.geometry.spherical.interpolate(poly.getPath().getAt(counter),poly.getPath().getAt(counter + 1),counter/250);
+          RouteControl.fixate(interpolatePath);
+          RouteControl.fixate(location);
+          counter++;
+        }
+      }, routesSegment.speedInterval);
+    },
+    this.initiate = function() {
+      routesSegment.reset();
+      React.render(<span />, document.getElementById('routes-display-container'));
+      routesSegment.offset = 0;
+      RouteControl.getTrip();
+      RouteControl.getTrip();
+      map.setZoom(15);
+      RouteControl.loading();
+    };
   }
 
   // Initialize control dependencies
   var RouteControl = new RouteControl,
       routesSegment = new RoutesSegment,
-      intervalId;
+      routeInterval,
+      rideInterval,
+      polyOptions = {
+            path: [],
+            geodesic: true,
+            strokeColor: '#00a9ff',
+            strokeOpacity: 0.25,
+            strokeWeight: 3
+          },
+      poly = new google.maps.Polyline(polyOptions),
+      interpolatePath;
 
   map.setStreetView(streetView);
 
@@ -133,7 +170,8 @@ $(function() {
       return {
         mounted: false,
         traversing: false,
-        paused: false
+        paused: false,
+        speedier: false
       };
     },
     componentDidMount: function() {
@@ -145,37 +183,44 @@ $(function() {
       routesSegment.bikeId = document.getElementById('bike-id-input').value;
       if (routesSegment.bikeId) {
         this.setState({traversing: !this.state.traversing});
-        routesSegment.reset();
-        React.render(<span />, document.getElementById('routes-display-container'))
-        routesSegment.offset = 0;
-        RouteControl.getTrip();
-        RouteControl.loading();
+        RouteControl.initiate();
       } else {
         React.render(<ErrorContainer data={[{message: "Please enter a bike id", loadAnim: false}]} />, document.getElementById('error-container'));
       }
     },
     startRandomTraverse: function() {
       this.setState({traversing: !this.state.traversing});
-      routesSegment.reset();
-      React.render(<span />, document.getElementById('routes-display-container'))
       routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
-      RouteControl.getTrip();
-      RouteControl.loading();
+      RouteControl.initiate();
     },
     stopTraverse: function() {
+      routesSegment.reset();
+      counter = 0;
+      poly.setMap(null);
+      clearInterval(rideInterval);
       this.setState({traversing: !this.state.traversing});
-      this.setState({paused: false});
+      this.setState({paused: false, speedier: false});
       RouteControl.stopTraverse();
       map.setZoom(12);
     },
-    handlePause: function() {
+    handleInterval: function() {
       this.setState({paused: !this.state.paused});
       if (!this.state.paused) {
-        clearInterval(intervalId);
+        clearInterval(rideInterval);
         React.render(<span />, document.getElementById('error-container'));
       } else {
-        RouteControl.autoTraverseRoutes();
+        RouteControl.animate();
       }
+    },
+    changeSpeed: function() {
+      this.setState({speedier: !this.state.speedier});
+      clearInterval(rideInterval);
+      if (this.state.speedier) {
+        routesSegment.speedInterval = 900;
+      } else {
+        routesSegment.speedInterval = 300;
+      };
+      RouteControl.animate();
     },
     render: function() {
       var initiateButtons =
@@ -184,16 +229,20 @@ $(function() {
             <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
             <input id="start-traverse" className="map-control button-green" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
             <p className="click-through">or</p>
-            <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="random bike" />
+            <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="Random" />
           </div>,
         continueButton =
-          <input key="continue-traverse" id="continue-traverse" className="map-control button-green" onClick={this.handlePause} type="submit" target="remote" value="Continue" />,
+          <input key="continue-traverse" id="continue-traverse" className="map-control button-green" onClick={this.handleInterval} type="submit" target="remote" value="Continue" />,
         pauseButton =
-          <input key="pause-traverse" id="pause-traverse" className="map-control button-blue" onClick={this.handlePause} type="submit" target="remote" value="Pause" />,
+          <input key="pause-traverse" id="pause-traverse" className="map-control button-blue" onClick={this.handleInterval} type="submit" target="remote" value="Pause" />,
         stopButton =
           <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />,
         currentBike =
-          <span key="current-bike" id="info-left">Following trips made by bike #{routesSegment.bikeId}</span>
+          <span key="current-bike" id="info-left">Following bike #{routesSegment.bikeId} through 2014</span>,
+        speedUp =
+          <input key="speed-up" id="speed-up" className="map-control button-green" onClick={this.changeSpeed} type="submit" target="remote" value="Faster" />,
+        speedDown =
+          <input key="speed-down" id="speed-down" className="map-control button-blue" onClick={this.changeSpeed} type="submit" target="remote" value="Slower" />
 
       var buttonArray;
       var key = 0;
@@ -204,6 +253,12 @@ $(function() {
         buttonArray = [stopButton, continueButton, currentBike]
       } else {
         buttonArray = [stopButton, pauseButton, currentBike]
+      }
+
+      if (this.state.speedier && this.state.traversing) {
+        buttonArray.push(speedDown)
+      } else if (this.state.traversing) {
+        buttonArray.push(speedUp)
       }
 
       buttonArray.map(function (button) {
@@ -241,6 +296,12 @@ $(function() {
             <RouteInfoBox key={data.tripId} data={data} />
           );
       }.bind(this));
+
+      // Hacky fix for the routes display container occasionally bugging out with extra tables.
+      if (routeNodes.length > 10) {
+        React.render(<span />, document.getElementById('routes-display-container'));
+      }
+
       return (
         <div>
           <ReactCSSTransitionGroup transitionName="routeInfoBox" component="div">

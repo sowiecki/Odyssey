@@ -7,6 +7,7 @@ function RoutesSegment() {
   this.offset = null;
   this.waypts = [];
   this.wayptsInfo = [];
+  this.speedInterval = 900;
 
   // Prevent MAX_WAYPOINTS_EXEEDED
   this.safeWaypts = [];
@@ -17,7 +18,7 @@ function RoutesSegment() {
         this.waypts[i]
       );
     }
-  }
+  };
   this.advanceRoute = function(trip) {
     if (this.waypts.length == 10) {
       this.waypts.shift();
@@ -40,10 +41,11 @@ function RoutesSegment() {
     })
 
     this.drawRoute();
-  }
+  };
   this.reset = function() {
     this.waypts = [];
     this.wayptsInfo = [];
+    this.speedInterval = 900;
   }
 };
 
