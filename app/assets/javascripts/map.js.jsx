@@ -212,14 +212,17 @@ $(function() {
       }
     },
     changeSpeed: function() {
-      this.setState({speedier: !this.state.speedier});
-      clearInterval(rideInterval);
-      if (this.state.speedier) {
-        routesSegment.speedInterval = 1400;
-      } else {
-        routesSegment.speedInterval = 300;
-      };
-      RouteControl.animate();
+      if (!this.state.paused) {
+        this.setState({speedier: !this.state.speedier});
+
+        clearInterval(rideInterval);
+        if (this.state.speedier) {
+          routesSegment.speedInterval = 1400;
+        } else {
+          routesSegment.speedInterval = 300;
+        };
+        RouteControl.animate();
+      }
     },
     render: function() {
       var initiateButtons =
