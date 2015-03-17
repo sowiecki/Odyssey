@@ -109,8 +109,6 @@ $(function() {
     this.drawPoly = function(result) {
       var routesArray = result.routes[0].overview_path;
       poly.setMap(map);
-      // var are_we_there_yet = google.maps.geometry.spherical.interpolate(location,poly.getPath().getAt(counter),counter/250);
-      // poly.setPath([location, are_we_there_yet]);
       poly.setPath(routesArray);
     },
     this.loading = function() {
@@ -125,7 +123,6 @@ $(function() {
       streetView.setPov(pov);
     },
     this.animate = function() {
-      // poly.setPath(interpolatePath)
       rideInterval = window.setInterval(function() { 
         var location = poly.getPath().getAt(counter);
         if (counter >= poly.getPath().length - 1) {
@@ -220,7 +217,7 @@ $(function() {
             <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
             <input id="start-traverse" className="map-control button-green" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
             <p className="click-through">or</p>
-            <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="Random bike" />
+            <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="Random" />
           </div>,
         continueButton =
           <input key="continue-traverse" id="continue-traverse" className="map-control button-green" onClick={this.handleInterval} type="submit" target="remote" value="Continue" />,

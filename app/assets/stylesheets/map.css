@@ -98,7 +98,10 @@ div.trip-box:nth-last-child(2), div.trip-box:hover {
 	max-width: 280px;
 	font-size: 16px;
 	opacity: 1;
-	border-top: 6px solid #3DB7E4;
+	border-top: 4px solid #3DB7E4;
+}
+div.trip-box:nth-last-child(2) {
+	border-top: 16px solid #3DB7E4;
 }
 div.trip-box:active {
   position:relative;
@@ -117,6 +120,15 @@ span.extended-info {
 	visibility: hidden;
 	position: absolute;
 	pointer-events: none;
+}
+div.trip-box:nth-last-child(2)::before {
+	content: "Current trip";
+	position: absolute;
+	top: -18px;
+	left: 35%;
+	font-size: 16px;
+	font-weight: bold;
+	/*color: #02C39A;*/
 }
 div.trip-box:hover span.extended-info, div.trip-box:nth-last-child(2) span.extended-info {
 	visibility: visible;
