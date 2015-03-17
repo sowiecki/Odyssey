@@ -40,7 +40,7 @@ $(function() {
           </p>
           <h2>How can I find the bikes I{"'"}ve ridden?</h2>
           <p>
-            All public Divvy trip data is anonymized. Also, bike IDs do not appear to be printed anywhere on the bike frames, unfortunately.
+            If you are registered with Divvy, you can use the trip IDs from your ride history page to search for the bike you took on that trip. Click "Find your bike" in the upper-right-hand corner.
           </p>
           <h2>What{"'"}s the tech stack?</h2>
           <ul>

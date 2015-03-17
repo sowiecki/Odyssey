@@ -21,4 +21,10 @@ class MapController < ApplicationController
 		end
 		render json: hash
 	end
+	
+	def bike
+		trip = Trip.find_by(trip_id: params[:trip_id].to_i)
+
+		render json: trip ? trip.bike_id : "Not found."
+	end
 end

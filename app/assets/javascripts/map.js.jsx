@@ -49,8 +49,7 @@ $(function() {
       coordinates = [],
       directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions),
       directionsService = new google.maps.DirectionsService(),
-      map = new google.maps.Map(document.getElementById('map'), mapOptions),
-      counter = 0;
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
   // Initialize StreetView Dependencies
   var streetView = new google.maps.StreetViewPanorama(document.getElementById('streetview'), streetViewOptions);
@@ -125,14 +124,14 @@ $(function() {
     this.animate = function() {
       rideInterval = window.setInterval(function() { 
         var location = poly.getPath().getAt(counter);
-        if (counter >= poly.getPath().length - 1) {
+        if (routesSegment.intervalCounter >= poly.getPath().length - 1) {
           window.clearInterval(rideInterval);
           RouteControl.getTrip();
         } else {
-          interpolatePath = google.maps.geometry.spherical.interpolate(poly.getPath().getAt(counter),poly.getPath().getAt(counter + 1),counter/250);
-          RouteControl.fixate(interpolatePath);
+          // interpolatePath = google.maps.geometry.spherical.interpolate(poly.getPath().getAt(counter),poly.getPath().getAt(counter + 1),counter/250);
+          // RouteControl.fixate(interpolatePath);
           RouteControl.fixate(location);
-          counter++;
+          routesSegment.intervalCounter++;
         }
       }, routesSegment.speedInterval);
     },
@@ -140,8 +139,7 @@ $(function() {
       routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'));
       routesSegment.offset = 0;
-      RouteControl.getTrip();
-      RouteControl.getTrip();
+      // RouteControl.getTrip();
       map.setZoom(15);
       RouteControl.loading();
     };
@@ -194,7 +192,7 @@ $(function() {
     },
     stopTraverse: function() {
       routesSegment.reset();
-      counter = 0;
+      routesSegment.intervalCounter = 0;
       poly.setMap(null);
       clearInterval(rideInterval);
       this.setState({traversing: !this.state.traversing});
