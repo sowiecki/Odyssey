@@ -1,10 +1,17 @@
 $(function() {
+  function BikeResult() {
+    this.id = null;
+    this.display = function() {
+      document.getElementById('bike-id-input').value = this.id;
+    }
+  }
+  bikeResult = new BikeResult();
+
 	var Bike = React.createClass({
 		getInitialState: function() {
       return {
         mounted: false,
-        clicked: false,
-        bikeId: 0
+        clicked: false
       };
     },
     componentDidMount: function() {
@@ -18,29 +25,33 @@ $(function() {
     handleSearch: function() {
       var bikeId = null
       tripId = document.getElementById('trip-id-input').value;
-      $.ajax({
+      request = $.ajax({
         url: "bike_for/" + tripId,
         method: "get",
         dataType: "json",
         success: function(response) {
-          bikeId = response
+          bikeResult.id = response;
+          bikeResult.display();
         }
       })
-      this.setState({bikeId: bikeId});
-      console.log(this.state.bikeId)
+      this.setState({clicked: !this.state.clicked, searched: !this.state.searched})
+    },
+    handleResult: function(result) {
+      console.log(result)
     },
     render: function() {
       var bikeSearch =
         <div key="bike-popup" id="bike-popup">
-        {this.state.bikeId}
           <p id="close"><a href="#" onClick={this.handleClick}>X</a></p>
           <input id="trip-id-input" className="nav-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Trip ID" />
-          <input id="trip-id-submit" className="nav-control button-green"  onClick={this.handleSearch} type="submit" value="Search" />
+          <input id="trip-id-submit" className="nav-control button-gray"  onClick={this.handleSearch} type="submit" value="Search" />
         </div>
 
-    	if (this.state.clicked) {
+      if (this.state.clicked) {
     		text = [bikeSearch]
-    	} else { text = [this.state.bikeId] }
+      } else {
+        text = [];
+      }
       		
       var key = 0;
       text.map(function (text) {

@@ -91,6 +91,22 @@ input.button-blue:active {
   position: relative;
   top: 1px;
 }
+input.button-gray {
+  display:inline-block;
+  -moz-box-shadow:inset 0px 1px 0px 0px #72c3e5;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #72c3e5;
+  box-shadow:inset 0px 1px 0px 0px #72c3e5;
+  background-color: #5fa2bf;
+  border: 1px solid #5d727c;
+}
+input.button-gray:hover {
+  background-color:#528ca5;
+  transition: all .5s;
+}
+input.button-gray:active {
+  position: relative;
+  top: 1px;
+}
 
 div#initial-buttons, div#initial-buttons > div {
   display: inline;
