@@ -14,6 +14,22 @@ input.map-control {
   background-color: rgba(50, 50, 50, 0.5);
   transition: all .5s;
 }
+input.nav-control {
+  box-sizing: border-box;
+  pointer-events: all;
+  display: inline;
+  margin: 0 4px 0 4px;
+  padding: 0 6px 0 6px;
+  height: 30px;
+  width: 80px;
+  outline: none;
+  color: #FFFFFF;
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: rgba(50, 50, 50, 0.5);
+  transition: all .5s;
+}
 input.text-field {
   color: #000000;
   border: solid 1px #E5E5E5;

@@ -75,3 +75,19 @@
 .faq-leave.faq-leave-active {
   opacity: 0.01;
 }
+
+.bike-enter {
+  opacity: 0.01;
+}
+.bike-enter.bike-enter-active {
+  transition: all .5s ease .2s;
+  opacity: 1;
+}
+.bike-leave {
+  opacity: 1;
+  transform: translate3d(0,-300px,0);
+  transition: all .5s ease .2s;
+}
+.bike-leave.bike-leave-active {
+  opacity: 0.01;
+}

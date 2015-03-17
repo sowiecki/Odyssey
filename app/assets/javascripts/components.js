@@ -8,7 +8,6 @@ function RoutesSegment() {
   this.waypts = [];
   this.wayptsInfo = [];
   this.speedInterval = 1400;
-  this.intervalCounter = 0;
 
   // Prevent MAX_WAYPOINTS_EXEEDED
   this.safeWaypts = [];
@@ -47,7 +46,6 @@ function RoutesSegment() {
     this.waypts = [];
     this.wayptsInfo = [];
     this.speedInterval = 1400;
-    this.intervalCounter = 0;
   }
 };
 
