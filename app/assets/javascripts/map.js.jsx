@@ -298,11 +298,6 @@ $(function() {
           );
       }.bind(this));
 
-      // Hacky fix for the routes display container occasionally bugging out with extra tables.
-      if (routeNodes.length > 10) {
-        React.render(<span />, document.getElementById('routes-display-container'));
-      }
-
       return (
         <div>
           <ReactCSSTransitionGroup transitionName="routeInfoBox" component="div">
@@ -321,7 +316,7 @@ $(function() {
     },
     render: function() {
       return (
-        <div key={this.props.data.tripId} className="trip-box">
+        <div key={this.props.data} className="trip-box">
           <a href="#" onClick={this.onClick}>
             <p><b>Origin:</b> {this.props.data.startLocation}</p>
             <span className="extended-info">
