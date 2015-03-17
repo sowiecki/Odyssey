@@ -70,7 +70,6 @@ $(function() {
       // console.log("Google response status: " + status)
       RouteControl.drawPoly(response);
       if (status == google.maps.DirectionsStatus.OK) {
-        console.log(routesSegment.speedInterval)
         RouteControl.animate();
         directionsDisplay.setDirections(response);
         React.render(<span />, document.getElementById('error-container'));
@@ -216,7 +215,7 @@ $(function() {
       this.setState({speedier: !this.state.speedier});
       clearInterval(rideInterval);
       if (this.state.speedier) {
-        routesSegment.speedInterval = 900;
+        routesSegment.speedInterval = 1200;
       } else {
         routesSegment.speedInterval = 300;
       };
