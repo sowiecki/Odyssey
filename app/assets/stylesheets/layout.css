@@ -38,10 +38,6 @@ nav {
 	pointer-events: none
 }
 
-#faq-link:hover:before {
-	content: "Coming soon ";
-}
-
 div#wrapper {
 	position: absolute;
 	margin: 0 auto;
@@ -96,6 +92,7 @@ div#faq-popup {
 	font-size: 20px;
 	font-family: 'PT Sans Narrow', sans-serif;
 	background-color: rgba(248, 248, 255, 0.95);
+	pointer-events: all;
 }
 div#faq-popup > h2 {
 	margin: 4px;
