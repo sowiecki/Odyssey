@@ -153,24 +153,17 @@ p.click-through {
   margin: 0 20px 0 20px;
   padding: 2px;
 }
-span#info-left {
-  left: 0;
-}
 span#info-right {
   right: 0;
 }
 
 /* Smartphone (portrait) */
-/*@media only screen and (max-width : 960px) {
+@media only screen and (max-width : 960px) {
 	div#bike-control-container {
-		height: 80px;
-		font-size: 34px;
+		font-size: 16px;
+	}
+	#info-left {
+		position: absolute;
+		top: 40px; right: 0; left: 0;
 	}
 }
-
-@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
-	div#bike-control-container {
-		height: 80px;
-		font-size: 34px;
-	}
-}*/
