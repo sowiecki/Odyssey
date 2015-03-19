@@ -253,7 +253,7 @@ $(function() {
         stopButton =
           <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />,
         currentBike =
-          <span key="current-bike" id="info-left">Following bike #{routesSegment.bikeId} through 2014</span>,
+          <div key="current-bike" id="info-left">Following bike #{routesSegment.bikeId} through 2014</div>,
         speedUp =
           <input key="speed-up" id="speed-up" className="map-control button-green" onClick={this.changeSpeed} type="submit" target="remote" value="Fast" />,
         speedDown =
@@ -265,9 +265,9 @@ $(function() {
       if (!this.state.traversing) {
         buttonArray = [initiateButtons]
       } else if (this.state.paused) {
-        buttonArray = [stopButton, continueButton, currentBike]
+        buttonArray = [currentBike, stopButton, continueButton]
       } else {
-        buttonArray = [stopButton, pauseButton, currentBike]
+        buttonArray = [currentBike, stopButton, pauseButton]
       }
 
       if (this.state.speedier && this.state.traversing) {
@@ -392,7 +392,7 @@ $(function() {
     render: function() {
       var flash = this.props.data.loadAnim ? this.state.dashFlash : null;
       return (
-        <div>{flash} {this.props.data.message} {flash}</div>
+        <div id="error-container">{flash} {this.props.data.message} {flash}</div>
       );
     }
   })

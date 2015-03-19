@@ -154,4 +154,12 @@ p#close > a:hover {
 	nav > div:nth-child(2) {
 		top: 0;
 	}
+	#info-left {
+		position: absolute;
+		width: 100%;
+		top: 100px;
+	}
+	#error-container {
+		bottom: 20%;
+	}
 }
