@@ -241,7 +241,7 @@ $(function() {
       var initiateButtons =
           <div key="initial-buttons" id="initial-buttons">
             <p className="click-through">{"Follow a bike"}</p>
-            <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter a bike ID" />
+            <input id="bike-id-input" className="map-control text-field" type="text" autofocus="true" autoComplete="off" placeholder="Enter ID" />
             <input id="start-traverse" className="map-control button-green" onClick={this.startTraverse} type="submit" target="remote" value="Begin" />
             <p className="click-through">or</p>
             <input id="start-traverse" className="map-control button-green" onClick={this.startRandomTraverse} type="submit" target="remote" value="Random" />

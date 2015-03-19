@@ -53,8 +53,7 @@ nav > div:nth-child(2) {
 div#wrapper {
 	position: absolute;
 	margin: 0 auto;
-	top: 0;
-	right: 0; left: 0;
+	top: 0; right: 0; left: 0;
 	max-width: 1140px;
 	height: 100%;
 	background-color: #f2f2f2;
@@ -98,8 +97,7 @@ div#faq-popup {
 	position: absolute;
 	margin: 0 auto auto;
 	padding: 20px;
-	top: 40px;
-	right: 0; left: 0;
+	top: 40px; right: 0; left: 0;
 	width: 860px;
 	height: 500px;
 	text-align: left;
@@ -116,14 +114,12 @@ div#bike-popup {
 	position: absolute;
 	margin: 0 auto auto;
 	padding: 20px;
-	top: 0;
-	right: 140px;
+	top: 0; right: 140px;
 	width: 190px;
 	height: 20px;
 	text-align: left;
 	font-size: 20px;
 	font-family: 'PT Sans Narrow', sans-serif;
-	/*background-color: rgba(248, 248, 255, 0.95);*/
 	pointer-events: all;
 }
 p#close {
@@ -141,8 +137,21 @@ p#close > a:hover {
 }
 
 /* Smartphone (portrait) */
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 800px) {
 	div#wrapper {
 		width: 100%;
+	}
+	nav {
+		font-size: 28px;
+	}
+	nav > div {
+		position: relative;
+		display: inline;
+	}
+	nav > div:nth-child(1) {
+		right: 60px;
+	}
+	nav > div:nth-child(2) {
+		top: 0;
 	}
 }
