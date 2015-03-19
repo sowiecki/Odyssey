@@ -141,7 +141,4 @@ p#close > a:hover {
 	header, footer, div#wrapper {
 		max-width: 100%;
 	}
-	#error-container {
-		bottom: 40%;
-	}
 }

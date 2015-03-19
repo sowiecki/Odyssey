@@ -32,7 +32,6 @@ div#error-container {
 	box-sizing: border-box;
 	z-index: 50;
 	position: absolute;
-	margin: 0 6px 0 10px;
 	top: 54%;
 	width: 100%;
 	text-align: center;
@@ -165,5 +164,8 @@ span#info-right {
 	#info-left {
 		position: absolute;
 		top: 40px; right: 0; left: 0;
+	}
+	#error-container {
+		bottom: 40%;
 	}
 }
