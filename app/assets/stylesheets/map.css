@@ -161,7 +161,7 @@ span#info-right {
 }
 
 /* Smartphone (portrait) */
-@media only screen and (max-width : 800px) {
+@media only screen and (max-width : 960px) {
 	div#bike-control-container {
 		z-index: 50;
 		position: absolute;
