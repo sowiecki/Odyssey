@@ -137,9 +137,9 @@ p#close > a:hover {
 }
 
 /* Smartphone (portrait) */
-@media only screen and (max-width : 960px) {
-	div#wrapper {
-		width: 100%;
+@media only screen and (max-width : 1243px) {
+	header, footer, div#wrapper {
+		max-width: 100%;
 	}
 	nav {
 		font-size: 28px;
