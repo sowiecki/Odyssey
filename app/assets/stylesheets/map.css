@@ -167,3 +167,10 @@ span#info-right {
 		font-size: 34px;
 	}
 }
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
+	div#bike-control-container {
+		height: 80px;
+		font-size: 34px;
+	}
+}

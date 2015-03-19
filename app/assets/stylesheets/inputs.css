@@ -127,3 +127,11 @@ div#hold-buttons {
     font-size: 34px;
   }
 }
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
+  input.map-control {
+    height: 80px;
+    width: 146px;
+    font-size: 34px;
+  }
+}

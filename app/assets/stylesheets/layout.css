@@ -137,7 +137,34 @@ p#close > a:hover {
 }
 
 /* Smartphone (portrait) */
-@media only screen and (max-width : 1243px) {
+@media only screen and (max-width : 960px) {
+	header, footer, div#wrapper {
+		max-width: 100%;
+	}
+	nav {
+		font-size: 28px;
+	}
+	nav > div {
+		position: relative;
+		display: inline;
+	}
+	nav > div:nth-child(1) {
+		right: 60px;
+	}
+	nav > div:nth-child(2) {
+		top: 0;
+	}
+	#info-left {
+		position: absolute;
+		width: 100%;
+		top: 100px;
+	}
+	#error-container {
+		bottom: 20%;
+	}
+}
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
 	header, footer, div#wrapper {
 		max-width: 100%;
 	}
