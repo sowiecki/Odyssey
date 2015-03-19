@@ -42,10 +42,5 @@ function RoutesSegment() {
 
     this.drawRoute();
   };
-  this.reset = function() {
-    this.waypts = [];
-    this.wayptsInfo = [];
-    this.speedInterval = 1400;
-  }
 };
 

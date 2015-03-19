@@ -137,7 +137,6 @@ $(function() {
       }, routesSegment.speedInterval);
     },
     this.initiate = function() {
-      routesSegment.reset();
       React.render(<span />, document.getElementById('routes-display-container'));
       routesSegment.offset = 0;
       RouteControl.getTrip();
@@ -207,7 +206,7 @@ $(function() {
       RouteControl.initiate();
     },
     stopTraverse: function() {
-      routesSegment.reset();
+      routesSegment = new RoutesSegment;
       counter = 0;
       poly.setMap(null);
       clearInterval(rideInterval);
