@@ -164,7 +164,7 @@ p#close > a:hover {
 	}
 }
 
-@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
+/*@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
 	header, footer, div#wrapper {
 		max-width: 100%;
 	}
@@ -189,4 +189,4 @@ p#close > a:hover {
 	#error-container {
 		bottom: 20%;
 	}
-}
+}*/

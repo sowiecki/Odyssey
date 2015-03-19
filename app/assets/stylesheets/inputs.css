@@ -120,7 +120,7 @@ div#hold-buttons {
 }
 
 /* Smartphone (portrait) */
-@media only screen and (max-width : 960px) {
+/*@media only screen and (max-width : 960px) {
   input.map-control {
     height: 80px;
     width: 146px;
@@ -134,4 +134,4 @@ div#hold-buttons {
     width: 146px;
     font-size: 34px;
   }
-}
+}*/
