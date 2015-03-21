@@ -157,7 +157,7 @@ span#info-right {
 }
 
 /* Smartphone (portrait) */
-@media only screen and (max-device-width : 1024px) {
+@media only screen and (max-device-width: 736px) {
 	div#bike-control-container {
 		padding: 2px;
 		height: 24px;

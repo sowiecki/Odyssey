@@ -137,7 +137,7 @@ p#close > a:hover {
 }
 
 /* Smartphone (portrait) */
-@media only screen and (max-device-width : 1024px) {
+@media only screen and (max-device-width: 736px) {
 	header, footer, div#wrapper {
 		max-width: 100%;
 	}
