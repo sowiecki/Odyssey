@@ -13,3 +13,4 @@
 /tmp
 /vendor/bundle/*
 npm-debug.log
+node_modules
