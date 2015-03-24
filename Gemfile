@@ -49,7 +49,7 @@ gem 'spring', group: [:development, :test]
 gem 'rspec-rails', '~> 3.0.0', group: [:development, :test]
 gem 'rails_12factor', group: [:production]
 gem 'shoulda-matchers', group: [:test]
-gem 'jasmine', group: [:test]
+gem 'jasmine-rails', group: [:test, :development]
 
 gem 'gmaps4rails'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
