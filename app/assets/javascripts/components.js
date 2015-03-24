@@ -1,8 +1,8 @@
 module.exports = {
-  model: RoutesSegment
+  model: RouteSegments
 };
 
-function RoutesSegment() {
+function RouteSegments() {
   this.bikeId = null;
   this.offset = null;
   this.waypts = [];

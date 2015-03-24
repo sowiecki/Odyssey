@@ -45,7 +45,7 @@ $(function() {
       };
 
   // Initialize Map Dependencies
-  var RoutesSegment = require('./components').model,
+  var RouteSegments = require('./components').model,
       coordinates = [],
       directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions),
       directionsService = new google.maps.DirectionsService(),
@@ -56,9 +56,9 @@ $(function() {
   var streetView = new google.maps.StreetViewPanorama(document.getElementById('streetview'), streetViewOptions);
   directionsDisplay.setMap(map);
 
-  RoutesSegment.prototype.drawRoute = function () {
+  RouteSegments.prototype.drawRoute = function () {
     this.makeSafeWaypts();
-    var destination = routesSegment.waypts[routesSegment.waypts.length-1].location,
+    var destination = routeSegments.waypts[routeSegments.waypts.length-1].location,
         request = {
           origin: this.waypts[0].location,
           destination: destination,
@@ -73,7 +73,7 @@ $(function() {
         RouteControl.animate();
         directionsDisplay.setDirections(response);
         React.render(<span />, document.getElementById('error-container'));
-        React.render(<RoutesInfoContainer tripsInfo={routesSegment.wayptsInfo} />, document.getElementById('routes-display-container'));
+        React.render(<RoutesInfoContainer tripsInfo={routeSegments.wayptsInfo} />, document.getElementById('routes-display-container'));
       } else {
         React.render(<ErrorContainer data={[{message: "Waiting on Google", loadAnim: true}]} />, document.getElementById('error-container'));
       };
@@ -82,14 +82,14 @@ $(function() {
 
   function RouteControl() {
     this.getTrip = function() {
-      routesSegment.offset += 1
+      routeSegments.offset += 1
       $.ajax({
-        url: "trip_for/" + routesSegment.bikeId + "/after/" + routesSegment.offset,
+        url: "trip_for/" + routeSegments.bikeId + "/after/" + routeSegments.offset,
         method: "get",
         dataType: "json",
         success: function(data) {
           if (data.length) {
-            routesSegment.advanceRoute(data[0]);
+            routeSegments.advanceRoute(data[0]);
           } else {
             RouteControl.stopTraverse();
             React.render(<ErrorContainer data={[{message: "Bike not found, try another!", loadAnim: false}]} />, document.getElementById('error-container'));
@@ -112,7 +112,7 @@ $(function() {
       poly.setPath(routesArray);
     },
     this.loading = function() {
-      React.render(<ErrorContainer data={[{message: "Loading trips for bike #" + routesSegment.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
+      React.render(<ErrorContainer data={[{message: "Loading trips for bike #" + routeSegments.bikeId, loadAnim: true}]} />, document.getElementById('error-container'));
     },
     this.fixate = function(location) {
       map.panTo(location);
@@ -134,11 +134,11 @@ $(function() {
           RouteControl.fixate(location);
           counter++;
         }
-      }, routesSegment.speedInterval);
+      }, routeSegments.speedInterval);
     },
     this.initiate = function() {
       React.render(<span />, document.getElementById('routes-display-container'));
-      routesSegment.offset = 0;
+      routeSegments.offset = 0;
       RouteControl.getTrip();
       map.setZoom(15);
       RouteControl.loading();
@@ -147,7 +147,7 @@ $(function() {
 
   // Initialize control dependencies
   var RouteControl = new RouteControl,
-      routesSegment = new RoutesSegment,
+      routeSegments = new RouteSegments,
       routeInterval,
       rideInterval,
       polyOptions = {
@@ -171,7 +171,7 @@ $(function() {
     if (resetCounter <= 10 && !streetView.getVisible()) {
       resetCounter++;
       streetView.setVisible();
-      RouteControl.fixate(routesSegment.waypts[routesSegment.waypts.length - 1]);
+      RouteControl.fixate(routeSegments.waypts[routeSegments.waypts.length - 1]);
     } else {
       resetCounter = 0;
     }
@@ -192,8 +192,8 @@ $(function() {
       });
     },
     startTraverse: function() {
-      routesSegment.bikeId = document.getElementById('bike-id-input').value;
-      if (routesSegment.bikeId) {
+      routeSegments.bikeId = document.getElementById('bike-id-input').value;
+      if (routeSegments.bikeId) {
         this.setState({traversing: !this.state.traversing});
         RouteControl.initiate();
       } else {
@@ -202,11 +202,11 @@ $(function() {
     },
     startRandomTraverse: function() {
       this.setState({traversing: !this.state.traversing});
-      routesSegment.bikeId = Math.floor(Math.random() * (3000-1) + 1);
+      routeSegments.bikeId = Math.floor(Math.random() * (3000-1) + 1);
       RouteControl.initiate();
     },
     stopTraverse: function() {
-      routesSegment = new RoutesSegment;
+      routeSegments = new RouteSegments;
       counter = 0;
       poly.setMap(null);
       clearInterval(rideInterval);
@@ -230,9 +230,9 @@ $(function() {
 
         clearInterval(rideInterval);
         if (this.state.speedier) {
-          routesSegment.speedInterval = 1400;
+          routeSegments.speedInterval = 1400;
         } else {
-          routesSegment.speedInterval = 600;
+          routeSegments.speedInterval = 600;
         };
         RouteControl.animate();
       }
@@ -253,7 +253,7 @@ $(function() {
         stopButton =
           <input key="stop-traverse" id="stop-traverse" className="map-control button-red" onClick={this.stopTraverse} type="submit" target="remote" value="Stop" />,
         currentBike =
-          <div key="current-bike" id="info-left">Following bike #{routesSegment.bikeId} through 2014</div>,
+          <div key="current-bike" id="info-left">Following bike #{routeSegments.bikeId} through 2014</div>,
         speedUp =
           <input key="speed-up" id="speed-up" className="map-control button-green" onClick={this.changeSpeed} type="submit" target="remote" value="Fast" />,
         speedDown =
