@@ -14,8 +14,7 @@
 //= require jquery_ujs
 //= require react
 //= require react_ujs
-//= require components
 //= require_tree .
 
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-var ReactTransitionGroup = React.addons.TransitionGroup;
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
+		ReactTransitionGroup = React.addons.TransitionGroup;

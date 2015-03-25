@@ -45,7 +45,7 @@ $(function() {
       };
 
   // Initialize Map Dependencies
-  var RouteSegments = require('./components').model,
+  var RouteSegments = require('./route-segments').model,
       coordinates = [],
       directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions),
       directionsService = new google.maps.DirectionsService(),
@@ -141,7 +141,7 @@ $(function() {
       routeSegments.offset = 0;
       RouteControl.getTrip();
       map.setZoom(15);
-      RouteControl.loading();
+      this.loading();
     };
   }
 
@@ -166,16 +166,16 @@ $(function() {
   function removeListener() {
     google.maps.event.removeListener(streetViewListener);
   };
-  var resetCounter = 0;
-  var streetViewListener = google.maps.event.addListener(streetView, 'visible_changed', function() {
-    if (resetCounter <= 10 && !streetView.getVisible()) {
-      resetCounter++;
-      streetView.setVisible();
-      RouteControl.fixate(routeSegments.waypts[routeSegments.waypts.length - 1]);
-    } else {
-      resetCounter = 0;
-    }
-  });
+  var resetCounter = 0,
+      streetViewListener = google.maps.event.addListener(streetView, 'visible_changed', function() {
+        if (resetCounter <= 10 && !streetView.getVisible()) {
+          resetCounter++;
+          streetView.setVisible();
+          RouteControl.fixate(routeSegments.waypts[routeSegments.waypts.length - 1]);
+        } else {
+          resetCounter = 0;
+        }
+      });
 
   var MapControlContainer = React.createClass({
     getInitialState: function() {

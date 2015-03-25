@@ -1,7 +1,7 @@
 module.exports = {
   model: RouteSegments
 };
-var test = 0
+
 function RouteSegments() {
   this.bikeId = null;
   this.offset = null;
