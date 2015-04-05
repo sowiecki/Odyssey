@@ -2,6 +2,8 @@
 
 Visualize the odyssies of each Divvy bike trip from 2014.
 
+**Nominated for "Most Creative" entry!** Vote [here](http://www.redeyechicago.com/redeye-divvy-data-challenge-2015-voting-most-creative-20150330-htmlstory.html)!
+
 [Live site](http://divvy-odyssey.herokuapp.com/)
 
 ## Configuration
