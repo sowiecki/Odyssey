@@ -2,9 +2,9 @@
 
 Visualize the odyssies of each Divvy bike trip from 2014.
 
-**Nominated for "Most Creative" entry!** Vote [here](http://www.redeyechicago.com/redeye-divvy-data-challenge-2015-voting-most-creative-20150330-htmlstory.html)!
+**Finalist "Most Creative" entry!**
 
-[Live site](http://divvy-odyssey.herokuapp.com/)
+Currently refactoring into a [light-weight API](https://github.com/Nase00/Odyssey-API) with a [static front-end client](https://github.com/Nase00/Odyssey-client).
 
 ## Configuration
 
